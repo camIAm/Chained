@@ -22,7 +22,8 @@
     "dev": "NODE_ENV=development nodemon server.js",
     "test": "NODE_ENV=test tape test/*-test.js | faucet",
     "testVerbose": "NODE_ENV=test tape test/*-test.js",
-    "load": "node load-data.js"
+    "load": "node load-data.js",
+    "index": "node create-indexes.js"
   },
   "devDependencies": {
     "faucet": "0.0.1",

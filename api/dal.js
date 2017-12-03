@@ -22,17 +22,35 @@ const addUser = (user) => {
 const getUser = id => get(id)
 const updateUser = user => update(user)
 const deleteUser = id => deleteDoc(id)
-const listUsers = () => db.allDocs({include_docs: true})
+const listUsers = () => db
+  .find({
+  selector: {
+    userName: {
+      $gte: null
+    }
+  }
+})
+  .then(res => res.docs)
+  .catch(err => console.log("error in dal/listUsers: ", err))
 
-// txs
-const addTx = tx => add(tx)
+  //db.allDocs({include_docs: true}) txs
+  const addTx = tx => add(tx)
 const getTx = id => get(id)
 const updateTx = tx => update(tx)
 const deleteTx = id => deleteDoc(id)
-const listTx = () => db.allDocs({include_docs: true})
+const listTx = () => db
+  .find({
+  selector: {
+    sender: {
+      $gte: null
+    }
+  }
+})
+  .then(res => res.docs)
+  .catch(err => console.log("error in dal/listTX: ", err))
 
-////////////////////////////// /        HELPERS ////////////////////////////
-const add = doc => db.put(doc)
+  ////////////////////////////// /        HELPERS ////////////////////////////
+  const add = doc => db.put(doc)
 const get = id => db.get(id)
 const update = doc => db.put(doc)
 const deleteDoc = id => db.remove(id)
