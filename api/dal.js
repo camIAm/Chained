@@ -33,8 +33,9 @@ const listUsers = () => db
   .then(res => res.docs)
   .catch(err => console.log("error in dal/listUsers: ", err))
 
-  //db.allDocs({include_docs: true}) txs
-  const addTx = tx => add(tx)
+  // we want addTx to have a guid so we will use the pouchdb post method instead
+  // of put
+  const addTx = tx => createWithId(tx)
 const getTx = id => get(id)
 const updateTx = tx => update(tx)
 const deleteTx = id => deleteDoc(id)
@@ -51,11 +52,14 @@ const listTx = () => db
 
   ////////////////////////////// /        HELPERS ////////////////////////////
   const add = doc => db.put(doc)
+const createWithId = doc => db.post(doc)
 const get = id => db.get(id)
 const update = doc => db.put(doc)
-const deleteDoc = id => db.remove(id)
+const deleteDoc = id => get(id)
+  .then(doc => db.remove(doc))
+  .catch(err => console.log(err))
 
-const dal = {
+  const dal = {
   addUser,
   getUser,
   updateUser,

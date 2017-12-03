@@ -111,7 +111,7 @@ module.exports = app => {
     }
   })
 
-  app.get('/tx/:id', async(req, res, next) => {
+  app.get('/txs/:id', async(req, res, next) => {
     try {
       res
         .status(200)
@@ -144,6 +144,8 @@ module.exports = app => {
   })
 
   app.delete('/txs/:id', async(req, res, next) => {
+    console.log("inside DELETE for /txs/:id")
+    console.log(`the id of txs ${req.params.id}`)
     try {
       res
         .status(200)
