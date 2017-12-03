@@ -1,8 +1,9 @@
 require('dotenv').config()
-const PouchDB = require('pouchdb')
-const db = new PouchDB(process.env.COUCHDB_URL + process.env.COUCHDB_NAME)
+const PouchDB = require('pouchdb-core')
+PouchDB.plugin(require('pouchdb-adapter-http'))
+const db = new PouchDB(process.env.COUCHDB_URL + process.env.COUCHDB_DATABASE)
 
-console.log("loading data to :", process.env.COUCHDB_URL + process.env.COUCHDB_NAME)
+console.log("loading data to :", process.env.COUCHDB_URL + process.env.COUCHDB_DATABASE)
 
 const users = [
   {
@@ -20,13 +21,12 @@ const users = [
         userName: "user_curry_thomas"
       }, {
         userName: "user_bill_joy"
-      }
-      {
+      }, {
         userName: "user_jeff_montgomery"
       }, {
         userName: "user_trip_ottinger"
       }, {
-        userName "user_tom_wilson"
+        userName: "user_tom_wilson"
       }
     ],
     finacialAccount: {
@@ -38,7 +38,8 @@ const users = [
       creditCard: [
         {
           cardNumber: "1234987612349876",
-          securityCode: "012" expirationMonth: "12",
+          securityCode: "012",
+          expirationMonth: "12",
           expirationYear: "2020"
         }
       ]
@@ -58,13 +59,12 @@ const users = [
         userName: "user_curry_thomas"
       }, {
         userName: "user_bill_joy"
-      }
-      {
+      }, {
         userName: "user_jeff_montgomery"
       }, {
         userName: "user_trip_ottinger"
       }, {
-        userName "user_tom_wilson"
+        userName: "user_tom_wilson"
       }
     ],
     finacialAccount: {
@@ -76,7 +76,8 @@ const users = [
       creditCard: [
         {
           cardNumber: "1234987333349876",
-          securityCode: "013" expirationMonth: "11",
+          securityCode: "013",
+          expirationMonth: "11",
           expirationYear: "2021"
         }
       ]
@@ -96,13 +97,12 @@ const users = [
         userName: "user_curry_thomas"
       }, {
         userName: "user_bill_joy"
-      }
-      {
+      }, {
         userName: "user_jeff_montgomery"
       }, {
         userName: "user_trip_ottinger"
       }, {
-        userName "user_tom_wilson"
+        userName: "user_tom_wilson"
       }
     ],
     finacialAccount: {
@@ -135,13 +135,12 @@ const users = [
         userName: "user_curry_thomas"
       }, {
         userName: "user_bill_joy"
-      }
-      {
+      }, {
         userName: "user_jeff_montgomery"
       }, {
         userName: "user_trip_ottinger"
       }, {
-        userName "user_tom_wilson"
+        userName: "user_tom_wilson"
       }
     ],
     finacialAccount: {
@@ -153,7 +152,8 @@ const users = [
       creditCard: [
         {
           cardNumber: "1234447333349876",
-          securityCode: "043" expirationMonth: "01",
+          securityCode: "043",
+          expirationMonth: "01",
           expirationYear: "2019"
         }
       ]
@@ -173,13 +173,12 @@ const users = [
         userName: "user_curry_thomas"
       }, {
         userName: "user_bill_joy"
-      }
-      {
+      }, {
         userName: "user_jeff_montgomery"
       }, {
         userName: "user_trip_ottinger"
       }, {
-        userName "user_tom_wilson"
+        userName: "user_tom_wilson"
       }
     ],
     finacialAccount: {
@@ -191,7 +190,8 @@ const users = [
       creditCard: [
         {
           cardNumber: "1298987333349876",
-          securityCode: "016" expirationMonth: "10",
+          securityCode: "016",
+          expirationMonth: "10",
           expirationYear: "2020"
         }
       ]
@@ -211,13 +211,12 @@ const users = [
         userName: "user_curry_thomas"
       }, {
         userName: "user_bill_joy"
-      }
-      {
+      }, {
         userName: "user_jeff_montgomery"
       }, {
         userName: "user_trip_ottinger"
       }, {
-        userName "user_tom_wilson"
+        userName: "user_tom_wilson"
       }
     ],
     finacialAccount: {
@@ -229,7 +228,8 @@ const users = [
       creditCard: [
         {
           cardNumber: "123495653349876",
-          securityCode: "017" expirationMonth: "08",
+          securityCode: "017",
+          expirationMonth: "08",
           expirationYear: "2022"
         }
       ]
