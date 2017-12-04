@@ -12,11 +12,11 @@ console.log('db is' + dbURL + dbName)
 const db = new PouchDB(dbURL + dbName)
 
 // Users
-const addUser = (user) => {
-
+const addUser = user => {
+  console.log("inside addUser with: ", user)
   user._id = pkGen('user', '_', user.userName)
 
-  add(user)
+  return add(user).then(res => res)
   //add(merge(book, {_id: pkGen("book", "_", prop('title', book)}), callback)
 }
 const getUser = id => get(id)
@@ -51,7 +51,10 @@ const listTx = () => db
   .catch(err => console.log("error in dal/listTX: ", err))
 
   ////////////////////////////// /        HELPERS ////////////////////////////
-  const add = doc => db.put(doc)
+  const add = doc => {
+  console.log("inside add")
+  return db.put(doc)
+}
 const createWithId = doc => db.post(doc)
 const get = id => db.get(id)
 const update = doc => db.put(doc)

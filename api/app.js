@@ -27,7 +27,7 @@ module.exports = app => {
   app.post('/users', bodyParser.json(), async(req, res, next) => {
     try {
       const user = prop('body', req)
-
+      //console.log("the user POST, ", user)
       if (isEmpty(user)) {
         return next(new HTTPError(res.status(400), 'No body was provided'))
       }
