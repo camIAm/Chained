@@ -55,6 +55,7 @@
 
 ```
 {
+  _id:guid,
   sender:"user_rcmontgo",
   recipient:"user_miguel_fernandez",
   amount:"10.00",
