@@ -13,11 +13,8 @@ const db = new PouchDB(dbURL + dbName)
 
 // Users
 const addUser = user => {
-  console.log("inside addUser with: ", user)
   user._id = pkGen('user', '_', user.userName)
-
   return add(user).then(res => res)
-  //add(merge(book, {_id: pkGen("book", "_", prop('title', book)}), callback)
 }
 const getUser = id => get(id)
 const updateUser = user => update(user)
@@ -52,7 +49,6 @@ const listTx = () => db
 
   ////////////////////////////// /        HELPERS ////////////////////////////
   const add = doc => {
-  console.log("inside add")
   return db.put(doc)
 }
 const createWithId = doc => db.post(doc)

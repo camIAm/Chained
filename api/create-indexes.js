@@ -5,7 +5,6 @@ PouchDB.plugin(require('pouchdb-find'))
 
 const db = new PouchDB(process.env.COUCHDB_URL + process.env.COUCHDB_DATABASE)
 
-// sort the docs by the type property
 db
   .createIndex({
   index: {

@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const {prop, isEmpty, path} = require('ramda')
 const HTTPError = require('node-http-error')
-// const Ajv = require('ajv') const ajv = new Ajv()
+
 const {
   addUser,
   getUser,
@@ -27,7 +27,6 @@ module.exports = app => {
   app.post('/users', bodyParser.json(), async(req, res, next) => {
     try {
       const user = prop('body', req)
-      //console.log("the user POST, ", user)
       if (isEmpty(user)) {
         return next(new HTTPError(res.status(400), 'No body was provided'))
       }
@@ -35,7 +34,6 @@ module.exports = app => {
         .status(200)
         .send(await addUser(user))
     } catch (err) {
-      //res.status(500).send({ ok: false, message: err.message })
       next(new HTTPError(err.status, err.message))
     }
   })
@@ -67,7 +65,6 @@ module.exports = app => {
         .status(200)
         .send(await updateUser(user))
     } catch (err) {
-      //res.status(500).send({ ok: false, message: err.message })
       next(new HTTPError(err.status, err.message))
     }
   })
@@ -79,7 +76,6 @@ module.exports = app => {
         .send(await deleteUser(req.params.id))
     } catch (err) {
       next(new HTTPError(err.status, err.message))
-      //res.status(500).send({ ok: false, message: err.message })
     }
   })
 
@@ -90,7 +86,6 @@ module.exports = app => {
         .send(await listUsers())
     } catch (err) {
       next(new HTTPError(err.status, err.message))
-      //res.status(500).send({ ok: false, message: err.message })
     }
   })
 
@@ -106,7 +101,6 @@ module.exports = app => {
         .status(200)
         .send(await addTx(tx))
     } catch (err) {
-      //res.status(500).send({ ok: false, message: err.message })
       next(new HTTPError(err.status, err.message))
     }
   })
@@ -138,7 +132,6 @@ module.exports = app => {
         .status(200)
         .send(await updateTx(tx))
     } catch (err) {
-      //res.status(500).send({ ok: false, message: err.message })
       next(new HTTPError(err.status, err.message))
     }
   })
@@ -152,7 +145,6 @@ module.exports = app => {
         .send(await deleteTx(req.params.id))
     } catch (err) {
       next(new HTTPError(err.status, err.message))
-      //res.status(500).send({ ok: false, message: err.message })
     }
   })
 
@@ -163,7 +155,6 @@ module.exports = app => {
         .send(await listTx())
     } catch (err) {
       next(new HTTPError(err.status, err.message))
-      //res.status(500).send({ ok: false, message: err.message })
     }
   })
   app.use((err, req, res, next) => {
