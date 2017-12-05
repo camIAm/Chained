@@ -13,11 +13,16 @@ import LockOutlineIcon from 'material-ui-icons/LockOutline'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import GavelIcon from 'material-ui-icons/Gavel'
-import user from '../user.svg';
+
 const sideList = (
   <div>
     <List>
-      <Link to="/" className="router-link">
+      <Link
+        to="/"
+        className="router-link"
+        style={{
+        textDecoration: 'none'
+      }}>
         <ListItem button>
           <ListItemIcon>
             <HomeIcon/>
@@ -25,7 +30,12 @@ const sideList = (
           <ListItemText primary="Home"/>
         </ListItem>
       </Link>
-      <Link to="/search" className="router-link">
+      <Link
+        to="/search"
+        className="router-link"
+        style={{
+        textDecoration: 'none'
+      }}>
         <ListItem button>
           <ListItemIcon>
             <SearchIcon/>
@@ -33,11 +43,16 @@ const sideList = (
           <ListItemText primary="Search"/>
         </ListItem>
       </Link>
-      <Link to="/profile/:id" className="router-link">
+      <Link
+        to="/profile/:id"
+        className="router-link"
+        style={{
+        textDecoration: 'none'
+      }}>
         <ListItem button>
           <ListItemIcon>
             <Avatar>
-              {user}
+              <i class="material-icons">face</i>
             </Avatar>
           </ListItemIcon>
           <ListItemText primary="Profile"/>
@@ -46,10 +61,17 @@ const sideList = (
     </List>
     <Divider/>
     <List>
-      <Link to="/settings" className="router-link">
+      <Link
+        to="/settings"
+        className="router-link"
+        style={{
+        textDecoration: 'none'
+      }}>
         <ListItem button>
           <ListItemIcon>
-            <HelpIcon/>
+            <Avatar>
+              <i class="material-icons">settings</i>
+            </Avatar>
           </ListItemIcon>
           <ListItemText primary="Settings"/>
         </ListItem>
