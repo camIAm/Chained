@@ -151,7 +151,6 @@ module.exports = app => {
   })
 
   app.get(`/txs/`, async(req, res, next) => {
-    console.log("/txs/ getting hit")
     try {
       res
         .status(200)

@@ -5,13 +5,15 @@ import Divider from 'material-ui/Divider'
 import InboxIcon from 'material-ui-icons/Inbox'
 import HomeIcon from 'material-ui-icons/Home'
 import HelpIcon from 'material-ui-icons/Help'
+import SearchIcon from 'material-ui-icons/Search'
+import Avatar from 'material-ui/Avatar'
 import ViewList from 'material-ui-icons/ViewList'
 import FavoriteIcon from 'material-ui-icons/Favorite'
 import LockOutlineIcon from 'material-ui-icons/LockOutline'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import GavelIcon from 'material-ui-icons/Gavel'
-
+import user from '../user.svg';
 const sideList = (
   <div>
     <List>
@@ -23,49 +25,36 @@ const sideList = (
           <ListItemText primary="Home"/>
         </ListItem>
       </Link>
-      <Link to="/resources" className="router-link">
+      <Link to="/search" className="router-link">
         <ListItem button>
           <ListItemIcon>
-            <InboxIcon/>
+            <SearchIcon/>
           </ListItemIcon>
-          <ListItemText primary="Resources"/>
+          <ListItemText primary="Search"/>
         </ListItem>
       </Link>
-      <Link to="/categories" className="router-link">
+      <Link to="/profile/:id" className="router-link">
         <ListItem button>
           <ListItemIcon>
-            <ViewList/>
+            <Avatar>
+              {user}
+            </Avatar>
           </ListItemIcon>
-          <ListItemText primary="Categories"/>
+          <ListItemText primary="Profile"/>
         </ListItem>
       </Link>
     </List>
     <Divider/>
     <List>
-      <Link to="/about" className="router-link">
+      <Link to="/settings" className="router-link">
         <ListItem button>
           <ListItemIcon>
             <HelpIcon/>
           </ListItemIcon>
-          <ListItemText primary="About"/>
+          <ListItemText primary="Settings"/>
         </ListItem>
       </Link>
-      <Link to="/legal" className="router-link">
-        <ListItem button>
-          <ListItemIcon>
-            <GavelIcon/>
-          </ListItemIcon>
-          <ListItemText primary="Legal"/>
-        </ListItem>
-      </Link>
-      <Link to="/in-memory" className="router-link">
-        <ListItem button>
-          <ListItemIcon>
-            <FavoriteIcon/>
-          </ListItemIcon>
-          <ListItemText primary="In Memory"/>
-        </ListItem>
-      </Link>
+
       <Divider/>
     </List>
   </div>

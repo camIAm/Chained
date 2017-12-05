@@ -22,19 +22,20 @@ const ResourceItem = ({resource, history}) => {
   const removeArticles = arrData => contains(head(arrData), ['the', 'a', 'an'])
     ? drop(1, arrData)
     : arrData
+
+  // be careful with this method. Temporary solution only
+  const userify = fullUser => compose(join(' '), slice(1, Infinity), split('_'))(fullUser)
   return (
     <div key={resource._id}>
-      <ListItem
-        button
-        onClick={e => {
-        history.push(`/resources/${resource._id}`)
-      }}>
+      <ListItem button onClick={e => {}}>
         <ListItemAvatar>
           <Avatar>
-            {compose(toUpper(), slice(0, 1), join(' '), removeArticles, split(' '), toLower())(resource.userName)}
+            {compose(toUpper(), slice(0, 1), join(' '), split(' '), toLower(), userify)(resource.sender)}
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={resource.userName} secondary={resource.firstName}/>
+        <ListItemText
+          primary={`${userify(resource.sender)} sent ${userify(resource.recipient)}`}
+          secondary={resource.amount}/>
 
       </ListItem>
 
