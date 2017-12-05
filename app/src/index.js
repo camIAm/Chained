@@ -5,7 +5,7 @@ import App from './App';
 import store from './store'
 import {Provider} from 'react-redux'
 import registerServiceWorker from './registerServiceWorker';
-import {setAllTransactions, setPersonalTransactions} from './action-creators/txs'
+import {setAllTransactions} from './action-creators/txs'
 
 ReactDOM.render(
   <Provider store={store}>

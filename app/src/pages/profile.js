@@ -6,13 +6,15 @@ import {connect} from 'react-redux'
 import {filter, contains, map} from 'ramda'
 import List from 'material-ui/List'
 import ResourceItem from '../components/resource-item'
-import {setPersonalTransactions} from '../action-creators/txs'
+import {setPersonalTransactions, setAllTransactions} from '../action-creators/txs'
 
 class Profile extends React.Component {
+
   componentDidMount() {
     this
       .props
       .toggleDrawer()
+
     this
       .props
       .setPersonalTxs(this.props.user)
@@ -44,7 +46,8 @@ const connector = connect(state => {
 }, dispatch => {
   return {
     toggleDrawer: () => dispatch({type: 'TOGGLE_DRAWER'}),
-    setPersonalTxs: user => dispatch(setPersonalTransactions(user))
+    setPersonalTxs: user => dispatch(setPersonalTransactions(user)),
+    setAllTxs: () => dispatch(setAllTransactions)
   }
 })
 export default withRoot(withDrawer(connector(Profile)))

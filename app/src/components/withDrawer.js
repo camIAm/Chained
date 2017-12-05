@@ -61,7 +61,7 @@ const sideList = (
         <ListItem button>
           <ListItemIcon>
             <Avatar >
-              <i class="material-icons">face</i>
+              <i className="material-icons">face</i>
             </Avatar>
           </ListItemIcon>
           <ListItemText primary="Profile"/>
@@ -79,7 +79,7 @@ const sideList = (
         <ListItem button>
           <ListItemIcon>
             <Avatar>
-              <i class="material-icons">settings</i>
+              <i className="material-icons">settings</i>
             </Avatar>
           </ListItemIcon>
           <ListItemText primary="Settings"/>
