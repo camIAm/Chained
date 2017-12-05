@@ -1,6 +1,8 @@
 # Chained
 
-## User
+## A low fee, peer to peer money transfer application backed by the blockchain ledger.
+
+### User
 - pk
 - First Name
 - Last Name
@@ -16,7 +18,7 @@
     - Routing number
     - Account number
 
-## Transactions
+### Transactions
 - Sender
 - Recipient
 - Amount

@@ -308,6 +308,13 @@ const tx = [
     currency: "USD",
     description: "Tattoo work",
     timeStamp: "Wed Oct 18 2017 12:41:34 GMT+0000 (UTC)"
+  }, {
+    sender: "user_Monty",
+    recipient: "user_rcmontgo",
+    amount: "140.00",
+    currency: "USD",
+    description: "APP TESTING",
+    timeStamp: "Wed Oct 18 2017 12:41:34 GMT+0000 (UTC)"
   }
 
 ]
