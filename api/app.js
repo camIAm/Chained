@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const {prop, isEmpty, path} = require('ramda')
 const HTTPError = require('node-http-error')
-
+const cors = require('cors')
 const {
   addUser,
   getUser,
@@ -19,6 +19,8 @@ const {
 } = require('./dal')
 
 module.exports = app => {
+  //app.use(cors({credentials: true}))
+  app.use(cors())
 
   app.get('/', async(req, res) => {
     res.send({description: pkg.description, version: pkg.version})
@@ -149,6 +151,7 @@ module.exports = app => {
   })
 
   app.get(`/txs/`, async(req, res, next) => {
+    console.log("/txs/ getting hit")
     try {
       res
         .status(200)
