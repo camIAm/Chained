@@ -36,6 +36,26 @@ const listUsers = () => db
 const getTx = id => get(id)
 const updateTx = tx => update(tx)
 const deleteTx = id => deleteDoc(id)
+/* find(options)
+// option object should be build in the app.js level
+// for all txs
+// options = {
+   selector: {
+     sender: {
+       $gte: null
+     }
+}
+// for user based txs
+// options = {
+   selector: {
+     sender: {
+       $eq: user_rcmontgo
+     },
+     recipient:{
+       $eq: user_rcmontgo
+     }
+}
+*/
 const listTx = () => db
   .find({
   selector: {

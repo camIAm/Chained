@@ -16,14 +16,10 @@ export const setAllTransactions = async(dispatch, getState) => {
   dispatch({type: ALL_TRANSACTIONS, payload: response})
 }
 
-export const setPersonalTransactions = async(dispatch, getState) => {
-  console.log("setPersonalTxs")
+export const setPersonalTransactions = user => async(dispatch, getState) => {
+  console.log("setPersonalTxs user: ", user)
 
-  const response = await fetch(`http://localhost:4000/txs/user_rcmontgo`)
-    .then(res => res.json())
-    .catch(err => console.log('err: ', err));
-  if (!response.ok) {
-    console.log("the response: ", response)
-  }
-  dispatch({type: PERSONAL_TXS, payload: response})
+  const results = getState().allTransactions
+  console.log("all txs inside setPersonal ", results)
+  dispatch({type: PERSONAL_TXS, payload: results})
 }

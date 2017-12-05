@@ -14,4 +14,3 @@ ReactDOM.render(
 registerServiceWorker();
 
 store.dispatch(setAllTransactions)
-store.dispatch(setPersonalTransactions)

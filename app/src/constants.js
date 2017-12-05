@@ -1,3 +1,4 @@
 export const TOGGLE_DRAWER = "TOGGLE_DRAWER"
 export const ALL_TRANSACTIONS = "ALL_TRANSACTIONS"
 export const PERSONAL_TXS = "PERSONAL_TXS"
+export const ACTIVE_USER = "ACTIVE_USER"

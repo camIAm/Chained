@@ -4,6 +4,7 @@ import './App.css';
 import history from './history'
 import Home from './pages/home'
 import Search from './pages/search'
+import Profile from './pages/profile'
 
 const App = props => {
 
@@ -13,6 +14,7 @@ const App = props => {
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route path="/search" component={Search}/>
+          <Route path="/profile/:id" component={Profile}/>
         </Switch>
       </div>
     </Router>

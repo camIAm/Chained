@@ -152,6 +152,8 @@ module.exports = app => {
 
   app.get(`/txs/`, async(req, res, next) => {
     try {
+      // let searchStr = compose(split(':'), pathOr('', ['query', 'filter']))(req)
+      // const filter = pathOr(null, ['query', 'filter'])(req) var options = {}
       res
         .status(200)
         .send(await listTx())
