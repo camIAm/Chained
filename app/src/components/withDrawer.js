@@ -13,6 +13,15 @@ import LockOutlineIcon from 'material-ui-icons/LockOutline'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import GavelIcon from 'material-ui-icons/Gavel'
+import {pink} from 'material-ui/colors';
+
+const styles = {
+  pinkAvatar: {
+    margin: 10,
+    color: '#fff',
+    backgroundColor: pink[500]
+  }
+}
 
 const sideList = (
   <div>
@@ -51,7 +60,7 @@ const sideList = (
       }}>
         <ListItem button>
           <ListItemIcon>
-            <Avatar>
+            <Avatar >
               <i class="material-icons">face</i>
             </Avatar>
           </ListItemIcon>

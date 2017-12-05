@@ -1,11 +1,11 @@
 import fetch from 'isomorphic-fetch'
-import {ALL_TRANSACTIONS} from '../constants'
+import {ALL_TRANSACTIONS, PERSONAL_TXS} from '../constants'
 import history from '../history'
 
 const url = process.env.REACT_APP_BASE_URL
 
 export const setAllTransactions = async(dispatch, getState) => {
-  console.log("setAllTxs")
+
   //console.log("REACT_APP_BASE_URL ", process.env.REACT_APP_BASE_URL)
   const response = await fetch("http://localhost:4000/txs")
     .then(res => res.json())
@@ -14,4 +14,16 @@ export const setAllTransactions = async(dispatch, getState) => {
     console.log("the response: ", response)
   }
   dispatch({type: ALL_TRANSACTIONS, payload: response})
+}
+
+export const setPersonalTransactions = async(dispatch, getState) => {
+  console.log("setPersonalTxs")
+
+  const response = await fetch(`http://localhost:4000/txs/user_rcmontgo`)
+    .then(res => res.json())
+    .catch(err => console.log('err: ', err));
+  if (!response.ok) {
+    console.log("the response: ", response)
+  }
+  dispatch({type: PERSONAL_TXS, payload: response})
 }
