@@ -27,7 +27,8 @@ const SearchItem = ({resource}) => {
   const userify = fullUser => compose(join(' '), slice(1, Infinity), split('_'))(fullUser)
   return (
     <div key={resource._id}>
-    <Link to={`send/${resource._id}`} style={{
+    <Link key={resource._id}
+          to={`send/${resource._id}`} style={{
           textDecoration: 'none'
          }}
        className="w-100  animated fadeInRight">

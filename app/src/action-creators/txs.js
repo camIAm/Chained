@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import {SET_ALL_TRANSACTIONS, PERSONAL_TXS} from '../constants'
+import {SET_ALL_TRANSACTIONS,IS_ACTIVE, PERSONAL_TXS,CLEAR_SEND_FORM,ERROR} from '../constants'
 import history from '../history'
 import {
   filter,
@@ -8,6 +8,7 @@ import {
   or,
   reverse,
   sortBy,
+  isEmpty,
   concat
 } from "ramda"
 
@@ -45,4 +46,40 @@ export const setPersonalTransactions = user => async(dispatch, getState) => {
     type: PERSONAL_TXS,
     payload: reverse(sortByTimeStamp(personalTxs))
   })
+}
+
+export const createTxs = async(dispatch, getState) => {
+  console.log("createTxs action creator ")
+  const txsToPost = getState().transactionForm
+  // POST txsToPost then dispatch to setAllTransactions to update redux state store
+  const response = await fetch(`${url}/txs`, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(txsToPost)
+  }).then(res => res.json())
+
+  if (!response.ok) {
+    dispatch({ type: ERROR, payload: 'Could not add txs' })
+    return
+  }
+  dispatch(setAllTransactions)
+  
+  // clear form
+  dispatch({
+    type: CLEAR_SEND_FORM
+  })
+  history.push('/') 
+}
+
+// modify
+export const isActive = async (dispatch, getState) => {
+  const currentData = !isEmpty(getState().transactionForm.recipient)
+  const { name, desc, shortDesc, icon } = currentData
+  if (isEmpty(name) || isEmpty(desc) || isEmpty(shortDesc) || isEmpty(icon)) {
+    dispatch({ type: IS_ACTIVE, payload: true })
+  } else {
+    dispatch({ type: IS_ACTIVE, payload: false })
+  }
 }

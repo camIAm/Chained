@@ -41,7 +41,7 @@ return (
         </ListItem>
       </Link>
       <Link
-        to="/search/:id"
+        to={`/search/${activeUser.id}`}
         className="router-link"
         style={{
         textDecoration: 'none'
