@@ -244,77 +244,77 @@ const tx = [
     amount: "10.00",
     currency: "USD",
     description: "Pizza",
-    timeStamp: "Wed Oct 18 2017 12:41:34 GMT+0000 (UTC)"
+    timeStamp: "Wed Oct 10 2017 12:41:34 GMT+0000 (UTC)"
   }, {
     sender: "user_rcmontgo",
     recipient: "user_jj_driscoll",
     amount: "10.00",
     currency: "USD",
     description: "Pizza",
-    timeStamp: "Wed Oct 18 2017 12:41:34 GMT+0000 (UTC)"
+    timeStamp: "Wed Oct 11 2017 12:41:34 GMT+0000 (UTC)"
   }, {
     sender: "user_miguel_fernandex",
     recipient: "user_Monty",
     amount: "100.00",
     currency: "USD",
     description: "Surf Lessons",
-    timeStamp: "Wed Oct 18 2017 12:41:34 GMT+0000 (UTC)"
+    timeStamp: "Wed Oct 12 2017 12:41:34 GMT+0000 (UTC)"
   }, {
     sender: "user_rcmontgo",
     recipient: "user_jj_driscoll",
     amount: "40.00",
     currency: "USD",
     description: "Hair tips",
-    timeStamp: "Wed Oct 18 2017 12:41:34 GMT+0000 (UTC)"
+    timeStamp: "Wed Oct 09 2017 12:40:34 GMT+0000 (UTC)"
   }, {
     sender: "user_rcmontgo",
     recipient: "user_Bill",
     amount: "200.00",
     currency: "USD",
     description: "Music lessons",
-    timeStamp: "Wed Oct 18 2017 12:41:34 GMT+0000 (UTC)"
+    timeStamp: "Wed Oct 09 2017 12:41:34 GMT+0000 (UTC)"
   }, {
     sender: "user_currythomas",
     recipient: "user_jj_driscoll",
     amount: "15.00",
     currency: "USD",
     description: "Beerz",
-    timeStamp: "Wed Oct 18 2017 12:41:34 GMT+0000 (UTC)"
+    timeStamp: "Wed Oct 09 2017 01:41:34 GMT+0000 (UTC)"
   }, {
     sender: "user_miguel_fernandez",
     recipient: "user_rcmontgo",
     amount: "35.00",
     currency: "USD",
     description: "Driving lessons",
-    timeStamp: "Wed Oct 18 2017 12:41:34 GMT+0000 (UTC)"
+    timeStamp: "Wed Oct 28 2017 12:41:34 GMT+0000 (UTC)"
   }, {
     sender: "user_rcmontgo",
     recipient: "user_jj_driscoll",
     amount: "10.00",
     currency: "USD",
     description: "Debugging my spaghetti code",
-    timeStamp: "Wed Oct 18 2017 12:41:34 GMT+0000 (UTC)"
+    timeStamp: "Wed Oct 23 2017 12:41:34 GMT+0000 (UTC)"
   }, {
     sender: "user_rcmontgo",
-    recipient: "currythomas",
+    recipient: "user_currythomas",
     amount: "350.00",
     currency: "USD",
     description: "Finacial Services",
-    timeStamp: "Wed Oct 18 2017 12:41:34 GMT+0000 (UTC)"
+    timeStamp: "Wed Oct 23 2017 12:51:34 GMT+0000 (UTC)"
   }, {
     sender: "user_Monty",
     recipient: "user_jj_driscoll",
     amount: "140.00",
     currency: "USD",
     description: "Tattoo work",
-    timeStamp: "Wed Oct 18 2017 12:41:34 GMT+0000 (UTC)"
+    timeStamp: "Wed Oct 12 2017 12:41:34 GMT+0000 (UTC)"
   }, {
     sender: "user_Monty",
     recipient: "user_rcmontgo",
     amount: "140.00",
     currency: "USD",
     description: "APP TESTING",
-    timeStamp: "Wed Oct 18 2017 12:41:34 GMT+0000 (UTC)"
+    timeStamp: "Wed Oct 01 2017 12:41:34 GMT+0000 (UTC)"
   }
 
 ]

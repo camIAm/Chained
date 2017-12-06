@@ -3,6 +3,7 @@ import withRoot from '../components/withRoot'
 import withDrawer from '../components/withDrawer'
 import MenuAppBar from '../components/menuAppBar'
 import {connect} from 'react-redux'
+import {Typography} from 'material-ui'
 import {filter, contains, map} from 'ramda'
 import List from 'material-ui/List'
 import ResourceItem from '../components/resource-item'
@@ -10,16 +11,17 @@ import logo from '../logo.svg';
 
 class Home extends React.Component {
   componentDidMount() {
-    this
-      .props
-      .toggleDrawer()
+   
   }
   render() {
     return (
       <div>
         <MenuAppBar title="Home"/>
-        <List style={{
+        <Typography/>
+        <List
+          style={{
           padding: 0,
+          paddingTop: 60,
           marginBottom: 60
         }}>
           {map(transactions => <ResourceItem resource={transactions}/>, this.props.transactions)}

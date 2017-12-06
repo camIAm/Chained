@@ -10,9 +10,7 @@ import logo from '../logo.svg';
 
 class Search extends React.Component {
   componentDidMount() {
-    this
-      .props
-      .toggleDrawer()
+   
   }
   render() {
     return (

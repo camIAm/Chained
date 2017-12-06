@@ -4,7 +4,7 @@ import './App.css';
 import history from './history'
 import Home from './pages/home'
 import Search from './pages/search'
-import Profile from './pages/profile'
+import Profile from './pages/profile2'
 
 const App = props => {
 
