@@ -8,6 +8,7 @@ import {
   or,
   reverse,
   sortBy,
+  merge,
   isEmpty,
   concat
 } from "ramda"
@@ -20,9 +21,11 @@ export const setAllTransactions = async(dispatch, getState) => {
   const response = await fetch("http://localhost:4000/txs")
     .then(res => res.json())
     .catch(err => console.log('err: ', err));
-  if (!response.ok) {
+  // if (!response.ok) {
+    //   console.log("inside !response.ok",response)
+    //   return
+    // }
     console.log("the response: ", response)
-  }
   const sortByTimeStamp = sortBy(prop('timeStamp'))
   dispatch({
     type: SET_ALL_TRANSACTIONS,
@@ -50,7 +53,11 @@ export const setPersonalTransactions = user => async(dispatch, getState) => {
 
 export const createTxs = async(dispatch, getState) => {
   console.log("createTxs action creator ")
-  const txsToPost = getState().transactionForm
+  let txsToPost = getState().transactionForm
+  const activeUser = getState().activeUser
+  txsToPost = merge(txsToPost,{'timeStamp':`Wed Oct 18 2017 12:41:34 GMT+0000 (UTC)`,
+  "currency":"USDTEST", "sender":activeUser.id})
+  console.log("txtToPost POST merge in actioncreator: ",txsToPost)
   // POST txsToPost then dispatch to setAllTransactions to update redux state store
   const response = await fetch(`${url}/txs`, {
     headers: {
@@ -60,6 +67,8 @@ export const createTxs = async(dispatch, getState) => {
     body: JSON.stringify(txsToPost)
   }).then(res => res.json())
 
+  console.log("response in createTxs: ",response)
+  
   if (!response.ok) {
     dispatch({ type: ERROR, payload: 'Could not add txs' })
     return

@@ -59,7 +59,7 @@ const deleteTx = id => deleteDoc(id)
 const listTx = () => db
   .find({
   selector: {
-    sender: {
+    recipient:{
       $gte: null
     }
   }

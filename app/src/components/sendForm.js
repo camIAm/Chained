@@ -26,21 +26,19 @@ class SendForm extends React.Component {
       : compose(last, split('/'), path(['location', 'pathname']))(this.props)
     
     this.props.onChange('recipient', pathID)
-console.log("this.props.onChange('recipient', pathID)",this.props.onChange('recipient', pathID))
+
   }
 
   render() {
     console.log('in SendForm')
-    console.log("transactionForm: ",this.props)
+console.log("this.props.activeUser.id")
     const { classes } = this.props
     return (
       <form
         style={{ marginTop: 8 }}
         autoComplete="off"
-        onSubmit={e=>{
-          this.props.createTxs()
-        }
-      }
+        onSubmit={this.props.createTxs}
+      
       >
         <TextField
           label="Recipient"
@@ -78,7 +76,7 @@ console.log("this.props.onChange('recipient', pathID)",this.props.onChange('reci
           type="submit"
           aria-label="add"
           className="fab-button"
-          disabled={this.props.isActive}
+          disabled={false}
         >
           <SaveIcon />
         </Button>
@@ -89,14 +87,16 @@ console.log("this.props.onChange('recipient', pathID)",this.props.onChange('reci
 
 const mapStateToProps = state => {
   return {
-    transactionForm: state.transactionForm
+    transactionForm: state.transactionForm,
+    activeUser: state.activeUser
   }
 }
 
 const mapActionsToProps = dispatch => {
   return {
     
-    createTxs: e =>{
+    createTxs: e => {
+      console.log("createTxs fired")
       e.preventDefault()
       dispatch(createTxs)
     },
