@@ -1,8 +1,8 @@
-import {ALL_TRANSACTIONS} from '../../constants'
+import {SET_ALL_TRANSACTIONS} from '../../constants'
 
 export const allTransactions = (state = [], action) => {
   switch (action.type) {
-    case ALL_TRANSACTIONS:
+    case SET_ALL_TRANSACTIONS:
       return action.payload
     default:
       return state

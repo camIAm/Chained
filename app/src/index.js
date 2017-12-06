@@ -6,6 +6,7 @@ import store from './store'
 import {Provider} from 'react-redux'
 import registerServiceWorker from './registerServiceWorker';
 import {setAllTransactions} from './action-creators/txs'
+import {setAllUsers} from './action-creators/user'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -14,3 +15,4 @@ ReactDOM.render(
 registerServiceWorker();
 
 store.dispatch(setAllTransactions)
+store.dispatch(setAllUsers)

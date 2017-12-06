@@ -5,7 +5,7 @@ import MenuAppBar from '../components/menuAppBar'
 import {connect} from 'react-redux'
 import {filter, contains, map} from 'ramda'
 import List from 'material-ui/List'
-import ResourceItem from '../components/resource-item'
+import SearchItem from '../components/search-item'
 import logo from '../logo.svg';
 
 class Search extends React.Component {
@@ -20,7 +20,7 @@ class Search extends React.Component {
           padding: 0,
           marginBottom: 60
         }}>
-          {map(transactions => <ResourceItem resource={transactions}/>, this.props.personalTxs)}
+          {map(searchItem => <SearchItem resource={searchItem}/>, this.props.searchItems)}
         </List>
       </div>
 
@@ -31,7 +31,7 @@ class Search extends React.Component {
 const connector = connect(state => {
   return {
     //transactions: state.allTransactions
-    personalTxs: state.personalTxs
+    searchItems: state.allUsers
     // favorites: filter(resource => contains(resource._id, state.favorites),
     // state.resources)
   }

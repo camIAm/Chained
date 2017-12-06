@@ -13,7 +13,7 @@ const App = props => {
       <div>
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route path="/search" component={Search}/>
+          <Route path="/search/:id" component={Search}/>
           <Route path="/profile/:id" component={Profile}/>
         </Switch>
       </div>

@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import {ALL_TRANSACTIONS, PERSONAL_TXS} from '../constants'
+import {SET_ALL_TRANSACTIONS, PERSONAL_TXS} from '../constants'
 import history from '../history'
 import {
   filter,
@@ -24,7 +24,7 @@ export const setAllTransactions = async(dispatch, getState) => {
   }
   const sortByTimeStamp = sortBy(prop('timeStamp'))
   dispatch({
-    type: ALL_TRANSACTIONS,
+    type: SET_ALL_TRANSACTIONS,
     payload: reverse(sortByTimeStamp(response))
   })
 }

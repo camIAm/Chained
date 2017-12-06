@@ -40,7 +40,7 @@ const sideList = (
         </ListItem>
       </Link>
       <Link
-        to="/search"
+        to="/search/:id"
         className="router-link"
         style={{
         textDecoration: 'none'
