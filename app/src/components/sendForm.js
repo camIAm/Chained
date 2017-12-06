@@ -37,7 +37,10 @@ console.log("this.props.onChange('recipient', pathID)",this.props.onChange('reci
       <form
         style={{ marginTop: 8 }}
         autoComplete="off"
-        onSubmit={this.props.createTxs}
+        onSubmit={e=>{
+          this.props.createTxs()
+        }
+      }
       >
         <TextField
           label="Recipient"

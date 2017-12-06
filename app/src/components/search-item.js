@@ -39,7 +39,6 @@ const SearchItem = ({resource}) => {
         <ListItemText
           primary={`${userify(resource.firstName)}`}
           secondary={resource.userName}/>
-
       </ListItem>
       </Link>
       <Divider/>
