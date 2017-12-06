@@ -5,6 +5,7 @@ import history from './history'
 import Home from './pages/home'
 import Search from './pages/search'
 import Profile from './pages/profile2'
+import SendForm from './components/sendForm'
 
 const App = props => {
 
@@ -13,6 +14,7 @@ const App = props => {
       <div>
         <Switch>
           <Route exact path="/" component={Home}/>
+          <Route exact path="search/send/:id" component={SendForm}/>
           <Route path="/search/:id" component={Search}/>
           <Route path="/profile/:id" component={Profile}/>
         </Switch>

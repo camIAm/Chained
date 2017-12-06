@@ -23,7 +23,7 @@ const styles = {
   }
 }
 
-const sideList = (
+const sideList = ({activeUser}) => (
   <div>
     <List>
       <Link
@@ -53,7 +53,7 @@ const sideList = (
         </ListItem>
       </Link>
       <Link
-        to="/profile/:id"
+        to={`/profile/${activeUser.id}`}
         className="router-link"
         style={{
         textDecoration: 'none'
@@ -102,14 +102,16 @@ const withDrawer = function (PageComponent) {
             role="button"
             onClick={props.toggleDrawer}
             onKeyDown={props.toggleDrawer}>
-            {sideList}
+            {sideList activeUser={props.activeUser}}
           </div>
         </Drawer>
       </div>
     )
   }
   const mapStateToProps = state => {
-    return {open: state.drawer.open}
+    return {
+      open: state.drawer.open,
+      activeUser: state.activeUser.id}
   }
   const mapActionsToProps = dispatch => {
     return {

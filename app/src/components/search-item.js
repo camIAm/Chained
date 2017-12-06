@@ -1,6 +1,6 @@
 import React from 'react'
 import {withRouter} from 'react-router-dom'
-
+import { Link } from 'react-router-dom'
 import {ListItem, ListItemAvatar, ListItemText} from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import Divider from 'material-ui/Divider'
@@ -18,7 +18,7 @@ import {
   split
 } from 'ramda'
 
-const SearchItem = ({resource, history}) => {
+const SearchItem = ({resource}) => {
   const removeArticles = arrData => contains(head(arrData), ['the', 'a', 'an'])
     ? drop(1, arrData)
     : arrData
@@ -27,6 +27,10 @@ const SearchItem = ({resource, history}) => {
   const userify = fullUser => compose(join(' '), slice(1, Infinity), split('_'))(fullUser)
   return (
     <div key={resource._id}>
+    <Link to={`send/${resource._id}`} style={{
+          textDecoration: 'none'
+         }}
+       className="w-100  animated fadeInRight">
       <ListItem button onClick={e => {}}>
         <ListItemAvatar>
         <Avatar>{resource.firstName}</Avatar>
@@ -36,7 +40,7 @@ const SearchItem = ({resource, history}) => {
           secondary={resource.userName}/>
 
       </ListItem>
-
+      </Link>
       <Divider/>
     </div>
   )
