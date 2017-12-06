@@ -28,7 +28,9 @@ const SearchItem = ({resource, history}) => {
   return (
     <div key={resource._id}>
       <ListItem button onClick={e => {}}>
-        
+        <ListItemAvatar>
+        <Avatar>{resource.firstName}</Avatar>
+        </ListItemAvatar>
         <ListItemText
           primary={`${userify(resource.firstName)}`}
           secondary={resource.userName}/>

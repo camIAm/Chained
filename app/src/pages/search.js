@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import {filter, contains, map} from 'ramda'
 import List from 'material-ui/List'
 import SearchItem from '../components/search-item'
-import logo from '../logo.svg';
+import TextField from 'material-ui/TextField';
 
 class Search extends React.Component {
   componentDidMount() {
@@ -16,6 +16,20 @@ class Search extends React.Component {
     return (
       <div>
         <MenuAppBar title="Search"/>
+        <form noValidate autoComplete="off">
+        <TextField 
+        style={{
+          paddingTop: 30,
+          
+          marginBottom: 0
+        }}
+        label="With placeholder multiline"
+        placeholder="Username or Name"
+        helperText="Pay a friend!"
+        fullWidth
+        margin="normal"
+        />
+        </form>
         <List style={{
           padding: 0,
           marginBottom: 60
