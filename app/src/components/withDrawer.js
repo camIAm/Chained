@@ -23,7 +23,8 @@ const styles = {
   }
 }
 
-const sideList = ({activeUser}) => (
+const SideList = ({activeUser}) => {
+return (
   <div>
     <List>
       <Link
@@ -90,7 +91,7 @@ const sideList = ({activeUser}) => (
     </List>
   </div>
 )
-
+}
 const withDrawer = function (PageComponent) {
   const WrapDrawerComponent = props => {
     return (
@@ -102,7 +103,7 @@ const withDrawer = function (PageComponent) {
             role="button"
             onClick={props.toggleDrawer}
             onKeyDown={props.toggleDrawer}>
-            {sideList activeUser={props.activeUser}}
+            <SideList activeUser={props.activeUser}/>
           </div>
         </Drawer>
       </div>
@@ -111,7 +112,8 @@ const withDrawer = function (PageComponent) {
   const mapStateToProps = state => {
     return {
       open: state.drawer.open,
-      activeUser: state.activeUser.id}
+      activeUser: state.activeUser
+    }
   }
   const mapActionsToProps = dispatch => {
     return {
