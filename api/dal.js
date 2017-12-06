@@ -56,17 +56,20 @@ const deleteTx = id => deleteDoc(id)
      }
 }
 */
-const listTx = () => db
+const listTx = () => {
+  // console.log("inside listTX");
+  return db
   .find({
   selector: {
-    recipient:{
+    sender: {
       $gte: null
     }
   }
 })
+
   .then(res => res.docs)
   .catch(err => console.log("error in dal/listTX: ", err))
-
+}
   ////////////////////////////// /        HELPERS ////////////////////////////
   const add = doc => {
   return db.put(doc)

@@ -21,11 +21,11 @@ export const setAllTransactions = async(dispatch, getState) => {
   const response = await fetch("http://localhost:4000/txs")
     .then(res => res.json())
     .catch(err => console.log('err: ', err));
-  // if (!response.ok) {
-    //   console.log("inside !response.ok",response)
-    //   return
-    // }
-    console.log("the response: ", response)
+  // if (!response) {
+  //     console.log("inside !response.ok",response)
+  //     return
+  //   }
+  console.log("the response setAllTransactions: ", response)
   const sortByTimeStamp = sortBy(prop('timeStamp'))
   dispatch({
     type: SET_ALL_TRANSACTIONS,
@@ -55,8 +55,11 @@ export const createTxs = async(dispatch, getState) => {
   console.log("createTxs action creator ")
   let txsToPost = getState().transactionForm
   const activeUser = getState().activeUser
-  txsToPost = merge(txsToPost,{'timeStamp':`Wed Oct 18 2017 12:41:34 GMT+0000 (UTC)`,
-  "currency":"USDTEST", "sender":activeUser.id})
+  txsToPost = merge(txsToPost,
+                {'timeStamp':`Wed Oct 01 2017 12:41:34 GMT+0000 (UTC)`,
+                "currency":"USDTEST",
+                "sender":activeUser.id
+                })
   console.log("txtToPost POST merge in actioncreator: ",txsToPost)
   // POST txsToPost then dispatch to setAllTransactions to update redux state store
   const response = await fetch(`${url}/txs`, {
