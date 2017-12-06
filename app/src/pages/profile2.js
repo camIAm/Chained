@@ -60,18 +60,24 @@ class Profile extends React.Component {
           />
          
           <CardActions disableActionSpacing>
+          <div style={{
+          paddingLeft: 20
+        }}>
+          {` $ ${this.props.user.balance}`}
+          </div>
             <IconButton aria-label="Add to favorites">
-              <FavoriteIcon />
+            <i class="material-icons">get_app</i>
             </IconButton>
-            <IconButton aria-label="Share">
-              <ShareIcon />
-            </IconButton>
-            <div  />
-            <IconButton
-             
-            >
-              <ExpandMoreIcon />
-            </IconButton>
+            <div style={{
+          paddingRight: 0
+        }}>
+              Cash Out
+            </div>
+            
+            
+            
+            
+            
           </CardActions>
           <Collapse  timeout="auto" unmountOnExit>
             <CardContent>
