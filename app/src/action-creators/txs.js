@@ -1,5 +1,12 @@
 import fetch from 'isomorphic-fetch'
-import {SET_ALL_TRANSACTIONS, IS_ACTIVE, PERSONAL_TXS, CLEAR_SEND_FORM, ERROR} from '../constants'
+import {
+  SET_ALL_TRANSACTIONS,
+  SINGLE_TX,
+  IS_ACTIVE,
+  PERSONAL_TXS,
+  CLEAR_SEND_FORM,
+  ERROR
+} from '../constants'
 import history from '../history'
 import {
   filter,
@@ -9,6 +16,7 @@ import {
   reverse,
   sortBy,
   merge,
+  find,
   isEmpty,
   concat
 } from "ramda"
@@ -49,7 +57,6 @@ export const setPersonalTransactions = user => async(dispatch, getState) => {
 }
 
 export const createTxs = async(dispatch, getState) => {
-  console.log("createTxs action creator ")
   let txsToPost = getState().transactionForm
   const activeUser = getState().activeUser
   txsToPost = merge(txsToPost, {
@@ -81,6 +88,15 @@ export const createTxs = async(dispatch, getState) => {
   // clear form
   dispatch({type: CLEAR_SEND_FORM})
   history.push('/')
+}
+
+export const getTx = txID => async(dispatch, getState) => {
+  console.log("getTx, whole: ", getState().allTransactions)
+  dispatch({
+    type: SINGLE_TX,
+    payload: find(propEq('_id', 'ba44400c583b0c952e5a0040a3009130'))(getState().allTransactions)
+  })
+
 }
 
 // modify

@@ -7,7 +7,18 @@ import {activeUser} from './reducers/users/activeUser'
 import {allUsers} from './reducers/users/users'
 import {transactionForm} from './reducers/txs/searchTxs'
 import {isActive} from './reducers/txs/isActive'
-const store = createStore(combineReducers({drawer, allUsers,isActive,transactionForm,activeUser, personalTxs, allTransactions}), applyMiddleware(thunk))
+import {singleTransaction} from './reducers/txs/singleTx'
+
+const store = createStore(combineReducers({
+  drawer,
+  singleTransaction,
+  allUsers,
+  isActive,
+  transactionForm,
+  activeUser,
+  personalTxs,
+  allTransactions
+}), applyMiddleware(thunk))
 
 store.subscribe(() => {
   console.log('store.getState()', store.getState())
