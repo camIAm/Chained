@@ -21,14 +21,31 @@ import {
   Snackbar
 } from 'material-ui'
 
+const styles = theme => ({
+  root: {
+    width: '100%'
+  },
+  flex: {
+    flex: 1
+  },
+  firstButton: {
+    marginLeft: -12,
+    marginRight: 12
+  },
+  lastButton: {
+    marginLeft: 12,
+    marginRight: -12
+  }
+})
+
 class ReceiptTicket extends React.Component {
   // /profile/user_rcmontgo/ba44400c583b0c952e5a0040a3009130 maybe dispatch to an
   // action creator to pull txs/{id} out of the redux state store
   componentWillMount() {
     const txID = prop('match')(this.props)
-      ? path(['match', 'params', 'id', 'tx'])(this.props)
+      ? path(['match', 'params', 'tx'])(this.props)
       : compose(last, split('/'), path(['location', 'pathname']))(this.props)
-
+    console.log("txID=",txID)
     this
       .props
       .getTx(txID)
@@ -107,4 +124,4 @@ const mapActionToProps = dispatch => {
 
 const connector = connect(mapStateToProps, mapActionToProps)
 
-export default connector(ReceiptTicket);
+export default connector(withStyles(styles)(ReceiptTicket));

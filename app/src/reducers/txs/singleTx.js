@@ -21,7 +21,7 @@ const singleTxDefault = {
 }
 // maybe clear singleTx when leaving receipt view
 export const singleTransaction = (state = singleTxDefault, action) => {
-  console.log("singTx action:", action.payload)
+  
   switch (action.type) {
     case SINGLE_TX:
       return action.payload

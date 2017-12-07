@@ -92,9 +92,11 @@ export const createTxs = async(dispatch, getState) => {
 
 export const getTx = txID => async(dispatch, getState) => {
   console.log("getTx, whole: ", getState().allTransactions)
+  console.log("txID",txID)
+  console.log("the `${txID}`",`${txID}`)
   dispatch({
     type: SINGLE_TX,
-    payload: find(propEq('_id', 'ba44400c583b0c952e5a0040a3009130'))(getState().allTransactions)
+    payload: find(propEq('_id', `${txID}`))(getState().allTransactions)
   })
 
 }
