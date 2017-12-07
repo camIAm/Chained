@@ -19,13 +19,13 @@ import {
   split
 } from 'ramda'
 
-const ResourceItem = ({resource, history}) => {
+const ProfileItem = ({resource, user}) => {
 
   // Improve resource item design to include description and time or txs Add link
   // to receipt (paper material-ui component)
   return (
     <div key={resource._id}>
-    <Link to={`/${resource._id}`}>
+    <Link to={`/profile/${user.id}/${resource._id}`}>
       <ListItem button onClick={e => {}}>
         <ListItemAvatar>
           <Avatar>
@@ -37,9 +37,9 @@ const ResourceItem = ({resource, history}) => {
           secondary={resource.amount}/>
 
       </ListItem>
-</Link>
+  </Link>
       <Divider/>
     </div>
   )
 }
-export default withRouter(ResourceItem)
+export default withRouter(ProfileItem)

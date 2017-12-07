@@ -19,7 +19,6 @@ class Search extends React.Component {
     this.setState({value: newValue});
   };
 
-  // Pull line 18-37 out into a search component and implement search
   render() {
     return (
       <div>

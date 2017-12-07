@@ -16,7 +16,7 @@ import FavoriteIcon from 'material-ui-icons/Favorite';
 import ShareIcon from 'material-ui-icons/Share';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
-import ResourceItem from '../components/resource-item'
+import ProfileItem from '../components/profile-item'
 import {setPersonalTransactions, setAllTransactions} from '../action-creators/txs'
 
 const userify = fullUser => compose(join(' '), slice(1, Infinity), split('_'))(fullUser)
@@ -65,7 +65,7 @@ class Profile extends React.Component {
         }}>
           {` $ ${this.props.user.balance}`}
           </div>
-            <IconButton aria-label="Add to favorites">
+            <IconButton aria-label="Cash out to bank account">
             <i class="material-icons">get_app</i>
             </IconButton>
             <div style={{
@@ -73,11 +73,6 @@ class Profile extends React.Component {
         }}>
               Cash Out
             </div>
-            
-            
-            
-            
-            
           </CardActions>
           <Collapse  timeout="auto" unmountOnExit>
             <CardContent>
@@ -88,8 +83,9 @@ class Profile extends React.Component {
      style = {{
           padding: 0,
           marginBottom: 60
-        }} > {map(transactions => <ResourceItem resource={transactions}/>, this.props.personalTxs) } 
-        < /List>
+        }} >
+         {map(transactions => <ProfileItem resource={transactions} user={this.props.user}/>, this.props.personalTxs) } 
+        </List>
       </div >
       )
   }
