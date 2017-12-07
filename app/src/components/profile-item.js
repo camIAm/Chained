@@ -7,6 +7,7 @@ import Divider from 'material-ui/Divider'
 import {userify} from '../lib/userify'
 //import ResourceMenuItem from './resource-item-menu'
 import {Link} from 'react-router-dom'
+
 import {
   slice,
   toUpper,
@@ -25,7 +26,10 @@ const ProfileItem = ({resource, user}) => {
   // to receipt (paper material-ui component)
   return (
     <div key={resource._id}>
-    <Link to={`/profile/${user.id}/${resource._id}`}>
+    
+    <Link to={`/profile/${user.id}/${resource._id}`} style={{
+        textDecoration: 'none'
+      }}>
       <ListItem button onClick={e => {}}>
         <ListItemAvatar>
           <Avatar>

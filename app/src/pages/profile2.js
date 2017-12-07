@@ -19,8 +19,8 @@ import MoreVertIcon from 'material-ui-icons/MoreVert';
 import ProfileItem from '../components/profile-item'
 import {setPersonalTransactions, setAllTransactions} from '../action-creators/txs'
 import '../App.css'
-// import {loading} from '../loading.svg'
 
+const loading = require('../loading.svg')
 
 const userify = fullUser => compose(join(' '), slice(1, Infinity), split('_'))(fullUser)
 
@@ -86,10 +86,9 @@ componentDidMount() {
             </CardContent>
           </Collapse>
         </Card>
-        {!this.props.load.loaded?<h1 style={{
-          padding: 0,
-          paddingTop: 60
-        }}>Hello</h1>:(
+        {!this.props.load.loaded?<div id="custom-loader-container">
+    <img id="custom-loader" src={loading} alt="loading" />
+    </div>:(
     < List
      style = {{
           padding: 0,
