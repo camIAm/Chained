@@ -27,11 +27,10 @@ class Search extends React.Component {
         <form noValidate autoComplete="off">
           <TextField
             style={{
-            paddingTop: 30,
+            paddingTop: 40,
             marginBottom: 0
           }}
-            label="With placeholder multiline"
-            placeholder="Username or Name"
+            placeholder="Username or Name "
             helperText="Pay a friend!"
             fullWidth
             onChange={e => {
@@ -43,7 +42,7 @@ class Search extends React.Component {
           padding: 0,
           marginBottom: 60
         }}>
-          {map(searchItem => <SearchItem resource={searchItem}/>, searchDocs(searchStringBuilder(['userName', 'firstName']), this.state.value)(this.props.allUsers))}
+          {map(searchItem => <SearchItem resource={searchItem}/>, searchDocs(searchStringBuilder(['userName', 'firstName', 'lastName']), this.state.value)(this.props.allUsers))}
         </List>
       </div>
 
