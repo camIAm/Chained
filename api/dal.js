@@ -60,12 +60,15 @@ const listTx = () => {
   // console.log("inside listTX");
   return db
   .find({
-  selector: {
-    sender: {
-      $gte: null
+    selector: {
+      sender: {
+        $gte: null
+      },
+      recipient: {
+        $gte: null
+      }
     }
-  }
-})
+  })
 
   .then(res => res.docs)
   .catch(err => console.log("error in dal/listTX: ", err))

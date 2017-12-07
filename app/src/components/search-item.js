@@ -1,6 +1,6 @@
 import React from 'react'
 import {withRouter} from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {ListItem, ListItemAvatar, ListItemText} from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import Divider from 'material-ui/Divider'
@@ -27,19 +27,21 @@ const SearchItem = ({resource}) => {
   const userify = fullUser => compose(join(' '), slice(1, Infinity), split('_'))(fullUser)
   return (
     <div key={resource._id}>
-    <Link key={resource._id}
-          to={`send/${resource._id}`} style={{
-          textDecoration: 'none'
-         }}
-       className="w-100  animated fadeInRight">
-      <ListItem button onClick={e => {}}>
-        <ListItemAvatar>
-        <Avatar>{resource.firstName}</Avatar>
-        </ListItemAvatar>
-        <ListItemText
-          primary={`${userify(resource.firstName)}`}
-          secondary={resource.userName}/>
-      </ListItem>
+      <Link
+        key={resource._id}
+        to={`send/${resource._id}`}
+        style={{
+        textDecoration: 'none'
+      }}
+        className="w-100  animated fadeInRight">
+        <ListItem button onClick={e => {}}>
+          <ListItemAvatar>
+            <Avatar>{resource.firstName}</Avatar>
+          </ListItemAvatar>
+          <ListItemText
+            primary={`${userify(resource.firstName)}`}
+            secondary={resource.userName}/>
+        </ListItem>
       </Link>
       <Divider/>
     </div>

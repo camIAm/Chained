@@ -7,34 +7,43 @@ import {filter, contains, map} from 'ramda'
 import List from 'material-ui/List'
 import SearchItem from '../components/search-item'
 import TextField from 'material-ui/TextField';
+import {searchDocs} from '../lib/search/search-docs'
+import {searchStringBuilder} from '../lib/search/build-search-string'
 
 class Search extends React.Component {
-  componentDidMount() {
-   
+  state = {
+    value: ''
   }
+
+  handleChange = (newValue) => {
+    this.setState({value: newValue});
+  };
+
+  // Pull line 18-37 out into a search component and implement search
   render() {
     return (
       <div>
         <MenuAppBar title="Search"/>
         <form noValidate autoComplete="off">
-        <TextField 
-        style={{
-          paddingTop: 30,
-          
-          marginBottom: 0
-        }}
-        label="With placeholder multiline"
-        placeholder="Username or Name"
-        helperText="Pay a friend!"
-        fullWidth
-        margin="normal"
-        />
+          <TextField
+            style={{
+            paddingTop: 30,
+            marginBottom: 0
+          }}
+            label="With placeholder multiline"
+            placeholder="Username or Name"
+            helperText="Pay a friend!"
+            fullWidth
+            onChange={e => {
+            this.handleChange(e.target.value)
+          }}
+            margin="normal"/>
         </form>
         <List style={{
           padding: 0,
           marginBottom: 60
         }}>
-          {map(searchItem => <SearchItem resource={searchItem}/>, this.props.searchItems)}
+          {map(searchItem => <SearchItem resource={searchItem}/>, searchDocs(searchStringBuilder(['userName', 'firstName']), this.state.value)(this.props.allUsers))}
         </List>
       </div>
 
@@ -45,7 +54,7 @@ class Search extends React.Component {
 const connector = connect(state => {
   return {
     //transactions: state.allTransactions
-    searchItems: state.allUsers
+    allUsers: state.allUsers
     // favorites: filter(resource => contains(resource._id, state.favorites),
     // state.resources)
   }

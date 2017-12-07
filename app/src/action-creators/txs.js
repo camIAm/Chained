@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import {SET_ALL_TRANSACTIONS,IS_ACTIVE, PERSONAL_TXS,CLEAR_SEND_FORM,ERROR} from '../constants'
+import {SET_ALL_TRANSACTIONS, IS_ACTIVE, PERSONAL_TXS, CLEAR_SEND_FORM, ERROR} from '../constants'
 import history from '../history'
 import {
   filter,
@@ -21,10 +21,7 @@ export const setAllTransactions = async(dispatch, getState) => {
   const response = await fetch("http://localhost:4000/txs")
     .then(res => res.json())
     .catch(err => console.log('err: ', err));
-  // if (!response) {
-  //     console.log("inside !response.ok",response)
-  //     return
-  //   }
+  // if (!response) {     console.log("inside !response.ok",response)     return }
   console.log("the response setAllTransactions: ", response)
   const sortByTimeStamp = sortBy(prop('timeStamp'))
   dispatch({
@@ -55,13 +52,16 @@ export const createTxs = async(dispatch, getState) => {
   console.log("createTxs action creator ")
   let txsToPost = getState().transactionForm
   const activeUser = getState().activeUser
-  txsToPost = merge(txsToPost,
-                {'timeStamp':`Wed Oct 01 2017 12:41:34 GMT+0000 (UTC)`,
-                "currency":"USDTEST",
-                "sender":activeUser.id
-                })
-  console.log("txtToPost POST merge in actioncreator: ",txsToPost)
-  // POST txsToPost then dispatch to setAllTransactions to update redux state store
+  txsToPost = merge(txsToPost, {
+    'timeStamp': Date
+      .now()
+      .toString(),
+    "currency": "USDTEST",
+    "sender": activeUser.id
+  })
+  console.log("txtToPost POST merge in actioncreator: ", txsToPost)
+  // POST txsToPost then dispatch to setAllTransactions to update redux state
+  // store
   const response = await fetch(`${url}/txs`, {
     headers: {
       'Content-Type': 'application/json'
@@ -70,28 +70,26 @@ export const createTxs = async(dispatch, getState) => {
     body: JSON.stringify(txsToPost)
   }).then(res => res.json())
 
-  console.log("response in createTxs: ",response)
-  
+  console.log("response in createTxs: ", response)
+
   if (!response.ok) {
-    dispatch({ type: ERROR, payload: 'Could not add txs' })
+    dispatch({type: ERROR, payload: 'Could not add txs'})
     return
   }
   dispatch(setAllTransactions)
-  
+
   // clear form
-  dispatch({
-    type: CLEAR_SEND_FORM
-  })
-  history.push('/') 
+  dispatch({type: CLEAR_SEND_FORM})
+  history.push('/')
 }
 
 // modify
-export const isActive = async (dispatch, getState) => {
+export const isActive = async(dispatch, getState) => {
   const currentData = !isEmpty(getState().transactionForm.recipient)
-  const { name, desc, shortDesc, icon } = currentData
+  const {name, desc, shortDesc, icon} = currentData
   if (isEmpty(name) || isEmpty(desc) || isEmpty(shortDesc) || isEmpty(icon)) {
-    dispatch({ type: IS_ACTIVE, payload: true })
+    dispatch({type: IS_ACTIVE, payload: true})
   } else {
-    dispatch({ type: IS_ACTIVE, payload: false })
+    dispatch({type: IS_ACTIVE, payload: false})
   }
 }
