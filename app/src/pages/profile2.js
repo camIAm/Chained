@@ -18,14 +18,21 @@ import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
 import ProfileItem from '../components/profile-item'
 import {setPersonalTransactions, setAllTransactions} from '../action-creators/txs'
+import '../App.css'
+// import {loading} from '../loading.svg'
+
 
 const userify = fullUser => compose(join(' '), slice(1, Infinity), split('_'))(fullUser)
 
 class Profile extends React.Component {
-
-  componentDidMount() {
-   
-
+// componentWillMount(){
+//   if(!this.props.load.loaded){
+//     console.log("getting all Txws")
+//     this.props.setAllTxs()
+//   }
+// }
+componentDidMount() {
+  this.props.setAllTxs()
     this
       .props
       .setPersonalTxs(this.props.user)
@@ -79,6 +86,10 @@ class Profile extends React.Component {
             </CardContent>
           </Collapse>
         </Card>
+        {!this.props.load.loaded?<h1 style={{
+          padding: 0,
+          paddingTop: 60
+        }}>Hello</h1>:(
     < List
      style = {{
           padding: 0,
@@ -86,6 +97,7 @@ class Profile extends React.Component {
         }} >
          {map(transactions => <ProfileItem resource={transactions} user={this.props.user}/>, this.props.personalTxs) } 
         </List>
+        )}
       </div >
       )
   }
@@ -95,7 +107,8 @@ const connector = connect(state => {
   return {
     //transactions: state.allTransactions
     personalTxs: state.personalTxs,
-    user: state.activeUser
+    user: state.activeUser,
+    load: state.load
     // favorites: filter(resource => contains(resource._id, state.favorites),
     // state.resources)
   }

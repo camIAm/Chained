@@ -25,19 +25,20 @@ const ResourceItem = ({resource, history}) => {
   // to receipt (paper material-ui component)
   return (
     <div key={resource._id}>
-    <Link to={`/${resource._id}`}>
-      <ListItem button onClick={e => {}}>
-        <ListItemAvatar>
-          <Avatar>
-            {compose(toUpper(), slice(0, 1), join(' '), split(' '), toLower(), userify)(resource.sender)}
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText
-          primary={`${userify(resource.sender)} sent ${userify(resource.recipient)}`}
-          secondary={resource.amount}/>
+      <Link to={`/${resource._id}`}>
+        <ListItem button onClick={e => {}}>
+          <ListItemAvatar>
+            <Avatar>
+              {compose(toUpper(), slice(0, 1), join(' '), split(' '), toLower(), userify)(resource.sender)}
+            </Avatar>
+          </ListItemAvatar>
 
-      </ListItem>
-</Link>
+          <ListItemText
+            primary={`${userify(resource.sender)} sent ${userify(resource.recipient)}`}
+            secondary={resource.amount}/>
+
+        </ListItem>
+      </Link>
       <Divider/>
     </div>
   )

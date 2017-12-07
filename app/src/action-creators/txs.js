@@ -4,6 +4,7 @@ import {
   SINGLE_TX,
   IS_ACTIVE,
   PERSONAL_TXS,
+  DATA_LOADED,
   CLEAR_SEND_FORM,
   ERROR
 } from '../constants'
@@ -26,7 +27,7 @@ const url = process.env.REACT_APP_BASE_URL
 export const setAllTransactions = async(dispatch, getState) => {
 
   console.log("REACT_APP_BASE_URL ", process.env.REACT_APP_BASE_URL)
-  const response = await fetch("http://localhost:4000/txs")
+  const response = await fetch(`${url}/txs`)
     .then(res => res.json())
     .catch(err => console.log('err: ', err));
   // if (!response) {     console.log("inside !response.ok",response)     return }
@@ -36,9 +37,13 @@ export const setAllTransactions = async(dispatch, getState) => {
     type: SET_ALL_TRANSACTIONS,
     payload: reverse(sortByTimeStamp(response))
   })
+  dispatch({type: DATA_LOADED, payload: true})
 }
 
 export const setPersonalTransactions = user => async(dispatch, getState) => {
+  
+  dispatch(setAllTransactions).then(()=>{
+  
   console.log("setPersonalTxs user: ", user)
   const allTxs = getState().allTransactions
   const rec = propEq('recipient', 'user_rcmontgo')
@@ -54,6 +59,7 @@ export const setPersonalTransactions = user => async(dispatch, getState) => {
     type: PERSONAL_TXS,
     payload: reverse(sortByTimeStamp(personalTxs))
   })
+})
 }
 
 export const createTxs = async(dispatch, getState) => {

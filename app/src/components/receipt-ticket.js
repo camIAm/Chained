@@ -1,11 +1,12 @@
 import React from 'react';
 import {withStyles} from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
+import Card, {CardActions, CardContent} from 'material-ui/Card';
+import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import {connect} from 'react-redux'
 import {getTx} from '../action-creators/txs'
 import {prop, path, compose, last, split} from 'ramda'
-
+import {userify} from '../lib/userify'
 class ReceiptTicket extends React.Component {
   // /profile/user_rcmontgo/ba44400c583b0c952e5a0040a3009130 maybe dispatch to an
   // action creator to pull txs/{id} out of the redux state store
@@ -19,20 +20,40 @@ class ReceiptTicket extends React.Component {
       .getTx(txID)
   }
   render() {
-    console.log("this.props.tx", this.props.tx)
+
     return (
       <div>
-        <Paper elevation={4}>
-          <Typography type="headline" component="h3">
-            This is a sheet of paper.
-          </Typography>
-          <Typography type="body1" component="p">
-            Paper can be used to build surface or other elements for your application. {this.props.tx.sender
-              ? this.props.tx.sender
-              : ''}
-          </Typography>
-
-        </Paper>
+        <Card >
+          <CardContent>
+            <Typography type="h2">
+              Receipt Ticket
+            </Typography>
+            <Typography component="h3">
+              <b>Sender:
+              </b>{`  ${userify(this.props.tx.sender)}`}
+            </Typography>
+            <Typography component="h3">
+              <b>Recipient:
+              </b>
+              {`  ${userify(this.props.tx.recipient)}`}
+            </Typography>
+            <Typography type="body1">
+              <b>Amount:
+              </b>{`  ${this.props.tx.amount}`}
+            </Typography>
+            <Typography component="p">
+              <b>Description:
+              </b>{`  ${this.props.tx.description}`}
+            </Typography>
+            <Typography component="p">
+              <b>Date:
+              </b>{`  ${this.props.tx.timeStamp}`}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button dense>Dispute</Button>
+          </CardActions>
+        </Card>
       </div>
     )
   }
