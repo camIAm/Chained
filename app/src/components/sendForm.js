@@ -1,13 +1,26 @@
 import React from 'react'
 import {withStyles} from 'material-ui/styles'
-import TextField from 'material-ui/TextField'
-import Button from 'material-ui/Button'
 import SaveIcon from 'material-ui-icons/Save'
 import {UPDATE_NEW_TXS_FORM, SUBMIT_NEW_TXS} from '../constants'
 import {createTxs, isActive} from '../action-creators/txs'
 import {connect} from 'react-redux'
 import {transactionForm} from '../reducers/txs/searchTxs';
 import {prop, path, compose, split, last} from 'ramda'
+import {Link} from 'react-router-dom'
+import {
+  AppBar,
+  List,
+  TextField,
+  FormControl,
+  InputLabel,
+  Typography,
+  Select,
+  Toolbar,
+  Button,
+  IconButton,
+  Icon,
+  Snackbar
+} from 'material-ui'
 
 const styles = theme => ({
   input: {
@@ -36,6 +49,24 @@ class SendForm extends React.Component {
     console.log("this.props.activeUser.id")
     const {classes} = this.props
     return (
+      <div>
+      <AppBar position="static">
+      <Toolbar className="flex" color="contrast">
+        <Link to={`/search/${this.props.activeUser.id}`} style={{ textDecoration: 'none', color: 'transparent' }}>
+          <IconButton color="inherit">
+            <Icon color="accent" style={{ fontSize: 36 }}>
+              keyboard_arrow_left
+            </Icon>
+          </IconButton>
+        </Link>
+        <Typography color="inherit" className="flex-auto" type="title">
+          New Widget Form
+        </Typography>
+        <Button type="submit" color="inherit">
+          Save
+        </Button>
+      </Toolbar>
+    </AppBar>
       <form
         style={{
         marginTop: 8
@@ -83,6 +114,7 @@ class SendForm extends React.Component {
           <SaveIcon/>
         </Button>
       </form>
+      </div>
     )
   }
 }

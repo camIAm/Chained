@@ -25,7 +25,7 @@ const ResourceItem = ({resource, history}) => {
   // to receipt (paper material-ui component)
   return (
     <div key={resource._id}>
-      <Link to={`/${resource._id}`}>
+      <Link to={`/${resource._id}`} style={{ textDecoration: 'none', color: 'transparent' }}>
         <ListItem button onClick={e => {}}>
           <ListItemAvatar>
             <Avatar>
