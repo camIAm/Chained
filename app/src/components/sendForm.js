@@ -7,6 +7,9 @@ import {connect} from 'react-redux'
 import {transactionForm} from '../reducers/txs/searchTxs';
 import {prop, path, compose, split, last} from 'ramda'
 import {Link} from 'react-router-dom'
+import withDrawer from './withDrawer'
+import withRoot from './withRoot'
+
 import {
   AppBar,
   List,
@@ -58,8 +61,8 @@ class SendForm extends React.Component {
     console.log("this.props.activeUser.id")
     const {classes} = this.props
     return (
-      <div id="menu-container" className={classes.root}>
-      <MenuAppBar title="Receipt"/>
+      <div  >
+      <MenuAppBar title="Send Money" goBack {...this.props}/>
       <form
         style={{
         marginTop: 60
@@ -71,7 +74,7 @@ class SendForm extends React.Component {
           value={this.props.transactionForm.recipient}
           margin="normal"
           required
-          className={classes.input}/>
+          />
         <TextField
           label="Amount"
           value={this.props.transactionForm.amount}
@@ -82,7 +85,7 @@ class SendForm extends React.Component {
         }}
           margin="normal"
           required
-          className={classes.input}
+          
           multiline/>
         <TextField
           label="Description"
@@ -94,7 +97,7 @@ class SendForm extends React.Component {
         }}
           margin="normal"
           required
-          className={classes.input}
+          
           multiline/>
 
         <Button
@@ -137,4 +140,4 @@ const mapActionsToProps = dispatch => {
 }
 const connector = connect(mapStateToProps, mapActionsToProps)
 
-export default connector(withStyles(styles)(SendForm))
+export default withRoot(withDrawer(connector(SendForm)))
