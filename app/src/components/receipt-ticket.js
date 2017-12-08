@@ -7,6 +7,8 @@ import {getTx} from '../action-creators/txs'
 import {prop, path, compose, last, split} from 'ramda'
 import {userify} from '../lib/userify'
 import {Link} from "react-router-dom"
+import withDrawer from './withDrawer'
+import withRoot from './withRoot'
 import {
   AppBar,
   List,
@@ -20,7 +22,7 @@ import {
   Icon,
   Snackbar
 } from 'material-ui'
-
+import MenuAppBar from './menuAppBar'
 const styles = theme => ({
   root: {
     width: '100%'
@@ -54,24 +56,10 @@ class ReceiptTicket extends React.Component {
 
     return (
       <div>
-        <AppBar position="static">
-        <Toolbar className="flex" color="contrast">
-          <Link to={`/profile/${this.props.activeUser.id}`} style={{ textDecoration: 'none', color: 'transparent' }}>
-            <IconButton color="inherit">
-              <Icon color="accent" style={{ fontSize: 36 }}>
-                keyboard_arrow_left
-              </Icon>
-            </IconButton>
-          </Link>
-          <Typography color="inherit" className="flex-auto" type="title">
-            New Widget Form
-          </Typography>
-          <Button type="submit" color="inherit">
-            Save
-          </Button>
-        </Toolbar>
-      </AppBar>
-        <Card >
+        <MenuAppBar title="Receipt" goBack {...this.props}/>
+        <Card style={{
+        marginTop: 60
+        }}>
           <CardContent>
             <Typography type="h2">
               Receipt Ticket
@@ -115,6 +103,7 @@ const mapStateToProps = state => {
 const mapActionToProps = dispatch => {
   console.log("action fired")
   return {
+    // goBack:(history)=>{}
     getTx: txID => {
       console.log("inside action")
       dispatch(getTx(txID))
@@ -124,4 +113,4 @@ const mapActionToProps = dispatch => {
 
 const connector = connect(mapStateToProps, mapActionToProps)
 
-export default connector(withStyles(styles)(ReceiptTicket));
+export default withRoot(withDrawer(connector(ReceiptTicket)))

@@ -77,6 +77,7 @@ const mapStateToProps = state => ({})
 const mapActionsToProps = (dispatch, getState) => ({
   toggleDrawer: () => dispatch({type: 'TOGGLE_DRAWER'}),
   lastPage: (history, page) => e => {
+    console.log("insdie lastPage, history = ",history)
     e.preventDefault()
     history.goBack()
     // if (page) {   history.replace(page) } else { history.goBack() }

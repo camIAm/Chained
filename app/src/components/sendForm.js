@@ -21,13 +21,22 @@ import {
   Icon,
   Snackbar
 } from 'material-ui'
+import MenuAppBar from './menuAppBar'
 
 const styles = theme => ({
-  input: {
-    width: '50%',
-    marginLeft: 16,
-    marginTop: 16,
-    marginBottom: 8
+  root: {
+    width: '100%'
+  },
+  flex: {
+    flex: 1
+  },
+  firstButton: {
+    marginLeft: -12,
+    marginRight: 12
+  },
+  lastButton: {
+    marginLeft: 12,
+    marginRight: -12
   }
 })
 
@@ -49,27 +58,11 @@ class SendForm extends React.Component {
     console.log("this.props.activeUser.id")
     const {classes} = this.props
     return (
-      <div>
-      <AppBar position="static">
-      <Toolbar className="flex" color="contrast">
-        <Link to={`/search/${this.props.activeUser.id}`} style={{ textDecoration: 'none', color: 'transparent' }}>
-          <IconButton color="inherit">
-            <Icon color="accent" style={{ fontSize: 36 }}>
-              keyboard_arrow_left
-            </Icon>
-          </IconButton>
-        </Link>
-        <Typography color="inherit" className="flex-auto" type="title">
-          New Widget Form
-        </Typography>
-        <Button type="submit" color="inherit">
-          Save
-        </Button>
-      </Toolbar>
-    </AppBar>
+      <div id="menu-container" className={classes.root}>
+      <MenuAppBar title="Receipt"/>
       <form
         style={{
-        marginTop: 8
+        marginTop: 60
       }}
         autoComplete="off"
         onSubmit={this.props.createTxs}>
@@ -144,4 +137,4 @@ const mapActionsToProps = dispatch => {
 }
 const connector = connect(mapStateToProps, mapActionsToProps)
 
-export default withStyles(styles)(connector(SendForm))
+export default connector(withStyles(styles)(SendForm))
