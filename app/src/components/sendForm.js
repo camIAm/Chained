@@ -11,6 +11,7 @@ import withDrawer from './withDrawer'
 import withRoot from './withRoot'
 import Send from 'material-ui-icons/Send';
 import Delete from 'material-ui-icons/Delete';
+import {userify} from '../lib/userify'
 
 import {
   AppBar,
@@ -82,8 +83,8 @@ class SendForm extends React.Component {
         autoComplete="off"
         onSubmit={this.props.createTxs}>
         <TextField
-          label="Recipient"
-          value={this.props.transactionForm.recipient}
+          label="Selected User"
+          value={userify(this.props.transactionForm.recipient)}
           margin="normal"
           required
           />
