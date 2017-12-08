@@ -9,6 +9,8 @@ import {prop, path, compose, split, last} from 'ramda'
 import {Link} from 'react-router-dom'
 import withDrawer from './withDrawer'
 import withRoot from './withRoot'
+import Send from 'material-ui-icons/Send';
+import Delete from 'material-ui-icons/Delete';
 
 import {
   AppBar,
@@ -40,8 +42,18 @@ const styles = theme => ({
   lastButton: {
     marginLeft: 12,
     marginRight: -12
-  }
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+  leftIcon: {
+    marginRight: theme.spacing.unit,
+  },
+  rightIcon: {
+    marginLeft: theme.spacing.unit,
+  },
 })
+
 
 class SendForm extends React.Component {
 
@@ -61,7 +73,7 @@ class SendForm extends React.Component {
     console.log("this.props.activeUser.id")
     const {classes} = this.props
     return (
-      <div  >
+      <div >
       <MenuAppBar title="Send Money" goBack {...this.props}/>
       <form
         style={{
@@ -77,6 +89,7 @@ class SendForm extends React.Component {
           />
         <TextField
           label="Amount"
+          fullWidth
           value={this.props.transactionForm.amount}
           onChange={e => {
           this
@@ -89,6 +102,7 @@ class SendForm extends React.Component {
           multiline/>
         <TextField
           label="Description"
+          fullWidth
           value={this.props.transactionForm.description}
           onChange={e => {
           this
@@ -97,18 +111,31 @@ class SendForm extends React.Component {
         }}
           margin="normal"
           required
-          
           multiline/>
-
+  <div style={{display: 'flex',width: '100%'}}>
         <Button
-          fab
+        style={{display: 'flex',width: '100%'}}
+          raised
           color="primary"
           type="submit"
-          aria-label="add"
+          aria-label="send"
           className="fab-button"
           disabled={false}>
-          <SaveIcon/>
+          Send
+          <Send className={classes.rightIcon} />
         </Button>
+        <Button
+        style={{display: 'flex',width: '100%'}}
+          raised
+          color="accent"
+          type="submit"
+          aria-label="request"
+          className="fab-button"
+          disabled={false}>
+          Request
+          <Delete className={classes.rightIcon} />
+        </Button>
+      </div>
       </form>
       </div>
     )
@@ -140,4 +167,4 @@ const mapActionsToProps = dispatch => {
 }
 const connector = connect(mapStateToProps, mapActionsToProps)
 
-export default withRoot(withDrawer(connector(SendForm)))
+export default withRoot(withDrawer(connector(withStyles(styles)(SendForm))))
