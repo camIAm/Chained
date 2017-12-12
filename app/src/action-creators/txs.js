@@ -41,19 +41,19 @@ export const setAllTransactions = async(dispatch, getState) => {
 }
 
 export const setPersonalTransactions = user => async(dispatch, getState) => {
-  dispatch(setAllTransactions).then(()=>{
-  const allTxs = getState().allTransactions
-  const rec = propEq('recipient', 'user_rcmontgo')
-  const sender = propEq('sender', 'user_rcmontgo')
-  const sortByTimeStamp = sortBy(prop('timeStamp'));
-  const senderTxs = filter(sender, allTxs)
-  const recipientTxs = filter(rec, allTxs)
-  const personalTxs = concat(senderTxs, recipientTxs)
-  dispatch({
-    type: PERSONAL_TXS,
-    payload: reverse(sortByTimeStamp(personalTxs))
+  dispatch(setAllTransactions).then(() => {
+    const allTxs = getState().allTransactions
+    const rec = propEq('recipient', 'user_rcmontgo')
+    const sender = propEq('sender', 'user_rcmontgo')
+    const sortByTimeStamp = sortBy(prop('timeStamp'));
+    const senderTxs = filter(sender, allTxs)
+    const recipientTxs = filter(rec, allTxs)
+    const personalTxs = concat(senderTxs, recipientTxs)
+    dispatch({
+      type: PERSONAL_TXS,
+      payload: reverse(sortByTimeStamp(personalTxs))
+    })
   })
-})
 }
 
 export const createTxs = async(dispatch, getState) => {
@@ -87,13 +87,13 @@ export const createTxs = async(dispatch, getState) => {
 
   // clear form
   dispatch({type: CLEAR_SEND_FORM})
-  history.push('/')
+  history.push(`/profile/${activeUser.id}`)
 }
 
 export const getTx = txID => async(dispatch, getState) => {
   console.log("getTx, whole: ", getState().allTransactions)
-  console.log("txID",txID)
-  console.log("the `${txID}`",`${txID}`)
+  console.log("txID", txID)
+  console.log("the `${txID}`", `${txID}`)
   dispatch({
     type: SINGLE_TX,
     payload: find(propEq('_id', `${txID}`))(getState().allTransactions)

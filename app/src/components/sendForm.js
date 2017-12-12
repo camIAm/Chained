@@ -3,6 +3,7 @@ import {withStyles} from 'material-ui/styles'
 import SaveIcon from 'material-ui-icons/Save'
 import {UPDATE_NEW_TXS_FORM, SUBMIT_NEW_TXS} from '../constants'
 import {createTxs, isActive} from '../action-creators/txs'
+import {createRequest} from '../action-creators/request'
 import {connect} from 'react-redux'
 import {transactionForm} from '../reducers/txs/searchTxs';
 import {prop, path, compose, split, last} from 'ramda'
@@ -12,7 +13,6 @@ import withRoot from './withRoot'
 import Send from 'material-ui-icons/Send';
 import Delete from 'material-ui-icons/Delete';
 import {userify} from '../lib/userify'
-
 
 import {
   AppBar,
@@ -46,16 +46,15 @@ const styles = theme => ({
     marginRight: -12
   },
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit
   },
   leftIcon: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing.unit
   },
   rightIcon: {
-    marginLeft: theme.spacing.unit,
-  },
+    marginLeft: theme.spacing.unit
+  }
 })
-
 
 class SendForm extends React.Component {
 
@@ -76,72 +75,78 @@ class SendForm extends React.Component {
     const {classes} = this.props
     return (
       <div >
-      <MenuAppBar title="Send Money" goBack {...this.props}/>
-      <form
-        style={{
-        marginTop: 60
-      }}
-        autoComplete="off"
-        onSubmit={this.props.createTxs}>
-        <TextField
-          label="Selected User"
-          value={userify(this.props.transactionForm.recipient)}
-          margin="normal"
-          required
-          />
-          
-        <TextField
-          label="Amount"
-          fullWidth
-          value={this.props.transactionForm.amount}
-          onChange={e => {
-          this
-            .props
-            .onChange('amount', e.target.value)
-        }}
-          margin="normal"
-          required
-          
-          multiline/>
-        <TextField
-          label="Description"
-          fullWidth
-          value={this.props.transactionForm.description}
-          onChange={e => {
-          this
-            .props
-            .onChange('description', e.target.value)
-        }}
-          margin="normal"
-          required
-          multiline/>
-  <div style={{display: 'flex',width: '100%'}}>
-        <Button
-        style={{display: 'flex',width: '100%'}}
-          raised
-          color="primary"
-          type="submit"
-          aria-label="send"
-          className="fab-button"
-          disabled={false}>
-          Send
-          <Send className={classes.rightIcon} />
-        </Button>
-        <Button
-        style={{display: 'flex',width: '100%'}}
-          raised
-          color="accent"
-          type="submit"
-          aria-label="request"
-          className="fab-button"
-          disabled={false}>
-          Request
-          <Delete className={classes.rightIcon} />
-        </Button>
-      </div>
-      </form>
-      
-      
+        <MenuAppBar title="Send Money" goBack {...this.props}/>
+        <form style={{
+          marginTop: 60
+        }} autoComplete="off">
+          <TextField
+            label="Selected User"
+            value={userify(this.props.transactionForm.recipient)}
+            margin="normal"
+            required/>
+
+          <TextField
+            label="Amount"
+            fullWidth
+            value={this.props.transactionForm.amount}
+            onChange={e => {
+            this
+              .props
+              .onChange('amount', e.target.value)
+          }}
+            margin="normal"
+            required
+            multiline/>
+          <TextField
+            label="Description"
+            fullWidth
+            value={this.props.transactionForm.description}
+            onChange={e => {
+            this
+              .props
+              .onChange('description', e.target.value)
+          }}
+            margin="normal"
+            required
+            multiline/>
+          <div
+            style={{
+            display: 'flex',
+            width: '100%'
+          }}>
+            <Button
+              style={{
+              display: 'flex',
+              width: '100%'
+            }}
+              raised
+              color="primary"
+              type="submit"
+              aria-label="send"
+              className="fab-button"
+              disabled={false}
+              onClick={this.props.createTxs}>
+              Send
+              <Send className={classes.rightIcon}/>
+            </Button>
+            <Button
+              style={{
+              display: 'flex',
+              width: '100%'
+            }}
+              raised
+              color="accent"
+              type="submit"
+              aria-label="request"
+              className="fab-button"
+              disabled={false}
+              onClick={this.props.createRequest}>
+              Request
+              <Delete className={classes.rightIcon}/>
+            </Button>
+          </div>
+        </form>
+
       </div>
     )
   }
@@ -157,6 +162,11 @@ const mapActionsToProps = dispatch => {
     createTxs: e => {
       e.preventDefault()
       dispatch(createTxs)
+    },
+    createRequest: e => {
+      e.preventDefault()
+
+      dispatch(createRequest)
     },
     onChange: (field, value) => {
       dispatch({

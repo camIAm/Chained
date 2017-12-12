@@ -9,6 +9,7 @@ import {transactionForm} from './reducers/txs/searchTxs'
 import {isActive} from './reducers/txs/isActive'
 import {singleTransaction} from './reducers/txs/singleTx'
 import {load} from './reducers/loaded'
+import {allRequests} from './reducers/requests/setRequest'
 
 const store = createStore(combineReducers({
   drawer,
@@ -19,6 +20,7 @@ const store = createStore(combineReducers({
   activeUser,
   personalTxs,
   load,
+  allRequests,
   allTransactions
 }), applyMiddleware(thunk))
 
