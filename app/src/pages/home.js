@@ -10,14 +10,10 @@ import ResourceItem from '../components/resource-item'
 import logo from '../logo.svg';
 import Button from 'material-ui/Button';
 import Send from 'material-ui-icons/Send';
+import Login from './login'
+
 class Home extends React.Component {
 
-  login() {
-    this
-      .props
-      .auth
-      .login()
-  }
   logout() {
     this
       .props
@@ -55,17 +51,7 @@ class Home extends React.Component {
 
         )}
         {!isAuthenticated() && (
-          <div>
-            <Button
-              raised
-              color="primary"
-              onClick={this
-              .login
-              .bind(this)}>
-              Sign In
-              <Send/>
-            </Button>
-          </div>
+          <div><MenuAppBar title="Login"/><Login {...this.props}/></div>
         )}
       </div>
     )
