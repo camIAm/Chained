@@ -13,6 +13,7 @@ import Send from 'material-ui-icons/Send';
 import Delete from 'material-ui-icons/Delete';
 import {userify} from '../lib/userify'
 
+
 import {
   AppBar,
   List,
@@ -88,6 +89,7 @@ class SendForm extends React.Component {
           margin="normal"
           required
           />
+          
         <TextField
           label="Amount"
           fullWidth
@@ -138,6 +140,8 @@ class SendForm extends React.Component {
         </Button>
       </div>
       </form>
+      
+      
       </div>
     )
   }

@@ -8,24 +8,66 @@ import {filter, contains, map} from 'ramda'
 import List from 'material-ui/List'
 import ResourceItem from '../components/resource-item'
 import logo from '../logo.svg';
-
+import Button from 'material-ui/Button';
+import Send from 'material-ui-icons/Send';
 class Home extends React.Component {
-  
+
+  login() {
+    this
+      .props
+      .auth
+      .login()
+  }
+  logout() {
+    this
+      .props
+      .auth
+      .logout(this.props)
+  }
+
   render() {
+
+    const {isAuthenticated} = this.props.auth
+
     return (
       <div>
-        <MenuAppBar title="Home"/>
-        <Typography/>
-        <List
-          style={{
-          padding: 0,
-          paddingTop: 60,
-          marginBottom: 60
-        }}>
-          {map(transactions => <ResourceItem resource={transactions}/>, this.props.transactions)}
-        </List>
-      </div>
+        {isAuthenticated() && (
+          <div>
+            <MenuAppBar title="Home"/>
+            <Typography/>
+            <List
+              style={{
+              padding: 0,
+              paddingTop: 60,
+              marginBottom: 60
+            }}>
+              {map(transactions => <ResourceItem resource={transactions}/>, this.props.transactions)}
+            </List>
+            <Button
+              bsStyle="primary"
+              className="btn-margin"
+              onClick={this
+              .logout
+              .bind(this)}>
+              Log Out
+            </Button>
+          </div>
 
+        )}
+        {!isAuthenticated() && (
+          <div>
+            <Button
+              raised
+              color="primary"
+              onClick={this
+              .login
+              .bind(this)}>
+              Sign In
+              <Send/>
+            </Button>
+          </div>
+        )}
+      </div>
     )
   }
 }
