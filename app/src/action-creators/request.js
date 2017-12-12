@@ -33,7 +33,7 @@ export const createRequest = async(dispatch, getState) => {
   dispatch({type: SET_PAYMENT_REQUEST, payload: txsToPost})
   console.log("create-request after dispatch")
   console.log("payload in create-request", txsToPost)
-  // console.log(`/profile/${activeUser.id}`) clear form dispatch({type:
-  // CLEAR_SEND_FORM})
+  // console.log(`/profile/${activeUser.id}`) clear form
+  dispatch({type: CLEAR_SEND_FORM})
   history.push(`/profile/${activeUser.id}`)
 }
