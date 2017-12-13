@@ -5,6 +5,7 @@ import history from './history'
 import Home from './pages/home'
 import Search from './pages/search'
 import Profile from './pages/profile2'
+import Notifications from "./pages/notifications"
 import SendForm from './components/sendForm'
 import ReceiptTicket from './components/receipt-ticket'
 import ScrollToTop from './ScrollToTop'
@@ -39,6 +40,7 @@ const App = props => {
             <Route exact path="/search/:id" component={Search}/>
             <Route exact path="/search/send/:id" component={SendForm}/>
             <Route path="/profile/:id" component={Profile}/>
+            <Route path="/notifications/:id" component={Notifications}/>
             <Route
               exact
               path="/callback"

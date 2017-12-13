@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import {SET_PAYMENT_REQUEST, CLEAR_SEND_FORM, ERROR} from '../constants'
+import {SET_PAYMENT_REQUEST, CLEAR_SEND_FORM,PERSONAL_REQUESTS, ERROR} from '../constants'
 import history from '../history'
 import {
   filter,
@@ -63,4 +63,20 @@ export const setAllRequests = async(dispatch, getState) => {
   })
   // THIS dispatch my need to be modified to establish a bool flag value for
   // payment request dispatch({type: DATA_LOADED, payload: true})
+}
+
+export const setPersonalRequest = user => async(dispatch, getState) =>{
+  dispatch(setAllRequests).then(() => {
+    const allRequests = getState().allRequests
+    const requester = propEq('requester', 'user_rcmontgo')
+    const requestee = propEq('requestee', 'user_rcmontgo')
+    const sortByTimeStamp = sortBy(prop('timeStamp'));
+    const requesterRequest = filter(requester, allRequests)
+    const requesteeRequest = filter(requestee, allRequests)
+    const setPersonalRequest = concat(requesterRequest, requesteeRequest)
+    dispatch({
+      type: PERSONAL_REQUESTS,
+      payload: reverse(sortByTimeStamp(setPersonalRequest))
+    })
+  })
 }

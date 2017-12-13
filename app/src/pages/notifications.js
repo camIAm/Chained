@@ -16,15 +16,16 @@ import FavoriteIcon from 'material-ui-icons/Favorite';
 import ShareIcon from 'material-ui-icons/Share';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
-import ProfileItem from '../components/profile-item'
-import {setPersonalTransactions, setAllTransactions} from '../action-creators/txs'
+import RequestItem from '../components/request-item'
+import { setAllTransactions} from '../action-creators/txs'
+import {setPersonalRequest} from '../action-creators/request'
 import '../App.css'
 
 const loading = require('../loading.svg')
 
 const userify = fullUser => compose(join(' '), slice(1, Infinity), split('_'))(fullUser)
 
-class Profile extends React.Component {
+class Notification extends React.Component {
 // componentWillMount(){
 //   if(!this.props.load.loaded){
 //     console.log("getting all Txws")
@@ -35,12 +36,12 @@ componentDidMount() {
   //this.props.setAllTxs()
     this
       .props
-      .setPersonalTxs(this.props.user)
+      .setPersonalRequest(this.props.user)
   }
   render() {
     return (
       <div>
-      <MenuAppBar title="Profile"/>
+      <MenuAppBar title="Payment Requests"/>
       
       <Card style={{
           padding: 0,
@@ -94,7 +95,7 @@ componentDidMount() {
           padding: 0,
           marginBottom: 60
         }} >
-         {map(transactions => <ProfileItem resource={transactions} user={this.props.user}/>, this.props.personalTxs) } 
+         {map(transactions => <RequestItem resource={transactions} user={this.props.user}/>, this.props.personalRequests) } 
         </List>
         )}
       </div >
@@ -105,7 +106,7 @@ componentDidMount() {
 const connector = connect(state => {
   return {
     //transactions: state.allTransactions
-    personalTxs: state.personalTxs,
+    personalRequests: state.personalRequests,
     user: state.activeUser,
     load: state.load
     // favorites: filter(resource => contains(resource._id, state.favorites),
@@ -114,8 +115,8 @@ const connector = connect(state => {
 }, dispatch => {
   return {
     toggleDrawer: () => dispatch({type: 'TOGGLE_DRAWER'}),
-    setPersonalTxs: user => dispatch(setPersonalTransactions(user))
-    //setAllTxs: () => dispatch(setAllTransactions)
+    setPersonalRequest: user => dispatch(setPersonalRequest(user)),
+    setAllTxs: () => dispatch(setAllTransactions)
   }
 })
-export default withRoot(withDrawer(connector(Profile)))
+export default withRoot(withDrawer(connector(Notification)))

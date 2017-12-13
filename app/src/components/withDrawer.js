@@ -68,7 +68,20 @@ return (
           <ListItemText primary="Profile"/>
         </ListItem>
       </Link>
-    </List>
+      <Link
+        to={`/notifications/${activeUser.id}`}
+        className="router-link"
+        style={{
+        textDecoration: 'none'
+      }}>
+        <ListItem button>
+          <ListItemIcon>
+            <SearchIcon/>
+          </ListItemIcon>
+          <ListItemText primary="Notifications"/>
+        </ListItem>
+      </Link>
+      </List>
     <Divider/>
     <List>
       <Link
