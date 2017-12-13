@@ -58,23 +58,45 @@ const deleteTx = id => deleteDoc(id)
 */
 const listTx = () => {
   // console.log("inside listTX");
-  return db
-  .find({
+  return db.find({
     selector: {
       sender: {
         $gte: null
       },
-      recipient: {
-        $gte: null
+        recipient: {
+          $gte: null
+        }
       }
-    }
-  })
-
-  .then(res => res.docs)
-  .catch(err => console.log("error in dal/listTX: ", err))
+    })
+    .then(res => res.docs)
+    .catch(err => console.log("error in dal/listTX: ", err))
 }
-  ////////////////////////////// /        HELPERS ////////////////////////////
-  const add = doc => {
+// Requests
+
+const addRequest = tx => {
+  console.log("in dall")
+  return createWithId(tx)
+}
+const getRequest = id => get(id)
+const updateRequest = tx => update(tx)
+const deleteRequest = id => deleteDoc(id)
+const listRequest = () => {
+  // console.log("inside listTX");
+  return db.find({
+    selector: {
+      requestee: {
+        $gte: null
+      },
+        requester: {
+          $gte: null
+        }
+      }
+    })
+    .then(res => res.docs)
+    .catch(err => console.log("error in dal/listTX: ", err))
+}
+////////////////////////////// /        HELPERS ////////////////////////////
+const add = doc => {
   return db.put(doc)
 }
 const createWithId = doc => db.post(doc)
@@ -94,7 +116,12 @@ const deleteDoc = id => get(id)
   getTx,
   updateTx,
   deleteTx,
-  listTx
+  listTx,
+  addRequest,
+  getRequest,
+  updateRequest,
+  deleteRequest,
+  listRequest
 }
 
 module.exports = dal

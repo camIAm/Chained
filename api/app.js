@@ -15,7 +15,12 @@ const {
   getTx,
   updateTx,
   deleteTx,
-  listTx
+  listTx,
+  addRequest,
+  getRequest,
+  updateRequest,
+  deleteRequest,
+  listRequest
 } = require('./dal')
 
 module.exports = app => {
@@ -157,6 +162,88 @@ module.exports = app => {
       res
         .status(200)
         .send(await listTx())
+    } catch (err) {
+      next(new HTTPError(err.status, err.message))
+    }
+  })
+
+  // Requests Tx
+  /*
+  {
+    "description": "some description"
+  'timeStamp': Date
+      .now()
+      .toString(),
+    "currency": "USDTEST",
+    "requestee": txsToPost.recipient,
+    "requester": activeUser.id
+  }
+  */
+  app.post('/requests', bodyParser.json(), async(req, res, next) => {
+    try {
+      const request = prop('body', req)
+      if (isEmpty(request)) {
+        return next(new HTTPError(res.status(400), 'No body was provided'))
+      }
+
+      res
+        .status(200)
+        .send(await addRequest(request))
+    } catch (err) {
+      next(new HTTPError(err.status, err.message))
+    }
+  })
+
+  app.get('/requests/:id', async(req, res, next) => {
+    try {
+      res
+        .status(200)
+        .send(await getRequest(path([
+          'params', 'id'
+        ], req)))
+    } catch (err) {
+      res
+        .status(500)
+        .send({ok: false, message: err.message})
+    }
+  })
+
+  app.put('/requests/:id', bodyParser.json(), async(req, res, next) => {
+    try {
+      //const id = pathOr(null, ['params', 'id'], req)
+      const request = prop('body', req)
+
+      if (isEmpty(request)) {
+        return next(new HTTPError(400, `No Notification body was provided`))
+      }
+
+      res
+        .status(200)
+        .send(await updateRequest(tx))
+    } catch (err) {
+      next(new HTTPError(err.status, err.message))
+    }
+  })
+
+  app.delete('/requests/:id', async(req, res, next) => {
+    console.log("inside DELETE for /txs/:id")
+    console.log(`the id of txs ${req.params.id}`)
+    try {
+      res
+        .status(200)
+        .send(await deleteRequest(req.params.id))
+    } catch (err) {
+      next(new HTTPError(err.status, err.message))
+    }
+  })
+
+  app.get(`/requests/`, async(req, res, next) => {
+    try {
+      // let searchStr = compose(split(':'), pathOr('', ['query', 'filter']))(req)
+      // const filter = pathOr(null, ['query', 'filter'])(req) var options = {}
+      res
+        .status(200)
+        .send(await listRequest())
     } catch (err) {
       next(new HTTPError(err.status, err.message))
     }
