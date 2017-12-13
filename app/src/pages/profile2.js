@@ -39,10 +39,17 @@ class Profile extends React.Component {
         .setPersonalTxs(this.props.user)
       }
       render() {
-      
+      const menuItemActions = [
+        {
+          name: 'Search',
+          link: `/search/${this.props.user.id}`,
+          fn: null
+        }
+      ]
     return (
       <div>
       <MenuAppBar title="Profile" search={true} {...this.props}/>
+        
       
       <Card style={{
           padding: 0,
@@ -56,7 +63,7 @@ class Profile extends React.Component {
             }
             action={
               <IconButton>
-                <MoreVertIcon />
+                <SecondaryMenu actions={menuItemActions} {...this.props} />
               </IconButton>
             }
             title={`${this.props.user.firstName} ${this.props.user.lastName}`}

@@ -36,7 +36,7 @@ class SecondaryMenu extends React.Component {
           aria-label="More"
           aria-owns={open ? 'long-menu' : null}
           aria-haspopup="true"
-          color="inherit"
+          color="primary"
           style={{ marginRight: -12 }}
           onClick={this.handleClick}
         >
@@ -44,6 +44,7 @@ class SecondaryMenu extends React.Component {
         </IconButton>
         <Menu
           id="long-menu"
+          color="primary"
           anchorEl={this.state.anchorEl}
           open={open}
           onRequestClose={this.handleRequestClose}
@@ -61,6 +62,9 @@ class SecondaryMenu extends React.Component {
                   key={action.name}
                   to={action.link}
                   className="no-underline no-focus"
+                  style={{
+                    textDecoration: 'none'
+                  }}
                 >
                   <MenuItem onClick={this.handleRequestClose}>
                     {action.name}
@@ -72,6 +76,9 @@ class SecondaryMenu extends React.Component {
                   to={'#'}
                   onClick={action.fn}
                   className="no-underline no-focus"
+                  style={{
+                    textDecoration: 'none'
+                  }}
                 >
                   <MenuItem onClick={this.handleRequestClose}>
                     {action.name}

@@ -29,7 +29,7 @@ class Home extends React.Component {
       <div>
         {isAuthenticated() && (
           <div>
-            <MenuAppBar title="Home"/>
+            <MenuAppBar title="Home" search={true} {...this.props}/>
             <Typography/>
             <List
               style={{
@@ -61,7 +61,8 @@ class Home extends React.Component {
 const connector = connect(state => {
   console.log("state", state)
   return {
-    transactions: state.allTransactions
+    transactions: state.allTransactions,
+    user: state.activeUser
     // favorites: filter(resource => contains(resource._id, state.favorites),
     // state.resources)
   }

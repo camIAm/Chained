@@ -41,7 +41,7 @@ componentDidMount() {
   render() {
     return (
       <div>
-      <MenuAppBar title="Payment Requests"/>
+      <MenuAppBar title="Payment Requests" search={true} {...this.props}/>
       
       <Card style={{
           padding: 0,
