@@ -57,8 +57,10 @@ const RequestItem = ({resource, user}) => {
           }}>
           <Button
           style={{
-            display: 'flex',
-            width: '100%'
+
+            width: '100%',
+            marginRight: '20',
+            marginLeft: '20'
           }}
           raised
           color="primary"
@@ -69,10 +71,12 @@ const RequestItem = ({resource, user}) => {
         </Button>
         <Button
         style={{
-          display: 'flex',
-          width: '100%'
+          
+          width: '100%',
+          marginLeft: '20',
+          marginRight: '20'
         }}
-          raised       
+          raised   
           type="submit"
           aria-label="send"
           className="fab-button">

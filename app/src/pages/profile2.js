@@ -81,13 +81,12 @@ class Profile extends React.Component {
         }}>
           {` $ ${this.props.user.balance}`}
           </div>
-            <IconButton aria-label="Cash out to bank account">
-            <i class="material-icons">get_app</i>
-            </IconButton>
+           
             <div style={{
-          paddingRight: 0
-        }}>
+          paddingLeft: 20
+        }}><Button raised dense>
               Cash Out
+              </Button>
             </div>
           </CardActions>
           <Collapse  timeout="auto" unmountOnExit>

@@ -54,34 +54,21 @@ componentDidMount() {
               </Avatar>
             }
             action={
-              <IconButton>
-                <MoreVertIcon />
-              </IconButton>
+              <div style={{
+                paddingRight: 20,
+                paddingTop: 15
+              }}>
+              <Button raised dense>
+              Request
+              </Button>
+              </div>
             }
             title={`${this.props.user.firstName} ${this.props.user.lastName}`}
             subheader={userify(this.props.user.id)}
           />
-          <CardMedia
-           
-            image="/static/images/cards/paella.jpg"
-            title="Contemplative Reptile"
-          />
+          
          
-          <CardActions disableActionSpacing>
-          <div style={{
-          paddingLeft: 20
-        }}>
-          {` $ ${this.props.user.balance}`}
-          </div>
-            <IconButton aria-label="Cash out to bank account">
-            <i class="material-icons">get_app</i>
-            </IconButton>
-            <div style={{
-          paddingRight: 0
-        }}>
-              Cash Out
-            </div>
-          </CardActions>
+         
           <Collapse  timeout="auto" unmountOnExit>
             <CardContent>
             </CardContent>
