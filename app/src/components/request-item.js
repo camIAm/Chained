@@ -5,7 +5,7 @@ import {ListItem, ListItemAvatar, ListItemText} from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import Divider from 'material-ui/Divider'
 import {userify} from '../lib/userify'
-//import ResourceMenuItem from './resource-item-menu'
+import Button from 'material-ui/Button';
 import {Link} from 'react-router-dom'
 
 import {
@@ -39,10 +39,6 @@ const RequestItem = ({resource, user}) => {
   // to receipt (paper material-ui component)
   return (
     <div key={resource._id}>
-    
-    <Link to={`/profile/${user.id}/${resource._id}`} style={{
-        textDecoration: 'none'
-      }}>
       <ListItem button onClick={e => {}}>
         <ListItemAvatar>
           <Avatar>
@@ -50,11 +46,39 @@ const RequestItem = ({resource, user}) => {
           </Avatar>
         </ListItemAvatar>
         <ListItemText
-          primary={`${userify(resource.requester)} requests ${userify(resource.requestee)}`}
-          secondary={resource.amount}/>
-
-      </ListItem>
-  </Link>
+        
+          primary={`${userify(resource.requester)} requests ${resource.amount}`}
+          secondary={resource.description}/>
+              </ListItem>
+          <div
+            style={{
+            display: 'flex',
+            width: '100%'
+          }}>
+          <Button
+          style={{
+            display: 'flex',
+            width: '100%'
+          }}
+          raised
+          color="primary"
+          type="submit"
+          aria-label="send"
+          className="fab-button">
+            Pay
+        </Button>
+        <Button
+        style={{
+          display: 'flex',
+          width: '100%'
+        }}
+          raised       
+          type="submit"
+          aria-label="send"
+          className="fab-button">
+            Decline
+        </Button>
+        </div>
       <Divider/>
     </div>
   )
