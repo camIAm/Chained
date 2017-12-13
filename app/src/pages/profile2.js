@@ -19,28 +19,30 @@ import MoreVertIcon from 'material-ui-icons/MoreVert';
 import ProfileItem from '../components/profile-item'
 import {setPersonalTransactions, setAllTransactions} from '../action-creators/txs'
 import '../App.css'
-
+import SecondaryMenu from '../components/secondaryMenu'
 const loading = require('../loading.svg')
 
 const userify = fullUser => compose(join(' '), slice(1, Infinity), split('_'))(fullUser)
 
+
 class Profile extends React.Component {
-// componentWillMount(){
-//   if(!this.props.load.loaded){
-//     console.log("getting all Txws")
-//     this.props.setAllTxs()
-//   }
-// }
-componentDidMount() {
-  //this.props.setAllTxs()
-    this
-      .props
-      .setPersonalTxs(this.props.user)
-  }
-  render() {
+  // componentWillMount(){
+    //   if(!this.props.load.loaded){
+      //     console.log("getting all Txws")
+      //     this.props.setAllTxs()
+      //   }
+      // }
+      componentDidMount() {
+        //this.props.setAllTxs()
+        this
+        .props
+        .setPersonalTxs(this.props.user)
+      }
+      render() {
+      
     return (
       <div>
-      <MenuAppBar title="Profile"/>
+      <MenuAppBar title="Profile" search={true} {...this.props}/>
       
       <Card style={{
           padding: 0,

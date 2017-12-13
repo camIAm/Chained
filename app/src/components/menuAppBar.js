@@ -7,7 +7,7 @@ import IconButton from 'material-ui/IconButton'
 import MenuIcon from 'material-ui-icons/Menu'
 import GoBackIcon from 'material-ui-icons/KeyboardArrowLeft'
 import SearchIcon from 'material-ui-icons/Search'
-
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {propOr, isNil} from 'ramda'
 
@@ -56,16 +56,31 @@ const MenuAppBar = props => {
           <Typography type="title" color="inherit" className={classes.flex}>
             {props.title}
           </Typography>
+          {props.search?
+          <Link to={`/search/${props.user.id}`} style={{
+            textDecoration: 'none'
+          }}>
           <IconButton
             className={isNil(secondaryMenu)
             ? classes.lastButton
             : ''}
             color="contrast"
             aria-label="Search"
-            onClick={props.toggleDrawer}>
+            >
             <SearchIcon/>
           </IconButton>
-
+          </Link>:
+          <IconButton
+            className={isNil(secondaryMenu)
+            ? classes.lastButton
+            : ''}
+            color="contrast"
+            aria-label="Search"
+            onClick={props.toggleDrawer}
+            >
+            
+          </IconButton>
+          }
           {secondaryMenu}
         </Toolbar>
       </AppBar>
