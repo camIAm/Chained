@@ -17,6 +17,9 @@ import {pink} from 'material-ui/colors';
 import Badge from 'material-ui/Badge';
 import IconButton from 'material-ui/IconButton';
 import MailIcon from 'material-ui-icons/Mail';
+import SvgIcon from 'material-ui/SvgIcon';
+const notification = require('../notification.svg')
+
 const styles = {
   pinkAvatar: {
     margin: 10,
@@ -24,6 +27,11 @@ const styles = {
     backgroundColor: pink[500]
   }
 }
+const NotificationIcon = () => (
+  <SvgIcon>
+    <img id="custom-notification" src={notification} alt="loading" />
+  </SvgIcon>
+);
 
 const SideList = ({activeUser}) => {
 return (
@@ -63,9 +71,9 @@ return (
       }}>
         <ListItem button>
           <ListItemIcon>
-            <Avatar >
+            
               <i className="material-icons">face</i>
-            </Avatar>
+            
           </ListItemIcon>
           <ListItemText primary="Profile"/>
         </ListItem>
@@ -77,15 +85,16 @@ return (
         textDecoration: 'none'
       }}>
         <ListItem button>
+        
           <ListItemIcon>
-            <SearchIcon/>
-          </ListItemIcon>
-          <ListItemText primary="Notifications"/>
           <IconButton>
           <Badge  badgeContent={4} color="primary">
             <MailIcon />
           </Badge>
         </IconButton>
+          </ListItemIcon>
+          <ListItemText primary="Notifications"/>
+          
         </ListItem>
       </Link>
       </List>
@@ -99,9 +108,7 @@ return (
       }}>
         <ListItem button>
           <ListItemIcon>
-            <Avatar>
               <i className="material-icons">settings</i>
-            </Avatar>
           </ListItemIcon>
           <ListItemText primary="Settings"/>
         </ListItem>
