@@ -14,7 +14,9 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import GavelIcon from 'material-ui-icons/Gavel'
 import {pink} from 'material-ui/colors';
-
+import Badge from 'material-ui/Badge';
+import IconButton from 'material-ui/IconButton';
+import MailIcon from 'material-ui-icons/Mail';
 const styles = {
   pinkAvatar: {
     margin: 10,
@@ -79,6 +81,11 @@ return (
             <SearchIcon/>
           </ListItemIcon>
           <ListItemText primary="Notifications"/>
+          <IconButton>
+          <Badge  badgeContent={4} color="primary">
+            <MailIcon />
+          </Badge>
+        </IconButton>
         </ListItem>
       </Link>
       </List>
