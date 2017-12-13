@@ -11,8 +11,17 @@ import logo from '../logo.svg';
 import Button from 'material-ui/Button';
 import Send from 'material-ui-icons/Send';
 import Login from './login'
+import AppBar from 'material-ui/AppBar';
+import Tabs, { Tab } from 'material-ui/Tabs';
 
 class Home extends React.Component {
+  state = {
+    value: 0,
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
 
   logout() {
     this
@@ -22,7 +31,7 @@ class Home extends React.Component {
   }
 
   render() {
-
+    const { value } = this.state;
     const {isAuthenticated} = this.props.auth
 
     return (
@@ -31,12 +40,24 @@ class Home extends React.Component {
           <div>
             <MenuAppBar title="Home" search={true} {...this.props}/>
             <Typography/>
-            <List
-              style={{
+            <AppBar position="static" color="default" style={{
               padding: 0,
-              paddingTop: 60,
-              marginBottom: 60
+              paddingTop: 60
             }}>
+          <Tabs
+            value={value}
+            onChange={this.handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            centered
+            scrollButtons="auto"
+          >
+            <Tab label="Item One" />
+            <Tab label="Item Two" />
+            <Tab label="Item Three" />
+          </Tabs>
+        </AppBar>
+            <List>
               {map(transactions => <ResourceItem resource={transactions}/>, this.props.transactions)}
             </List>
             <Button

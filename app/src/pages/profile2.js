@@ -5,6 +5,13 @@ import MenuAppBar from '../components/menuAppBar'
 import {connect} from 'react-redux'
 import {filter, contains, map, compose, join, toUpper,slice,split} from 'ramda'
 import List from 'material-ui/List'
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
+import Snackbar from 'material-ui/Snackbar';
 import Card, {CardHeader, CardMedia, CardContent, CardActions} from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
@@ -26,19 +33,37 @@ const userify = fullUser => compose(join(' '), slice(1, Infinity), split('_'))(f
 
 
 class Profile extends React.Component {
-  // componentWillMount(){
-    //   if(!this.props.load.loaded){
-      //     console.log("getting all Txws")
-      //     this.props.setAllTxs()
-      //   }
-      // }
       componentDidMount() {
         //this.props.setAllTxs()
         this
         .props
         .setPersonalTxs(this.props.user)
       }
+      state = {
+        open: false,
+        openSnack:false,
+        vertical: null,
+        horizontal: null,
+      };
+    
+      handleClick = state => () => {
+        this.handleRequestClose()
+        this.setState({ openSnack: true, ...state });
+      };
+
+      handleClickOpen = () => {
+        this.setState({ open: true });
+      };
+    
+      handleRequestClose = () => {
+        this.setState({ open: false });
+      };
+      handleSnackRequestClose = () => {
+        this.setState({ openSnack: false });
+      };
+
       render() {
+        const { vertical, horizontal } = this.state;
       const menuItemActions = [
         {
           name: 'Search',
@@ -84,15 +109,39 @@ class Profile extends React.Component {
            
             <div style={{
           paddingLeft: 20
-        }}><Button raised dense>
-              Cash Out
-              </Button>
+        }}>
+        <Button raised dense onClick={this.handleClickOpen}>Cash Out</Button>
+        <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
+          <DialogTitle>{"Ready to cash out?"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              It will take 3-5 business days before the withdraw enters your bank account.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleRequestClose} color="primary">
+              Disagree
+            </Button>
+            <Button onClick={this.handleClick({ vertical: 'bottom', horizontal: 'center' })} color="primary" autoFocus>
+              Agree
+            </Button>
+          </DialogActions>
+        </Dialog>
             </div>
           </CardActions>
           <Collapse  timeout="auto" unmountOnExit>
             <CardContent>
             </CardContent>
           </Collapse>
+          <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          open={this.state.openSnack}
+          onRequestClose={this.handleSnackRequestClose}
+          SnackbarContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">I love snacks</span>}
+        />
         </Card>
         {!this.props.load.loaded?<div id="custom-loader-container">
     <img id="custom-loader" src={loading} alt="loading" />
