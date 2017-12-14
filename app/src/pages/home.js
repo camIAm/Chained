@@ -90,6 +90,7 @@ const connector = connect(state => {
 }, dispatch => {
   return {
     toggleDrawer: () => dispatch({type: 'TOGGLE_DRAWER'})
+    
   }
 })
 export default withRoot(withDrawer(connector(Home)))

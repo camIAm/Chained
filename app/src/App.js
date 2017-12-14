@@ -11,6 +11,7 @@ import ReceiptTicket from './components/receipt-ticket'
 import ScrollToTop from './ScrollToTop'
 import Auth from './auth'
 import Callback from './pages/callback'
+import Logout from './pages/logout'
 const auth = new Auth()
 
 const handleAuthentication = (nextState, replace) => {
@@ -41,6 +42,8 @@ const App = props => {
             <Route exact path="/search/send/:id" component={SendForm}/>
             <Route path="/profile/:id" component={Profile}/>
             <Route path="/notifications/:id" component={Notifications}/>
+            <Route path="/logout" auth={auth}
+              render={props =>< Logout auth = {auth} {...props} />}/>
             <Route
               exact
               path="/callback"

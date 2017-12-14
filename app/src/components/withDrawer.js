@@ -2,6 +2,7 @@ import React from 'react'
 import {Drawer} from 'material-ui'
 import List, {ListItem, ListItemIcon, ListItemText} from 'material-ui/List'
 import Divider from 'material-ui/Divider'
+import Button from 'material-ui/Button';
 import InboxIcon from 'material-ui-icons/Inbox'
 import HomeIcon from 'material-ui-icons/Home'
 import HelpIcon from 'material-ui-icons/Help'
@@ -33,7 +34,7 @@ const NotificationIcon = () => (
   </SvgIcon>
 );
 
-const SideList = ({activeUser}) => {
+const SideList = ({activeUser,isAuthenticated}) => {
 return (
   <div>
     <List>
@@ -114,8 +115,25 @@ return (
         </ListItem>
       </Link>
 
-      <Divider/>
+      
     </List>
+    <Link
+        to="/logout"
+        className="router-link"
+        style={{
+        textDecoration: 'none'
+      }}>
+    <List>
+    <Divider/>
+          <div>
+            <Button
+              bsStyle="primary"
+              className="btn-margin">
+              Log Out
+            </Button>
+            </div>
+      </List>
+      </Link>
   </div>
 )
 }
@@ -130,7 +148,7 @@ const withDrawer = function (PageComponent) {
             role="button"
             onClick={props.toggleDrawer}
             onKeyDown={props.toggleDrawer}>
-            <SideList activeUser={props.activeUser}/>
+            <SideList activeUser={props.activeUser} />
           </div>
         </Drawer>
       </div>
