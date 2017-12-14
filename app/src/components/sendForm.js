@@ -79,8 +79,6 @@ class SendForm extends React.Component {
   }
   // add appBar with the ability to cancel txs
   render() {
-    console.log('in SendForm')
-    console.log("this.props.activeUser.id")
     const {classes} = this.props
     return (
       <div >

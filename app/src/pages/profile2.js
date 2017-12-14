@@ -23,10 +23,11 @@ import FavoriteIcon from 'material-ui-icons/Favorite';
 import ShareIcon from 'material-ui-icons/Share';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
-import ProfileItem from '../components/profile-item'
+import ProfileItem from '../components/profile-item2'
 import {setPersonalTransactions, setAllTransactions} from '../action-creators/txs'
 import {bankDeposit} from '../action-creators/bank'
 import '../App.css'
+import '../components/profile-item.css'
 import SecondaryMenu from '../components/secondaryMenu'
 const loading = require('../loading.svg')
 
@@ -155,13 +156,9 @@ class Profile extends React.Component {
         {!this.props.load.loaded?<div id="custom-loader-container">
     <img id="custom-loader" src={loading} alt="loading" />
     </div>:(
-    < List
-     style = {{
-          padding: 0,
-          marginBottom: 60
-        }} >
+    <ul class="list pl0 mt0 measure center">
          {map(transactions => <ProfileItem resource={transactions} user={this.props.user}/>, this.props.personalTxs) } 
-        </List>
+        </ul>
         )}
       </div >
       )
@@ -170,12 +167,9 @@ class Profile extends React.Component {
 
 const connector = connect(state => {
   return {
-    //transactions: state.allTransactions
     personalTxs: state.personalTxs,
     user: state.activeUser,
     load: state.load
-    // favorites: filter(resource => contains(resource._id, state.favorites),
-    // state.resources)
   }
 }, dispatch => {
   return {

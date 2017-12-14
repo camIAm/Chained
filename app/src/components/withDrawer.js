@@ -34,7 +34,7 @@ const NotificationIcon = () => (
   </SvgIcon>
 );
 
-const SideList = ({activeUser,isAuthenticated}) => {
+const SideList = ({activeUser,requests}) => {
 return (
   <div>
     <List>
@@ -89,7 +89,7 @@ return (
         
           <ListItemIcon>
           <IconButton>
-          <Badge  badgeContent={4} color="primary">
+          <Badge  badgeContent={`${requests.length}`} color="primary">
             <MailIcon />
           </Badge>
         </IconButton>
@@ -148,7 +148,7 @@ const withDrawer = function (PageComponent) {
             role="button"
             onClick={props.toggleDrawer}
             onKeyDown={props.toggleDrawer}>
-            <SideList activeUser={props.activeUser} />
+            <SideList activeUser={props.activeUser} requests={props.requests} />
           </div>
         </Drawer>
       </div>
@@ -157,7 +157,8 @@ const withDrawer = function (PageComponent) {
   const mapStateToProps = state => {
     return {
       open: state.drawer.open,
-      activeUser: state.activeUser
+      activeUser: state.activeUser,
+      requests : state.allRequests
     }
   }
   const mapActionsToProps = dispatch => {

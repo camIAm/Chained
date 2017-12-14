@@ -114,7 +114,7 @@ const connector = connect(state => {
     toggleDrawer: () => dispatch({type: 'TOGGLE_DRAWER'}),
     setPersonalRequest: () => dispatch(setPersonalRequest),
     setAllTxs: () => dispatch(setAllTransactions),
-    declineRequest:e=> id => {
+    declineRequest: id => {
       console.log("declineRequest id:", id);
       dispatch(declineRequest(id))
     },
