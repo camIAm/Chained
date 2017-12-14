@@ -9,7 +9,7 @@ import Divider from 'material-ui/Divider'
 import {userify} from '../lib/userify'
 import Button from 'material-ui/Button';
 import {Link} from 'react-router-dom'
-import {declineRequest,payRequest} from '../action-creators/request'
+
 import {
   slice,
   toUpper,

@@ -108,7 +108,7 @@ export const payRequest = requestID => async(dispatch, getState) => {
   let allRequests = getState().allRequests
   let requestToPay = find(propEq('_id', requestID))(allRequests)
   // requestee will be the sender and requester will be the recipient in txs
-  console.log("requestToPay: ",requestToPay)
+  
   const requester=prop('requester',requestToPay)
   const requestee=prop('requestee',requestToPay)
   const payObj = compose(dissoc('requestee'),
@@ -118,7 +118,7 @@ export const payRequest = requestID => async(dispatch, getState) => {
   assoc('sender',requestee),
   dissoc('_rev'),
   dissoc('_id'))(requestToPay)
-  console.log("payObj: ",payObj)
+  
   
   if(not(isEmpty(payObj))){
     const response = await fetch(`${url}/requests/${requestID}`, {

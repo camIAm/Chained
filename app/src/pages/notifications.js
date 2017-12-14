@@ -21,6 +21,7 @@ import { setAllTransactions} from '../action-creators/txs'
 import {setPersonalRequest} from '../action-creators/request'
 import '../App.css'
 import {declineRequest,payRequest} from '../action-creators/request'
+import {Link} from "react-router-dom"
 
 const loading = require('../loading.svg')
 
@@ -59,9 +60,17 @@ componentDidMount() {
                 paddingRight: 20,
                 paddingTop: 15
               }}>
+              <Link
+                  to={'/search/${user.id}'}
+                  className="no-underline no-focus"
+                  style={{
+                    textDecoration: 'none'
+                  }}
+                >
               <Button raised dense>
               Request
               </Button>
+              </Link>
               </div>
             }
             title={`${this.props.user.firstName} ${this.props.user.lastName}`}
