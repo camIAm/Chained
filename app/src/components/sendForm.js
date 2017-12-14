@@ -17,8 +17,10 @@ import {userify} from '../lib/userify'
 import {
   AppBar,
   List,
+  Input,
   TextField,
   FormControl,
+  InputAdornment,
   InputLabel,
   Typography,
   Select,
@@ -36,6 +38,13 @@ const styles = theme => ({
   },
   flex: {
     flex: 1
+  },
+  formControl: {
+    margin: theme.spacing.unit
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap'
   },
   firstButton: {
     marginLeft: -12,
@@ -75,63 +84,73 @@ class SendForm extends React.Component {
     const {classes} = this.props
     return (
       <div >
-        <MenuAppBar title="Send Money" goBack {...this.props}/>
-        <form style={{
-          marginTop: 60
-        }} autoComplete="off">
-          <TextField
-            label="Selected User"
-            value={userify(this.props.transactionForm.recipient)}
-            margin="normal"
-            required/>
-
-          <TextField
-            label="Amount"
-            fullWidth
-            value={this.props.transactionForm.amount}
-            onChange={e => {
-            this
-              .props
-              .onChange('amount', e.target.value)
-          }}
-            margin="normal"
-            required
-            multiline/>
-          <TextField
-            label="Description"
-            fullWidth
-            value={this.props.transactionForm.description}
-            onChange={e => {
-            this
-              .props
-              .onChange('description', e.target.value)
-          }}
-            margin="normal"
-            required
-            multiline/>
+        <MenuAppBar title="Transactions" goBack {...this.props}/>
+        <form
+          style={{
+          marginTop: 60,
+          marginLeft: 12,
+          marginRight: 12
+        }}
+          autoComplete="off">
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="user">Selected User</InputLabel>
+            <Input
+              value={userify(this.props.transactionForm.recipient)}
+              margin="normal"
+              required/>
+          </FormControl>
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="amount">Amount</InputLabel>
+            <Input
+              value={this.props.transactionForm.amount}
+              onChange={e => {
+              this
+                .props
+                .onChange('amount', e.target.value)
+            }}
+              margin="normal"
+              required
+              startAdornment={< InputAdornment position = "start" > $ < /InputAdornment>}/>
+          </FormControl >
+          <FormControl fullWidth className={classes.formControl}>
+            <InputLabel htmlFor="description">Description</InputLabel>
+            <Input
+              value={this.props.transactionForm.description}
+              onChange={e => {
+              this
+                .props
+                .onChange('description', e.target.value)
+            }}
+              margin="normal"
+              required
+              multiline/>
+          </FormControl>
           <div
+            className={classes.formControl}
             style={{
             display: 'flex',
             width: '100%'
           }}>
             <Button
               style={{
-              display: 'flex',
               width: '100%'
             }}
+              className={classes.formControl}
               raised
               color="primary"
               type="submit"
               aria-label="send"
               className="fab-button"
-              disabled={false}
+              disabled={this.props.transactionForm.amount && this.props.transactionForm.description
+              ? false
+              : true}
               onClick={this.props.createTxs}>
               Send
               <Send className={classes.rightIcon}/>
             </Button>
             <Button
+              className={classes.formControl}
               style={{
-              display: 'flex',
               width: '100%'
             }}
               raised
@@ -139,7 +158,9 @@ class SendForm extends React.Component {
               type="submit"
               aria-label="request"
               className="fab-button"
-              disabled={false}
+              disabled={this.props.transactionForm.amount && this.props.transactionForm.description
+              ? false
+              : true}
               onClick={this.props.createRequest}>
               Request
               <Delete className={classes.rightIcon}/>

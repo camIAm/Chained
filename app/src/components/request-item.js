@@ -1,6 +1,8 @@
 import React from 'react'
+import withRoot from '../components/withRoot'
+import withDrawer from '../components/withDrawer'
 import {withRouter} from 'react-router-dom'
-
+import {connect} from 'react-redux'
 import {ListItem, ListItemAvatar, ListItemText} from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import Divider from 'material-ui/Divider'
@@ -46,45 +48,55 @@ const RequestItem = ({resource, user}) => {
           </Avatar>
         </ListItemAvatar>
         <ListItemText
-        
           primary={`${userify(resource.requester)} requests ${resource.amount}`}
           secondary={resource.description}/>
-              </ListItem>
-          <div
-            style={{
-            display: 'flex',
-            width: '100%'
-          }}>
-          <Button
+      </ListItem>
+      <div style={{
+        display: 'flex',
+        width: '100%'
+      }}>
+        <Button
           style={{
-
-            width: '100%',
-            marginRight: '20',
-            marginLeft: '20'
-          }}
+          width: '100%',
+          marginRight: '20',
+          marginLeft: '20'
+        }}
           raised
           color="primary"
           type="submit"
           aria-label="send"
           className="fab-button">
-            Pay
+          Pay
         </Button>
         <Button
-        style={{
-          
+          style={{
           width: '100%',
           marginLeft: '20',
           marginRight: '20'
         }}
-          raised   
+          raised
           type="submit"
           aria-label="send"
           className="fab-button">
-            Decline
+          Decline
         </Button>
-        </div>
+      </div>
       <Divider/>
     </div>
   )
 }
-export default withRouter(RequestItem)
+
+const connector = connect(state => {
+  return {
+    // transactions: state.allTransactions personalRequests: state.personalRequests,
+    // user: state.activeUser, load: state.load
+
+  }
+}, dispatch => {
+  return {
+
+    // setPersonalRequest: user => dispatch(setPersonalRequest(user)),
+    // declineRequest: () => dispatch(declineRequest)
+  }
+})
+export default withRoot(withDrawer(connector(RequestItem)))

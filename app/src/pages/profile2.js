@@ -25,6 +25,7 @@ import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
 import ProfileItem from '../components/profile-item'
 import {setPersonalTransactions, setAllTransactions} from '../action-creators/txs'
+import {bankDeposit} from '../action-creators/bank'
 import '../App.css'
 import SecondaryMenu from '../components/secondaryMenu'
 const loading = require('../loading.svg')
@@ -47,6 +48,8 @@ class Profile extends React.Component {
       };
     
       handleClick = state => () => {
+        // set balance to zero
+        this.props.bankDeposit()
         this.handleRequestClose()
         this.setState({ openSnack: true, ...state });
       };
@@ -63,11 +66,16 @@ class Profile extends React.Component {
       };
 
       render() {
-        const { vertical, horizontal } = this.state;
+      const { vertical, horizontal } = this.state;
       const menuItemActions = [
         {
           name: 'Search',
           link: `/search/${this.props.user.id}`,
+          fn: null
+        },
+        {
+          name: 'Manage Account',
+          link: `/seetings/${this.props.user.id}`,
           fn: null
         }
       ]
@@ -136,11 +144,12 @@ class Profile extends React.Component {
           <Snackbar
           anchorOrigin={{ vertical, horizontal }}
           open={this.state.openSnack}
+          autoHideDuration={4000}
           onRequestClose={this.handleSnackRequestClose}
           SnackbarContentProps={{
             'aria-describedby': 'message-id',
           }}
-          message={<span id="message-id">I love snacks</span>}
+          message={<span id="message-id">Thank you for using Chained</span>}
         />
         </Card>
         {!this.props.load.loaded?<div id="custom-loader-container">
@@ -171,8 +180,8 @@ const connector = connect(state => {
 }, dispatch => {
   return {
     toggleDrawer: () => dispatch({type: 'TOGGLE_DRAWER'}),
-    setPersonalTxs: user => dispatch(setPersonalTransactions(user))
-    //setAllTxs: () => dispatch(setAllTransactions)
+    setPersonalTxs: user => dispatch(setPersonalTransactions(user)),
+    bankDeposit: () => dispatch(bankDeposit)
   }
 })
 export default withRoot(withDrawer(connector(Profile)))

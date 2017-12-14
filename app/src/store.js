@@ -11,6 +11,7 @@ import {singleTransaction} from './reducers/txs/singleTx'
 import {load} from './reducers/loaded'
 import {allRequests} from './reducers/requests/setRequest'
 import {personalRequests} from './reducers/requests/personalRequests'
+import {bankDeposit} from './reducers/bank'
 
 const store = createStore(combineReducers({
   drawer,
@@ -23,6 +24,7 @@ const store = createStore(combineReducers({
   load,
   allRequests,
   personalRequests,
+  bankDeposit,
   allTransactions
 }), applyMiddleware(thunk))
 
