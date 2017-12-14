@@ -20,7 +20,7 @@ import RequestItem from '../components/request-item'
 import { setAllTransactions} from '../action-creators/txs'
 import {setPersonalRequest} from '../action-creators/request'
 import '../App.css'
-import {declineRequest} from '../action-creators/request'
+import {declineRequest,payRequest} from '../action-creators/request'
 
 const loading = require('../loading.svg')
 
@@ -83,7 +83,7 @@ componentDidMount() {
           padding: 0,
           marginBottom: 60
         }} >
-         {map(transactions => <RequestItem declineRequest={this.props.declineRequest} resource={transactions} user={this.props.user}/>, this.props.personalRequests) } 
+         {map(transactions => <RequestItem declineRequest={this.props.declineRequest} payRequest={this.props.payRequest} resource={transactions} user={this.props.user}/>, this.props.personalRequests) } 
         </List>
         )}
       </div >
@@ -108,7 +108,11 @@ const connector = connect(state => {
     declineRequest:e=> id => {
       console.log("declineRequest id:", id);
       dispatch(declineRequest(id))
-    }
+    },
+    payRequest: id => {
+      console.log("payRequest id:", id);
+      dispatch(payRequest(id))
+    }    
   }
 })
 export default withRoot(withDrawer(connector(Notification)))

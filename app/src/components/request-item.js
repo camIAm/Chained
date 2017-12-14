@@ -9,7 +9,7 @@ import Divider from 'material-ui/Divider'
 import {userify} from '../lib/userify'
 import Button from 'material-ui/Button';
 import {Link} from 'react-router-dom'
-import {declineRequest} from '../action-creators/request'
+import {declineRequest,payRequest} from '../action-creators/request'
 import {
   slice,
   toUpper,
@@ -35,7 +35,7 @@ import {
 "requester": "user_rcmontgo"
 }
 */
-const RequestItem = ({declineRequest,resource, user}) => {
+const RequestItem = ({declineRequest,payRequest,resource, user}) => {
 
   // Improve resource item design to include description and time or txs Add link
   // to receipt (paper material-ui component)
@@ -61,6 +61,7 @@ const RequestItem = ({declineRequest,resource, user}) => {
           marginRight: '20',
           marginLeft: '20'
         }}
+        onClick={e=>{payRequest(resource._id)}}
           raised
           color="primary"
           type="submit"
@@ -96,10 +97,7 @@ const connector = connect(state => {
   }
 }, dispatch => {
   return {
-    declineRequest: id => {
-      console.log("declineRequest id:", id);
-      dispatch(declineRequest(id))
     }
   }
-})
+)
 export default withRoot(withDrawer(connector(RequestItem)))

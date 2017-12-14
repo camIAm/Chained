@@ -6,11 +6,15 @@ import {
   propEq,
   prop,
   or,
+  not,
+  dissoc,
   reverse,
   sortBy,
   merge,
   find,
   isEmpty,
+  compose,
+  assoc,
   concat
 } from "ramda"
 
@@ -28,6 +32,7 @@ export const createRequest = async(dispatch, getState) => {
     "requestee": requestToPost.recipient,
     "requester": activeUser.id
   })
+  requestToPost = dissoc("recipient",requestToPost)
   const response = await fetch(`${url}/requests`, {
     headers: {
       'Content-Type': 'application/json'
@@ -95,6 +100,39 @@ export const declineRequest = requestID => async(dispatch, getState) => {
   if (!response.ok) {
     dispatch({type: ERROR, payload: 'Could not decline request'})
     return
+  }
+  dispatch(setPersonalRequest)
+}
+
+export const payRequest = requestID => async(dispatch, getState) => {
+  let allRequests = getState().allRequests
+  let requestToPay = find(propEq('id', requestID))(allRequests)
+  // requestee will be the sender and requester will be the recipient in txs
+  console.log("requestToPay: ",requestToPay)
+  const requester=prop('requester',requestToPay)
+  const requestee=prop('requestee',requestToPay)
+  const payObj = compose(dissoc('requestee'),
+  dissoc('requester'),
+  assoc('timeStamp',"now"),
+  assoc('recipient',requester),
+  assoc('sender',requestee),
+  dissoc('_rev'),
+  dissoc('_id'))(requestToPay)
+  console.log("payObj: ",payObj)
+  
+  if(not(isEmpty(payObj))){
+    const response = await fetch(`${url}/requests/${requestID}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'DELETE'
+    }).then(res => res.json())
+    console.log("response in payRequest: ", response)
+  
+    if (!response.ok) {
+      dispatch({type: ERROR, payload: 'Could not pay request'})
+      return
+    }
   }
   dispatch(setPersonalRequest)
 }

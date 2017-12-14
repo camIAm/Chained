@@ -55,7 +55,7 @@ export const setPersonalTransactions = user => async(dispatch, getState) => {
     })
   })
 }
-
+// create transaction form sendForm
 export const createTxs = async(dispatch, getState) => {
   let txsToPost = getState().transactionForm
   const activeUser = getState().activeUser
@@ -66,6 +66,7 @@ export const createTxs = async(dispatch, getState) => {
     "currency": "USDTEST",
     "sender": activeUser.id
   })
+  
   console.log("txtToPost POST merge in actioncreator: ", txsToPost)
   // POST txsToPost then dispatch to setAllTransactions to update redux state
   // store

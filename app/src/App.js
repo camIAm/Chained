@@ -48,7 +48,6 @@ const App = props => {
               exact
               path="/callback"
               render={props => {
-              console.log("props in /callback: ", props);
               handleAuthentication(props);
               return <Callback {...props}/>
             }}/>
