@@ -20,6 +20,7 @@ import RequestItem from '../components/request-item'
 import { setAllTransactions} from '../action-creators/txs'
 import {setPersonalRequest} from '../action-creators/request'
 import '../App.css'
+import {declineRequest} from '../action-creators/request'
 
 const loading = require('../loading.svg')
 
@@ -36,7 +37,7 @@ componentDidMount() {
   //this.props.setAllTxs()
     this
       .props
-      .setPersonalRequest(this.props.user)
+      .setPersonalRequest()
   }
   render() {
     return (
@@ -82,7 +83,7 @@ componentDidMount() {
           padding: 0,
           marginBottom: 60
         }} >
-         {map(transactions => <RequestItem resource={transactions} user={this.props.user}/>, this.props.personalRequests) } 
+         {map(transactions => <RequestItem declineRequest={this.props.declineRequest} resource={transactions} user={this.props.user}/>, this.props.personalRequests) } 
         </List>
         )}
       </div >
@@ -102,8 +103,12 @@ const connector = connect(state => {
 }, dispatch => {
   return {
     toggleDrawer: () => dispatch({type: 'TOGGLE_DRAWER'}),
-    setPersonalRequest: user => dispatch(setPersonalRequest(user)),
-    setAllTxs: () => dispatch(setAllTransactions)
+    setPersonalRequest: () => dispatch(setPersonalRequest),
+    setAllTxs: () => dispatch(setAllTransactions),
+    declineRequest:e=> id => {
+      console.log("declineRequest id:", id);
+      dispatch(declineRequest(id))
+    }
   }
 })
 export default withRoot(withDrawer(connector(Notification)))

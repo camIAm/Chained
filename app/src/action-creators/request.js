@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import {SET_PAYMENT_REQUEST, CLEAR_SEND_FORM,PERSONAL_REQUESTS, ERROR} from '../constants'
+import {SET_PAYMENT_REQUEST, CLEAR_SEND_FORM, PERSONAL_REQUESTS, ERROR} from '../constants'
 import history from '../history'
 import {
   filter,
@@ -65,11 +65,12 @@ export const setAllRequests = async(dispatch, getState) => {
   // payment request dispatch({type: DATA_LOADED, payload: true})
 }
 
-export const setPersonalRequest = user => async(dispatch, getState) =>{
+export const setPersonalRequest = async(dispatch, getState) => {
   dispatch(setAllRequests).then(() => {
     const allRequests = getState().allRequests
-    const requester = propEq('requester', 'user_rcmontgo')
-    const requestee = propEq('requestee', 'user_rcmontgo')
+    const activeUser = getState().activeUser.id
+    const requester = propEq('requester', activeUser)
+    const requestee = propEq('requestee', activeUser)
     const sortByTimeStamp = sortBy(prop('timeStamp'));
     const requesterRequest = filter(requester, allRequests)
     const requesteeRequest = filter(requestee, allRequests)
@@ -79,4 +80,21 @@ export const setPersonalRequest = user => async(dispatch, getState) =>{
       payload: reverse(sortByTimeStamp(setPersonalRequest))
     })
   })
+}
+
+export const declineRequest = requestID => async(dispatch, getState) => {
+  const response = await fetch(`${url}/requests/${requestID}`, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'DELETE'
+  }).then(res => res.json())
+
+  console.log("response in declineRequest: ", response)
+
+  if (!response.ok) {
+    dispatch({type: ERROR, payload: 'Could not decline request'})
+    return
+  }
+  dispatch(setPersonalRequest)
 }
