@@ -72,7 +72,7 @@ class Home extends React.Component {
 
         )}
         {!isAuthenticated() && (
-          <div><MenuAppBar title="Login"/><Login {...this.props}/></div>
+          <div><Login {...this.props}/></div>
         )}
       </div>
     )
