@@ -17,7 +17,7 @@ import {
   assoc,
   concat
 } from "ramda"
-
+import {createTxsFromRequestPayment} from './txs'
 const url = process.env.REACT_APP_BASE_URL
 
 export const createRequest = async(dispatch, getState) => {
@@ -106,7 +106,7 @@ export const declineRequest = requestID => async(dispatch, getState) => {
 
 export const payRequest = requestID => async(dispatch, getState) => {
   let allRequests = getState().allRequests
-  let requestToPay = find(propEq('id', requestID))(allRequests)
+  let requestToPay = find(propEq('_id', requestID))(allRequests)
   // requestee will be the sender and requester will be the recipient in txs
   console.log("requestToPay: ",requestToPay)
   const requester=prop('requester',requestToPay)
@@ -130,9 +130,10 @@ export const payRequest = requestID => async(dispatch, getState) => {
     console.log("response in payRequest: ", response)
   
     if (!response.ok) {
-      dispatch({type: ERROR, payload: 'Could not pay request'})
+      dispatch({type: ERROR, payload: 'Could not delete pay request'})
       return
     }
+    dispatch(createTxsFromRequestPayment(payObj))
   }
   dispatch(setPersonalRequest)
 }

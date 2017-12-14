@@ -90,6 +90,34 @@ export const createTxs = async(dispatch, getState) => {
   dispatch({type: CLEAR_SEND_FORM})
   history.push(`/profile/${activeUser.id}`)
 }
+export const createTxsFromRequestPayment =payObj=> async(dispatch, getState) => {
+  
+  const activeUser = getState().activeUser
+  
+  
+  console.log("payObj in createTxsFromRequestPayment: ", payObj)
+  // POST txsToPost then dispatch to setAllTransactions to update redux state
+  // store
+  const response = await fetch(`${url}/txs`, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(payObj)
+  }).then(res => res.json())
+
+  console.log("response in createTxs: ", response)
+
+  if (!response.ok) {
+    dispatch({type: ERROR, payload: 'Could not add txs'})
+    return
+  }
+  dispatch(setAllTransactions)
+
+  // clear form
+  dispatch({type: CLEAR_SEND_FORM})
+  history.push(`/profile/${activeUser.id}`)
+}
 
 export const getTx = txID => async(dispatch, getState) => {
   console.log("getTx, whole: ", getState().allTransactions)
