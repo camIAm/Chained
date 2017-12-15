@@ -30,13 +30,12 @@ import '../App.css'
 import '../components/profile-item.css'
 import SecondaryMenu from '../components/secondaryMenu'
 const loading = require('../loading.svg')
-
 const userify = fullUser => compose(join(' '), slice(1, Infinity), split('_'))(fullUser)
 
 
 class Profile extends React.Component {
       componentDidMount() {
-        //this.props.setAllTxs()
+        
         this
         .props
         .setPersonalTxs(this.props.user)
@@ -47,33 +46,34 @@ class Profile extends React.Component {
         vertical: null,
         horizontal: null,
       };
-    
+      
       handleClick = state => () => {
         // set balance to zero
         this.props.bankDeposit()
         this.handleRequestClose()
         this.setState({ openSnack: true, ...state });
       };
-
+      
       handleClickOpen = () => {
         this.setState({ open: true });
       };
-    
+      
       handleRequestClose = () => {
         this.setState({ open: false });
       };
       handleSnackRequestClose = () => {
         this.setState({ openSnack: false });
       };
-
+      
       render() {
-      const { vertical, horizontal } = this.state;
-      const menuItemActions = [
-        {
-          name: 'Search',
-          link: `/search/${this.props.user.id}`,
-          fn: null
-        },
+        
+        const { vertical, horizontal } = this.state;
+        const menuItemActions = [
+          {
+            name: 'Search',
+            link: `/search/${this.props.user.id}`,
+            fn: null
+          },
         {
           name: 'Manage Account',
           link: `/seetings/${this.props.user.id}`,
@@ -103,19 +103,13 @@ class Profile extends React.Component {
             title={`${this.props.user.firstName} ${this.props.user.lastName}`}
             subheader={userify(this.props.user.id)}
           />
-          <CardMedia
-           
-            image="/static/images/cards/paella.jpg"
-            title="Contemplative Reptile"
-          />
-         
           <CardActions disableActionSpacing>
           <div style={{
           paddingLeft: 20
         }}>
           {` $ ${this.props.user.balance}`}
           </div>
-           
+          
             <div style={{
           paddingLeft: 20
         }}>
@@ -157,7 +151,7 @@ class Profile extends React.Component {
     <img id="custom-loader" src={loading} alt="loading" />
     </div>:(
     <ul class="list pl0 mt0 measure center">
-         {map(transactions => <ProfileItem resource={transactions} user={this.props.user}/>, this.props.personalTxs) } 
+         {map(transactions => <ProfileItem resource={transactions} user={this.props.user} props={this.props}/>, this.props.personalTxs) } 
         </ul>
         )}
       </div >

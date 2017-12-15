@@ -10,11 +10,16 @@ import Divider from 'material-ui/Divider'
 import {userify} from '../lib/userify'
 //import ResourceMenuItem from './resource-item-menu'
 import {Link} from 'react-router-dom'
+
 import './profile-item.css'
 import {
   slice,
+  path,
+  prop,
+  last,
   toUpper,
   contains,
+  equals,
   head,
   drop,
   compose,
@@ -50,8 +55,12 @@ const styles = theme => ({
   }
 });
 
-const ProfileItem = ({resource, user}) => {
-
+const ProfileItem = ({props,resource, user}) => {
+  
+  const pathID = prop('match')(props)
+  ? path(['match', 'params', 'id'])(props)
+  : compose(last, split('/'), path(['location', 'pathname']))(props)
+  
   // Improve resource item design to include description and time or txs Add link
   // to receipt (paper material-ui component)
   return (
@@ -60,26 +69,44 @@ const ProfileItem = ({resource, user}) => {
       <li class="flex items-center lh-copy pa3 ph0-l bb b--black-10">
         <Avatar className="w2 h2 w3-ns h3-ns br-100">{`${compose(toUpper(), slice(0, 1), join(' '), split(' '), toLower(), userify)(resource.sender)}`}</Avatar>
         <div class="pl3 flex-auto">
-
+{equals(resource.sender,user.id)?
           <span class="f6 db black-70">
             <Link
-              to={`/profile/${user.id}/${resource._id}`}
+              to={`/profile/${resource.sender}`}
               style={{
               textDecoration: 'none',
               color: '#000000'
-            }}>{`${userify(resource.sender)}`}
+            }}>{`${userify(resource.sender)}  `}
             </Link>
             sent
             <Link
-              to={`/profile/${user.id}/${resource._id}`}
+              to={`/user/${resource.recipient}`}
               style={{
               textDecoration: 'none',
               color: '#000000'
             }}>
               {`  ${userify(resource.recipient)}`}
             </Link>
-          </span>
-
+          </span>:
+          <span class="f6 db black-70">
+          <Link
+            to={`/user/${resource.sender}`}
+            style={{
+            textDecoration: 'none',
+            color: '#000000'
+          }}>{`${userify(resource.sender)}  `}
+          </Link>
+          sent
+          <Link
+            to={`/profile/${resource.recipient}`}
+            style={{
+            textDecoration: 'none',
+            color: '#000000'
+          }}>
+            {`  ${userify(resource.recipient)}`}
+          </Link>
+        </span>
+}
           <span class="f6 db black-70">{resource.description}</span>
         </div>
         <div>

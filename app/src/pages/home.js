@@ -12,16 +12,24 @@ import Button from 'material-ui/Button';
 import Send from 'material-ui-icons/Send';
 import Login from './login'
 import AppBar from 'material-ui/AppBar';
-import Tabs, { Tab } from 'material-ui/Tabs';
+import Tabs, {Tab} from 'material-ui/Tabs';
 
+import {setPersonalTransactions, setAllTransactions} from '../action-creators/txs'
 class Home extends React.Component {
   state = {
-    value: 0,
+    value: 0
   };
 
   handleChange = (event, value) => {
-    this.setState({ value });
+    this.setState({value});
   };
+
+  componentDidMount() {
+    //this.props.setAllTxs()
+    this
+      .props
+      .setPersonalTxs(this.props.user)
+  }
 
   logout() {
     this
@@ -31,7 +39,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { value } = this.state;
+    const {value} = this.state;
     const {isAuthenticated} = this.props.auth
 
     return (
@@ -40,26 +48,30 @@ class Home extends React.Component {
           <div>
             <MenuAppBar title="Home" search={true} {...this.props}/>
             <Typography/>
-            <AppBar position="static" color="default" style={{
+            <AppBar
+              position="static"
+              color="default"
+              style={{
               padding: 0,
               paddingTop: 60
             }}>
-          <Tabs
-            value={value}
-            onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            centered
-            scrollButtons="auto"
-          >
-            <Tab label="Item One" />
-            <Tab label="Item Two" />
-            <Tab label="Item Three" />
-          </Tabs>
-        </AppBar>
-            <List>
-              {map(transactions => <ResourceItem resource={transactions}/>, this.props.transactions)}
-            </List>
+              <Tabs
+                value={value}
+                onChange={this.handleChange}
+                indicatorColor="primary"
+                textColor="primary"
+                centered
+                scrollButtons="auto">
+                <Tab label="Global"/>
+                <Tab label="Personal"/>
+              </Tabs>
+            </AppBar>
+            {value === 0 && <List>
+              {map(transactions => <ResourceItem resource={transactions} user={this.props.user}/>, this.props.transactions)}
+            </List>}
+            {value === 1 && <List>
+              {map(transactions => <ResourceItem resource={transactions} user={this.props.user}/>, this.props.personalTxs)}
+            </List>}
             <Button
               bsStyle="primary"
               className="btn-margin"
@@ -81,16 +93,12 @@ class Home extends React.Component {
 
 const connector = connect(state => {
   console.log("state", state)
-  return {
-    transactions: state.allTransactions,
-    user: state.activeUser
-    // favorites: filter(resource => contains(resource._id, state.favorites),
-    // state.resources)
-  }
+  return {transactions: state.allTransactions, user: state.activeUser, personalTxs: state.personalTxs}
 }, dispatch => {
   return {
-    toggleDrawer: () => dispatch({type: 'TOGGLE_DRAWER'})
-    
+    toggleDrawer: () => dispatch({type: 'TOGGLE_DRAWER'}),
+    setPersonalTxs: user => dispatch(setPersonalTransactions(user))
+
   }
 })
 export default withRoot(withDrawer(connector(Home)))
