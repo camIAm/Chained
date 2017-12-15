@@ -24,7 +24,7 @@ import ShareIcon from 'material-ui-icons/Share';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
 import UserProfileItem from '../components/user-profile-item'
-import {setPersonalTransactions, setAllTransactions} from '../action-creators/txs'
+import {setNonActivePersonalTransactions, setAllTransactions} from '../action-creators/txs'
 import {setUser} from "../action-creators/user"
 import {bankDeposit} from '../action-creators/bank'
 import {prop, last, path} from 'ramda'
@@ -129,7 +129,7 @@ class UserProfile extends React.Component {
 
 const connector = connect(state => {
   return {
-    personalTxs: state.personalTxs,
+    personalTxs: state.nonActiveTxs,
     nonActiveUsers: state.nonActiveUsers,
     user:state.activeUser,
     load: state.load
@@ -137,7 +137,7 @@ const connector = connect(state => {
 }, dispatch => {
   return {
     toggleDrawer: () => dispatch({type: 'TOGGLE_DRAWER'}),
-    setPersonalTxs: user => dispatch(setPersonalTransactions(user)),
+    setPersonalTxs: user => dispatch(setNonActivePersonalTransactions(user)),
     bankDeposit: () => dispatch(bankDeposit),
     setUser: user => dispatch(setUser(user))
   }

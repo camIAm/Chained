@@ -3,6 +3,7 @@ import {
   SET_ALL_TRANSACTIONS,
   SINGLE_TX,
   IS_ACTIVE,
+  PERSONAL_NA_TXS,
   PERSONAL_TXS,
   DATA_LOADED,
   CLEAR_SEND_FORM,
@@ -53,6 +54,24 @@ export const setPersonalTransactions = user => async(dispatch, getState) => {
     console.log("personalTxs: ",personalTxs)
     dispatch({
       type: PERSONAL_TXS,
+      payload: reverse(sortByTimeStamp(personalTxs))
+    })
+  })
+}
+
+export const setNonActivePersonalTransactions= user => async(dispatch, getState) => {
+  console.log("setNonActivePersonalTransactions: ",user)
+  dispatch(setAllTransactions).then(() => {
+    const allTxs = getState().allTransactions
+    const rec = propEq('recipient', user)
+    const sender = propEq('sender', user)
+    const sortByTimeStamp = sortBy(prop('timeStamp'));
+    const senderTxs = filter(sender, allTxs)
+    const recipientTxs = filter(rec, allTxs)
+    const personalTxs = concat(senderTxs, recipientTxs)
+    console.log("personalTxs: ",personalTxs)
+    dispatch({
+      type: PERSONAL_NA_TXS,
       payload: reverse(sortByTimeStamp(personalTxs))
     })
   })

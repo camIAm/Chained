@@ -1,5 +1,5 @@
 import {ACTIVE_USER} from '../../constants'
-import {BANK_DEPOSIT,SET_NON_ACTIVE_USERS} from '../../constants'
+import {BANK_DEPOSIT,SET_NON_ACTIVE_USERS,PERSONAL_NA_TXS} from '../../constants'
 import {merge} from 'ramda'
 
 export const activeUser = (state = {
@@ -28,6 +28,15 @@ export const nonActiveUsers = (state = {
 }, action) => {
   switch (action.type) {
     case SET_NON_ACTIVE_USERS:
+      return action.payload
+    default:
+      return state
+  }
+}
+
+export const nonActiveTxs = (state = [], action) => {
+  switch (action.type) {
+    case PERSONAL_NA_TXS:
       return action.payload
     default:
       return state
