@@ -31,6 +31,7 @@ const styles = theme => ({
 //  <Button color="contrast">Search</Button>
 const MenuAppBar = props => {
   const {classes} = props
+  
   const secondaryMenu = propOr(null, 'secondaryMenu', props)
   return (
     <div id="menu-container" className={classes.root}>

@@ -41,14 +41,16 @@ export const setAllTransactions = async(dispatch, getState) => {
 }
 
 export const setPersonalTransactions = user => async(dispatch, getState) => {
+  console.log("setPersonalTxs: ",user)
   dispatch(setAllTransactions).then(() => {
     const allTxs = getState().allTransactions
-    const rec = propEq('recipient', 'user_rcmontgo')
-    const sender = propEq('sender', 'user_rcmontgo')
+    const rec = propEq('recipient', user.id)
+    const sender = propEq('sender', user.id)
     const sortByTimeStamp = sortBy(prop('timeStamp'));
     const senderTxs = filter(sender, allTxs)
     const recipientTxs = filter(rec, allTxs)
     const personalTxs = concat(senderTxs, recipientTxs)
+    console.log("personalTxs: ",personalTxs)
     dispatch({
       type: PERSONAL_TXS,
       payload: reverse(sortByTimeStamp(personalTxs))

@@ -8,6 +8,7 @@ import Profile from './pages/profile2'
 import Notifications from "./pages/notifications"
 import SendForm from './components/sendForm'
 import ReceiptTicket from './components/receipt-ticket'
+import UserProfile from './components/user-profile'
 import ScrollToTop from './ScrollToTop'
 import Auth from './auth'
 import Callback from './pages/callback'
@@ -37,6 +38,7 @@ const App = props => {
             {
               ...props
             } />}/>
+            <Route exact path="/user/:id" component={UserProfile}/>
             <Route exact path="/profile/:id/:tx" component={ReceiptTicket}/>
             <Route exact path="/search/:id" component={Search}/>
             <Route exact path="/search/send/:id" component={SendForm}/>

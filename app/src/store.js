@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import {drawer} from './reducers/drawer'
 import {allTransactions} from './reducers/txs/allTransactions'
 import {personalTxs} from './reducers/txs/personalTxs'
-import {activeUser} from './reducers/users/activeUser'
+import {activeUser,nonActiveUsers} from './reducers/users/activeUser'
 import {allUsers} from './reducers/users/users'
 import {transactionForm} from './reducers/txs/searchTxs'
 import {isActive} from './reducers/txs/isActive'
@@ -16,12 +16,14 @@ import {bankDeposit} from './reducers/bank'
 const store = createStore(combineReducers({
   drawer,
   singleTransaction,
-  allUsers,
+  nonActiveUsers,
   isActive,
   transactionForm,
   activeUser,
   personalTxs,
+  activeUser,
   load,
+  allUsers,
   allRequests,
   personalRequests,
   bankDeposit,
