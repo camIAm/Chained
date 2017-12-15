@@ -27,13 +27,13 @@ export const setAllUsers = async(dispatch, getState) => {
 
 // non active user
 export const setUser =userID=> async(dispatch, getState) => {
-    const response = await fetch(`${url}/users/userID`)
+    const response = await fetch(`${url}/users/${userID}`)
       .then(res => res.json())
       .catch(err => console.log('err: ', err));
     if (!response.ok) {
       console.log("the response: ", response)
     }
-    console.log("the response ok: ", response)
+    console.log("the within setUser: ", response)
   
     dispatch({type: SET_NON_ACTIVE_USERS, payload: response})
   }

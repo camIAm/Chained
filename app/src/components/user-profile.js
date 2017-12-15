@@ -102,7 +102,7 @@ class UserProfile extends React.Component {
               </IconButton>
             }
             title={`${this.props.nonActiveUsers.firstName} ${this.props.nonActiveUsers.lastName}`}
-            subheader={userify(this.props.nonActiveUsers.id)}
+            subheader={userify(this.props.nonActiveUsers._id)}
           />
           <Snackbar
           anchorOrigin={{ vertical, horizontal }}
@@ -119,7 +119,7 @@ class UserProfile extends React.Component {
     <img id="custom-loader" src={loading} alt="loading" />
     </div>:(
     <ul class="list pl0 mt0 measure center">
-         {map(transactions => <UserProfileItem resource={transactions} user={this.props.user} props={this.props}/>, this.props.personalTxs) } 
+         {map(transactions => <UserProfileItem resource={transactions} user={this.props.nonActiveUsers} props={this.props}/>, this.props.personalTxs) } 
         </ul>
         )}
       </div >
@@ -131,6 +131,7 @@ const connector = connect(state => {
   return {
     personalTxs: state.personalTxs,
     nonActiveUsers: state.nonActiveUsers,
+    user:state.activeUser,
     load: state.load
   }
 }, dispatch => {
