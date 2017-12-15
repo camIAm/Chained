@@ -76,7 +76,7 @@ class Profile extends React.Component {
           },
         {
           name: 'Manage Account',
-          link: `/seetings/${this.props.user.id}`,
+          link: null,
           fn: null
         }
       ]

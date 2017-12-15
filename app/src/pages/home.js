@@ -7,6 +7,7 @@ import {Typography} from 'material-ui'
 import {filter, contains, map} from 'ramda'
 import List from 'material-ui/List'
 import ResourceItem from '../components/resource-item'
+import ResourceItem2 from '../components/resource-item2'
 import logo from '../logo.svg';
 import Button from 'material-ui/Button';
 import Send from 'material-ui-icons/Send';
@@ -67,7 +68,7 @@ class Home extends React.Component {
               </Tabs>
             </AppBar>
             {value === 0 && <List>
-              {map(transactions => <ResourceItem resource={transactions} user={this.props.user}/>, this.props.transactions)}
+              {map(transactions => <ResourceItem2 resource={transactions} user={this.props.user}/>, this.props.transactions)}
             </List>}
             {value === 1 && <List>
               {map(transactions => <ResourceItem resource={transactions} user={this.props.user}/>, this.props.personalTxs)}

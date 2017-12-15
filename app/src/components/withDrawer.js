@@ -101,21 +101,12 @@ return (
       </List>
     <Divider/>
     <List>
-      <Link
-        to="/settings"
-        className="router-link"
-        style={{
-        textDecoration: 'none'
-      }}>
         <ListItem button>
           <ListItemIcon>
               <i className="material-icons">settings</i>
           </ListItemIcon>
           <ListItemText primary="Settings"/>
-        </ListItem>
-      </Link>
-
-      
+        </ListItem>      
     </List>
     <Link
         to="/logout"

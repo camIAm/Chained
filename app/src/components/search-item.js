@@ -36,7 +36,7 @@ const SearchItem = ({resource}) => {
         className="w-100  animated fadeInRight">
         <ListItem button onClick={e => {}}>
           <ListItemAvatar>
-            <Avatar>{resource.firstName}</Avatar>
+            <Avatar>{compose(toUpper(), slice(0, 1))(resource.firstName)}</Avatar>
           </ListItemAvatar>
           <ListItemText
             primary={`${userify(resource.firstName)}`}

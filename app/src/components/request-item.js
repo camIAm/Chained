@@ -48,7 +48,7 @@ const RequestItem = ({declineRequest,payRequest,resource, user}) => {
           </Avatar>
         </ListItemAvatar>
         <ListItemText
-          primary={`${userify(resource.requester)} requests ${resource.amount}`}
+          primary={`${userify(resource.requester)} requests $${resource.amount}`}
           secondary={resource.description}/>
       </ListItem>
       <div style={{
