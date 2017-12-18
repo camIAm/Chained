@@ -41,17 +41,17 @@ export const setAllTransactions = async(dispatch, getState) => {
   dispatch({type: DATA_LOADED, payload: true})
 }
 
-export const setPersonalTransactions = user => async(dispatch, getState) => {
-  console.log("setPersonalTxs: ",user)
+export const setPersonalTransactions = userID => async(dispatch, getState) => {
+  console.log("setPersonalTxs: ", userID)
   dispatch(setAllTransactions).then(() => {
     const allTxs = getState().allTransactions
-    const rec = propEq('recipient', user.id)
-    const sender = propEq('sender', user.id)
+    const rec = propEq('recipient', userID)
+    const sender = propEq('sender', userID)
     const sortByTimeStamp = sortBy(prop('timeStamp'));
     const senderTxs = filter(sender, allTxs)
     const recipientTxs = filter(rec, allTxs)
     const personalTxs = concat(senderTxs, recipientTxs)
-    console.log("personalTxs: ",personalTxs)
+    console.log("personalTxs: ", personalTxs)
     dispatch({
       type: PERSONAL_TXS,
       payload: reverse(sortByTimeStamp(personalTxs))
@@ -59,8 +59,8 @@ export const setPersonalTransactions = user => async(dispatch, getState) => {
   })
 }
 
-export const setNonActivePersonalTransactions= user => async(dispatch, getState) => {
-  console.log("setNonActivePersonalTransactions: ",user)
+export const setNonActivePersonalTransactions = user => async(dispatch, getState) => {
+  console.log("setNonActivePersonalTransactions: ", user)
   dispatch(setAllTransactions).then(() => {
     const allTxs = getState().allTransactions
     const rec = propEq('recipient', user)
@@ -69,7 +69,7 @@ export const setNonActivePersonalTransactions= user => async(dispatch, getState)
     const senderTxs = filter(sender, allTxs)
     const recipientTxs = filter(rec, allTxs)
     const personalTxs = concat(senderTxs, recipientTxs)
-    console.log("personalTxs: ",personalTxs)
+    console.log("personalTxs: ", personalTxs)
     dispatch({
       type: PERSONAL_NA_TXS,
       payload: reverse(sortByTimeStamp(personalTxs))
@@ -87,7 +87,7 @@ export const createTxs = async(dispatch, getState) => {
     "currency": "USDTEST",
     "sender": activeUser.id
   })
-  
+
   console.log("txtToPost POST merge in actioncreator: ", txsToPost)
   // POST txsToPost then dispatch to setAllTransactions to update redux state
   // store
@@ -111,11 +111,10 @@ export const createTxs = async(dispatch, getState) => {
   dispatch({type: CLEAR_SEND_FORM})
   history.push(`/profile/${activeUser.id}`)
 }
-export const createTxsFromRequestPayment =payObj=> async(dispatch, getState) => {
-  
+export const createTxsFromRequestPayment = payObj => async(dispatch, getState) => {
+
   const activeUser = getState().activeUser
-  
-  
+
   console.log("payObj in createTxsFromRequestPayment: ", payObj)
   // POST txsToPost then dispatch to setAllTransactions to update redux state
   // store

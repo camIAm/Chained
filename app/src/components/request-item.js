@@ -35,7 +35,7 @@ import {
 "requester": "user_rcmontgo"
 }
 */
-const RequestItem = ({declineRequest,payRequest,resource, user}) => {
+const RequestItem = ({declineRequest, payRequest, resource, user}) => {
 
   // Improve resource item design to include description and time or txs Add link
   // to receipt (paper material-ui component)
@@ -61,7 +61,9 @@ const RequestItem = ({declineRequest,payRequest,resource, user}) => {
           marginRight: '20',
           marginLeft: '20'
         }}
-        onClick={e=>{payRequest(resource._id)}}
+          onClick={e => {
+          payRequest(resource._id)
+        }}
           raised
           color="primary"
           type="submit"
@@ -75,7 +77,9 @@ const RequestItem = ({declineRequest,payRequest,resource, user}) => {
           marginLeft: '20',
           marginRight: '20'
         }}
-          onClick={e=>{declineRequest(resource._id)}}
+          onClick={e => {
+          declineRequest(resource._id)
+        }}
           raised
           type="submit"
           aria-label="send"
@@ -90,14 +94,12 @@ const RequestItem = ({declineRequest,payRequest,resource, user}) => {
 
 const connector = connect(state => {
   return {
-    // transactions: state.allTransactions 
+    // transactions: state.allTransactions
     personalRequests: state.personalRequests
     // user: state.activeUser, load: state.load
 
   }
 }, dispatch => {
-  return {
-    }
-  }
-)
+  return {}
+})
 export default withRoot(withDrawer(connector(RequestItem)))

@@ -30,103 +30,101 @@ const styles = {
 }
 const NotificationIcon = () => (
   <SvgIcon>
-    <img id="custom-notification" src={notification} alt="loading" />
+    <img id="custom-notification" src={notification} alt="loading"/>
   </SvgIcon>
 );
 
-const SideList = ({activeUser,requests}) => {
-return (
-  <div>
-    <List>
-      <Link
-        to="/"
-        className="router-link"
-        style={{
-        textDecoration: 'none'
-      }}>
-        <ListItem button>
-          <ListItemIcon>
-            <HomeIcon/>
-          </ListItemIcon>
-          <ListItemText primary="Home"/>
-        </ListItem>
-      </Link>
-      <Link
-        to={`/search/${activeUser.id}`}
-        className="router-link"
-        style={{
-        textDecoration: 'none'
-      }}>
-        <ListItem button>
-          <ListItemIcon>
-            <SearchIcon/>
-          </ListItemIcon>
-          <ListItemText primary="Search"/>
-        </ListItem>
-      </Link>
-      <Link
-        to={`/profile/${activeUser.id}`}
-        className="router-link"
-        style={{
-        textDecoration: 'none'
-      }}>
-        <ListItem button>
-          <ListItemIcon>
-            
+const SideList = ({activeUser, requests}) => {
+  return (
+    <div>
+      <List>
+        <Link
+          to="/"
+          className="router-link"
+          style={{
+          textDecoration: 'none'
+        }}>
+          <ListItem button>
+            <ListItemIcon>
+              <HomeIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Home"/>
+          </ListItem>
+        </Link>
+        <Link
+          to={`/search/${activeUser.id}`}
+          className="router-link"
+          style={{
+          textDecoration: 'none'
+        }}>
+          <ListItem button>
+            <ListItemIcon>
+              <SearchIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Search"/>
+          </ListItem>
+        </Link>
+        <Link
+          to={`/profile/${activeUser.id}`}
+          className="router-link"
+          style={{
+          textDecoration: 'none'
+        }}>
+          <ListItem button>
+            <ListItemIcon>
+
               <i className="material-icons">face</i>
-            
-          </ListItemIcon>
-          <ListItemText primary="Profile"/>
-        </ListItem>
-      </Link>
-      <Link
-        to={`/notifications/${activeUser.id}`}
-        className="router-link"
-        style={{
-        textDecoration: 'none'
-      }}>
-        <ListItem button>
-        
-          <ListItemIcon>
-          <IconButton>
-          <Badge  badgeContent={`${requests.length}`} color="primary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-          </ListItemIcon>
-          <ListItemText primary="Notifications"/>
-          
-        </ListItem>
-      </Link>
+
+            </ListItemIcon>
+            <ListItemText primary="Profile"/>
+          </ListItem>
+        </Link>
+        <Link
+          to={`/notifications/${activeUser.id}`}
+          className="router-link"
+          style={{
+          textDecoration: 'none'
+        }}>
+          <ListItem button>
+
+            <ListItemIcon>
+              <IconButton>
+                <Badge badgeContent={`${requests.length}`} color="primary">
+                  <MailIcon/>
+                </Badge>
+              </IconButton>
+            </ListItemIcon>
+            <ListItemText primary="Notifications"/>
+
+          </ListItem>
+        </Link>
       </List>
-    <Divider/>
-    <List>
+      <Divider/>
+      <List>
         <ListItem button>
           <ListItemIcon>
-              <i className="material-icons">settings</i>
+            <i className="material-icons">settings</i>
           </ListItemIcon>
           <ListItemText primary="Settings"/>
-        </ListItem>      
-    </List>
-    <Link
+        </ListItem>
+      </List>
+      <Link
         to="/logout"
         className="router-link"
         style={{
         textDecoration: 'none'
       }}>
-    <List>
-    <Divider/>
+        <List>
+          <Divider/>
           <div>
-            <Button
-              bsStyle="primary"
-              className="btn-margin">
+            <Button bsStyle="primary" className="btn-margin">
               Log Out
             </Button>
-            </div>
-      </List>
+          </div>
+        </List>
       </Link>
-  </div>
-)
+    </div>
+  )
 }
 const withDrawer = function (PageComponent) {
   const WrapDrawerComponent = props => {
@@ -139,18 +137,14 @@ const withDrawer = function (PageComponent) {
             role="button"
             onClick={props.toggleDrawer}
             onKeyDown={props.toggleDrawer}>
-            <SideList activeUser={props.activeUser} requests={props.requests} />
+            <SideList activeUser={props.activeUser} requests={props.requests}/>
           </div>
         </Drawer>
       </div>
     )
   }
   const mapStateToProps = state => {
-    return {
-      open: state.drawer.open,
-      activeUser: state.activeUser,
-      requests : state.allRequests
-    }
+    return {open: state.drawer.open, activeUser: state.activeUser, requests: state.allRequests}
   }
   const mapActionsToProps = dispatch => {
     return {
