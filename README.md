@@ -1,6 +1,7 @@
 # Chained
 
-## A low fee, peer to peer money transfer application backed by the blockchain ledger.
+## Goal
+- A low fee, peer to peer money transfer application backed by the blockchain ledger.
 
 ### User
 - pk
