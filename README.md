@@ -7,6 +7,8 @@
 - [Date Models](data_model.md)
 - [User Stories](user_stories.md)
 
+## Entities
+
 ### User
 - pk
 - First Name
