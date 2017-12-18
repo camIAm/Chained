@@ -35,7 +35,9 @@
 - Description 
 - Time stamp
 
-# Data model
+[API endpoints](endpoints.md)
+
+# Data models
 
 ## User
 
