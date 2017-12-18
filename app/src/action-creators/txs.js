@@ -26,13 +26,13 @@ import {
 const url = process.env.REACT_APP_BASE_URL
 
 export const setAllTransactions = async(dispatch, getState) => {
-
-  console.log("REACT_APP_BASE_URL ", process.env.REACT_APP_BASE_URL)
   const response = await fetch(`${url}/txs`)
     .then(res => res.json())
     .catch(err => console.log('err: ', err));
-  // if (!response) {     console.log("inside !response.ok",response)     return }
-  console.log("the response setAllTransactions: ", response)
+  if (!response) {
+    console.log("inside !response.ok", response);
+    return
+  }
   const sortByTimeStamp = sortBy(prop('timeStamp'))
   dispatch({
     type: SET_ALL_TRANSACTIONS,
@@ -42,40 +42,18 @@ export const setAllTransactions = async(dispatch, getState) => {
 }
 
 export const setPersonalTransactions = userID => async(dispatch, getState) => {
-  console.log("setPersonalTxs: ", userID)
   dispatch(setAllTransactions).then(() => {
     const allTxs = getState().allTransactions
-    const rec = propEq('recipient', userID)
-    const sender = propEq('sender', userID)
-    const sortByTimeStamp = sortBy(prop('timeStamp'));
-    const senderTxs = filter(sender, allTxs)
-    const recipientTxs = filter(rec, allTxs)
+    const senderTxs = filter(propEq('sender', userID), allTxs)
+    const recipientTxs = filter(propEq('recipient', userID), allTxs)
     const personalTxs = concat(senderTxs, recipientTxs)
-    console.log("personalTxs: ", personalTxs)
     dispatch({
       type: PERSONAL_TXS,
-      payload: reverse(sortByTimeStamp(personalTxs))
+      payload: reverse(sortBy(prop('timeStamp'))(personalTxs))
     })
   })
 }
 
-export const setNonActivePersonalTransactions = user => async(dispatch, getState) => {
-  console.log("setNonActivePersonalTransactions: ", user)
-  dispatch(setAllTransactions).then(() => {
-    const allTxs = getState().allTransactions
-    const rec = propEq('recipient', user)
-    const sender = propEq('sender', user)
-    const sortByTimeStamp = sortBy(prop('timeStamp'));
-    const senderTxs = filter(sender, allTxs)
-    const recipientTxs = filter(rec, allTxs)
-    const personalTxs = concat(senderTxs, recipientTxs)
-    console.log("personalTxs: ", personalTxs)
-    dispatch({
-      type: PERSONAL_NA_TXS,
-      payload: reverse(sortByTimeStamp(personalTxs))
-    })
-  })
-}
 // create transaction form sendForm
 export const createTxs = async(dispatch, getState) => {
   let txsToPost = getState().transactionForm
@@ -99,14 +77,11 @@ export const createTxs = async(dispatch, getState) => {
     body: JSON.stringify(txsToPost)
   }).then(res => res.json())
 
-  console.log("response in createTxs: ", response)
-
   if (!response.ok) {
     dispatch({type: ERROR, payload: 'Could not add txs'})
     return
   }
   dispatch(setAllTransactions)
-
   // clear form
   dispatch({type: CLEAR_SEND_FORM})
   history.push(`/profile/${activeUser.id}`)
@@ -126,23 +101,17 @@ export const createTxsFromRequestPayment = payObj => async(dispatch, getState) =
     body: JSON.stringify(payObj)
   }).then(res => res.json())
 
-  console.log("response in createTxs: ", response)
-
   if (!response.ok) {
     dispatch({type: ERROR, payload: 'Could not add txs'})
     return
   }
   dispatch(setAllTransactions)
-
   // clear form
   dispatch({type: CLEAR_SEND_FORM})
   history.push(`/profile/${activeUser.id}`)
 }
 
 export const getTx = txID => async(dispatch, getState) => {
-  console.log("getTx, whole: ", getState().allTransactions)
-  console.log("txID", txID)
-  console.log("the `${txID}`", `${txID}`)
   dispatch({
     type: SINGLE_TX,
     payload: find(propEq('_id', `${txID}`))(getState().allTransactions)

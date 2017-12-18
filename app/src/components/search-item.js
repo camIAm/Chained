@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import {ListItem, ListItemAvatar, ListItemText} from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import Divider from 'material-ui/Divider'
+import {userify} from '../lib/userify'
 //import ResourceMenuItem from './resource-item-menu'
 
 import {
@@ -19,12 +20,6 @@ import {
 } from 'ramda'
 
 const SearchItem = ({resource}) => {
-  const removeArticles = arrData => contains(head(arrData), ['the', 'a', 'an'])
-    ? drop(1, arrData)
-    : arrData
-
-  // be careful with this method. Temporary solution only
-  const userify = fullUser => compose(join(' '), slice(1, Infinity), split('_'))(fullUser)
   return (
     <div key={resource._id}>
       <Link

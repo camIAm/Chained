@@ -32,11 +32,11 @@ import {setPersonalTransactions, setAllTransactions} from '../action-creators/tx
 import {setUser} from "../action-creators/user"
 import {bankDeposit} from '../action-creators/bank'
 import {prop, last, path} from 'ramda'
+import {userify} from "../lib/userify"
 import '../App.css'
 import '../components/profile-item.css'
 import SecondaryMenu from '../components/secondaryMenu'
 const loading = require('../loading.svg')
-const userify = fullUser => compose(join(' '), slice(1, Infinity), split('_'))(fullUser)
 
 class UserProfile extends React.Component {
   componentDidMount() {

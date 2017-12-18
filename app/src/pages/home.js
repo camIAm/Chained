@@ -26,10 +26,9 @@ class Home extends React.Component {
   };
 
   componentDidMount() {
-    //this.props.setAllTxs()
     this
       .props
-      .setPersonalTxs(this.props.user)
+      .setPersonalTxs(this.props.user.id)
   }
 
   logout() {

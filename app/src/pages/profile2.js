@@ -27,14 +27,14 @@ import FavoriteIcon from 'material-ui-icons/Favorite';
 import ShareIcon from 'material-ui-icons/Share';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
-import ProfileItem from '../components/profile-item2'
+import ProfileItem from '../components/profile-item'
 import {setPersonalTransactions, setAllTransactions} from '../action-creators/txs'
 import {bankDeposit} from '../action-creators/bank'
+import {userify} from '../lib/userify'
 import '../App.css'
 import '../components/profile-item.css'
 import SecondaryMenu from '../components/secondaryMenu'
 const loading = require('../loading.svg')
-const userify = fullUser => compose(join(' '), slice(1, Infinity), split('_'))(fullUser)
 
 class Profile extends React.Component {
   componentDidMount() {
