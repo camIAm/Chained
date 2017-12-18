@@ -3,9 +3,9 @@
 ## Goal
 - A low fee, peer to peer money transfer application backed by the blockchain ledger.
 
-##[API endpoints](endpoints.md)
-##[Date Models](data_model.md)
-##[User Stories](user_stories.md)
+-[API endpoints](endpoints.md)
+-[Date Models](data_model.md)
+-[User Stories](user_stories.md)
 
 ### User
 - pk
