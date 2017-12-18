@@ -116,4 +116,5 @@ const connector = connect(state => {
     }
   }
 })
+
 export default withRoot(withDrawer(connector(Notification)))

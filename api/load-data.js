@@ -2,7 +2,7 @@ require('dotenv').config()
 const PouchDB = require('pouchdb-core')
 PouchDB.plugin(require('pouchdb-adapter-http'))
 const db = new PouchDB(process.env.COUCHDB_URL + process.env.COUCHDB_DATABASE)
-
+const {dissoc, assoc, compose, map} = require('ramda')
 console.log("loading data to :", process.env.COUCHDB_URL + process.env.COUCHDB_DATABASE)
 
 const users = [
@@ -45,7 +45,7 @@ const users = [
       ]
     }
   }, {
-    _id: "user_miguelfernandez",
+    _id: "user_miguel_fernandez",
     firstName: "Miguel",
     lastName: "Fenandez",
     userName: "miguelfernandez",
@@ -324,7 +324,6 @@ db
   .then(res => console.log("Successfully loaded users data!"))
   .catch("An error has occurred will loading data");
 
-db
-  .bulkDocs(tx)
+db.bulkDocs(compose(map(assoc('timeStamp', new Date().toISOString())), map(dissoc('timeStamp')))(tx))
   .then(res => console.log("Successfully loaded TX data!"))
   .catch("An error has occurred will loading data")

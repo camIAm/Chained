@@ -28,7 +28,7 @@ import ShareIcon from 'material-ui-icons/Share';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
 import UserProfileItem from '../components/user-profile-item'
-import {setPersonalTransactions, setAllTransactions} from '../action-creators/txs'
+import {setNonActiveUserTransactions, setAllTransactions} from '../action-creators/txs'
 import {setUser} from "../action-creators/user"
 import {bankDeposit} from '../action-creators/bank'
 import {prop, last, path} from 'ramda'
@@ -140,7 +140,7 @@ const connector = connect(state => {
 }, dispatch => {
   return {
     toggleDrawer: () => dispatch({type: 'TOGGLE_DRAWER'}),
-    setPersonalTxs: user => dispatch(setPersonalTransactions(user)),
+    setPersonalTxs: user => dispatch(setNonActiveUserTransactions(user)),
     bankDeposit: () => dispatch(bankDeposit),
     setUser: user => dispatch(setUser(user))
   }

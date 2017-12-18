@@ -17,9 +17,7 @@ export const setAllUsers = async(dispatch, getState) => {
   const response = await fetch(`${url}/users`)
     .then(res => res.json())
     .catch(err => console.log('err: ', err));
-  if (!response.ok) {
-    console.log("the response: ", response)
-  }
+  //   consol. if (!response.ok) {   console.log("the response: ", response) }
   dispatch({type: SET_ALL_USERS, payload: response})
 }
 

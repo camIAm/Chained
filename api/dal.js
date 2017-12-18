@@ -63,10 +63,11 @@ const listTx = () => {
       sender: {
         $gte: null
       },
-        recipient: {
-          $gte: null
-        }
+      recipient: {
+        $gte: null
       }
+    },
+      limit: 70
     })
     .then(res => res.docs)
     .catch(err => console.log("error in dal/listTX: ", err))

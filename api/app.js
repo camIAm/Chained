@@ -98,6 +98,7 @@ module.exports = app => {
 
   // Tx
   app.post('/txs', bodyParser.json(), async(req, res, next) => {
+    console.log("within posts, body: ", prop('body', req))
     try {
       const tx = prop('body', req)
 

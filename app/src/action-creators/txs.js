@@ -26,6 +26,7 @@ import {
 const url = process.env.REACT_APP_BASE_URL
 
 export const setAllTransactions = async(dispatch, getState) => {
+  console.log("seeAllTransactions ")
   const response = await fetch(`${url}/txs`)
     .then(res => res.json())
     .catch(err => console.log('err: ', err));
@@ -54,21 +55,32 @@ export const setPersonalTransactions = userID => async(dispatch, getState) => {
   })
 }
 
+export const setNonActiveUserTransactions = userID => async(dispatch, getState) => {
+  dispatch(setAllTransactions).then(() => {
+    const allTxs = getState().allTransactions
+    const senderTxs = filter(propEq('sender', userID), allTxs)
+    const recipientTxs = filter(propEq('recipient', userID), allTxs)
+    const personalTxs = concat(senderTxs, recipientTxs)
+    dispatch({
+      type: PERSONAL_NA_TXS,
+      payload: reverse(sortBy(prop('timeStamp'))(personalTxs))
+    })
+  })
+}
+
 // create transaction form sendForm
 export const createTxs = async(dispatch, getState) => {
   let txsToPost = getState().transactionForm
   const activeUser = getState().activeUser
   txsToPost = merge(txsToPost, {
-    'timeStamp': Date
-      .now()
-      .toString(),
+    'timeStamp': new Date().toISOString(),
     "currency": "USDTEST",
     "sender": activeUser.id
   })
 
-  console.log("txtToPost POST merge in actioncreator: ", txsToPost)
   // POST txsToPost then dispatch to setAllTransactions to update redux state
   // store
+
   const response = await fetch(`${url}/txs`, {
     headers: {
       'Content-Type': 'application/json'
@@ -87,10 +99,7 @@ export const createTxs = async(dispatch, getState) => {
   history.push(`/profile/${activeUser.id}`)
 }
 export const createTxsFromRequestPayment = payObj => async(dispatch, getState) => {
-
   const activeUser = getState().activeUser
-
-  console.log("payObj in createTxsFromRequestPayment: ", payObj)
   // POST txsToPost then dispatch to setAllTransactions to update redux state
   // store
   const response = await fetch(`${url}/txs`, {
