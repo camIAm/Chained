@@ -123,3 +123,18 @@
   /// more data
 ]
 ```
+
+## Request
+
+```
+{
+  _id:guid,
+  requester:"user_rcmontgo",
+  requestee:"user_miguel_fernandez",
+  amount:"10.00",
+  currency:"USD",
+  description:"Pizza",
+  timeStamp:"Wed Oct 18 2017 12:41:34 GMT+0000 (UTC)"
+}
+
+```
