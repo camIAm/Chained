@@ -17,6 +17,7 @@ import {
   path,
   prop,
   last,
+  not,
   toUpper,
   contains,
   equals,
@@ -61,36 +62,58 @@ const ProfileItem = ({props, resource, user}) => {
     ? path(['match', 'params', 'id'])(props)
     : compose(last, split('/'), path(['location', 'pathname']))(props)
 
-  // Improve resource item design to include description and time or txs Add link
-  // to receipt (paper material-ui component)
+  // console.log("resource.sender: ", resource.sender)
+  // console.log("resource.recipient: ", resource.recipient) console.log("user.id:
+  // ", user.id) console.log("pathID", pathID) Improve resource item design to
+  // include description and time or txs Add link to receipt (paper material-ui
+  // component)
   return (
     <div key={resource._id}>
 
       <li class="flex items-center lh-copy pa3 ph0-l bb b--black-10">
         <Avatar className="w2 h2 w3-ns h3-ns br-100">{`${compose(toUpper(), slice(0, 1), join(' '), split(' '), toLower(), userify)(resource.sender)}`}</Avatar>
         <div class="pl3 flex-auto">
-          {equals(resource.sender, user.id)
-            ? <span class="f6 db black-70">
-                <Link
-                  to={`/profile/${resource.sender}`}
-                  style={{
-                  textDecoration: 'none',
-                  color: '#000000'
-                }}>{`${userify(resource.sender)}  `}
-                </Link>
-                sent
-                <Link
-                  to={`/user/${resource.recipient}`}
-                  style={{
-                  textDecoration: 'none',
-                  color: '#000000'
-                }}>
-                  {`  ${userify(resource.recipient)}`}
-                </Link>
-              </span>
+          {not(equals(resource.sender, user.id))
+            ? not(equals(resource.recipient, user.id))
+              ? <span class="f6 db black-70">
+                  <Link
+                    to={`/user/${resource.sender}`}
+                    style={{
+                    textDecoration: 'none',
+                    color: '#000000'
+                  }}>{`${userify(resource.sender)}  `}
+                  </Link>
+                  sent
+                  <Link
+                    to={`/user/${resource.recipient}`}
+                    style={{
+                    textDecoration: 'none',
+                    color: '#000000'
+                  }}>
+                    {`  ${userify(resource.recipient)}`}
+                  </Link>
+                </span>
+              : <span class="f6 db black-70">
+                  <Link
+                    to={`/user/${resource.sender}`}
+                    style={{
+                    textDecoration: 'none',
+                    color: '#000000'
+                  }}>{`${userify(resource.sender)}  `}
+                  </Link>
+                  sent
+                  <Link
+                    to={`/profile/${resource.recipient}`}
+                    style={{
+                    textDecoration: 'none',
+                    color: '#000000'
+                  }}>
+                    {`  ${userify(resource.recipient)}`}
+                  </Link>
+                </span>
             : <span class="f6 db black-70">
               <Link
-                to={`/user/${resource.sender}`}
+                to={`/profile/${resource.sender}`}
                 style={{
                 textDecoration: 'none',
                 color: '#000000'
@@ -98,7 +121,7 @@ const ProfileItem = ({props, resource, user}) => {
               </Link>
               sent
               <Link
-                to={`/profile/${resource.recipient}`}
+                to={`/user/${resource.recipient}`}
                 style={{
                 textDecoration: 'none',
                 color: '#000000'
@@ -109,9 +132,7 @@ const ProfileItem = ({props, resource, user}) => {
 }
           <span class="f6 db black-70">{resource.description}</span>
         </div>
-
       </li>
-
       <Divider/>
     </div>
   )

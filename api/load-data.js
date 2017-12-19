@@ -20,7 +20,7 @@ const users = [
       }, {
         userName: "user_curry_thomas"
       }, {
-        userName: "user_bill_joy"
+        userName: "user_bill"
       }, {
         userName: "user_jeff_montgomery"
       }, {
@@ -58,7 +58,7 @@ const users = [
       }, {
         userName: "user_curry_thomas"
       }, {
-        userName: "user_bill_joy"
+        userName: "user_bill"
       }, {
         userName: "user_jeff_montgomery"
       }, {
@@ -83,7 +83,7 @@ const users = [
       ]
     }
   }, {
-    _id: "user_jj_drisscol",
+    _id: "user_jj_driscoll",
     firstName: "JJ",
     lastName: "Drisscol",
     userName: "jj",
@@ -96,7 +96,7 @@ const users = [
       }, {
         userName: "user_curry_thomas"
       }, {
-        userName: "user_bill_joy"
+        userName: "user_bill"
       }, {
         userName: "user_jeff_montgomery"
       }, {
@@ -134,7 +134,7 @@ const users = [
       }, {
         userName: "user_curry_thomas"
       }, {
-        userName: "user_bill_joy"
+        userName: "user_bill"
       }, {
         userName: "user_jeff_montgomery"
       }, {
@@ -159,7 +159,7 @@ const users = [
       ]
     }
   }, {
-    _id: "user_currythomas",
+    _id: "user_curry_thomas",
     firstName: "Curry",
     lastName: "Thomas",
     userName: "currythomas",
@@ -172,7 +172,7 @@ const users = [
       }, {
         userName: "user_curry_thomas"
       }, {
-        userName: "user_bill_joy"
+        userName: "user_bill"
       }, {
         userName: "user_jeff_montgomery"
       }, {
@@ -210,7 +210,7 @@ const users = [
       }, {
         userName: "user_curry_thomas"
       }, {
-        userName: "user_bill_joy"
+        userName: "user_bill"
       }, {
         userName: "user_jeff_montgomery"
       }, {
@@ -253,7 +253,7 @@ const tx = [
     description: "Pizza",
     timeStamp: "Wed Oct 11 2017 12:41:34 GMT+0000 (UTC)"
   }, {
-    sender: "user_miguel_fernandex",
+    sender: "user_miguel_fernandez",
     recipient: "user_Monty",
     amount: "100.00",
     currency: "USD",
@@ -268,13 +268,13 @@ const tx = [
     timeStamp: "Wed Oct 09 2017 12:40:34 GMT+0000 (UTC)"
   }, {
     sender: "user_rcmontgo",
-    recipient: "user_Bill",
+    recipient: "user_bill",
     amount: "200.00",
     currency: "USD",
     description: "Music lessons",
     timeStamp: "Wed Oct 09 2017 12:41:34 GMT+0000 (UTC)"
   }, {
-    sender: "user_currythomas",
+    sender: "user_curry_thomas",
     recipient: "user_jj_driscoll",
     amount: "15.00",
     currency: "USD",
@@ -296,7 +296,7 @@ const tx = [
     timeStamp: "Wed Oct 23 2017 12:41:34 GMT+0000 (UTC)"
   }, {
     sender: "user_rcmontgo",
-    recipient: "user_currythomas",
+    recipient: "user_curry_thomas",
     amount: "350.00",
     currency: "USD",
     description: "Finacial Services",

@@ -43,6 +43,7 @@ class UserProfile extends React.Component {
     const pathID = prop('match')(this.props)
       ? path(['match', 'params', 'id'])(this.props)
       : compose(last, split('/'), path(['location', 'pathname']))(this.props)
+    console.log("USERPROFILE: ", pathID)
     this
       .props
       .setPersonalTxs(pathID)
@@ -126,7 +127,7 @@ class UserProfile extends React.Component {
             <ul class="list pl0 mt0 measure center">
               {map(transactions => <UserProfileItem
                 resource={transactions}
-                user={this.props.nonActiveUsers}
+                user={this.props.user}
                 props={this.props}/>, this.props.personalTxs)}
             </ul>
           )}
@@ -147,3 +148,5 @@ const connector = connect(state => {
 })
 
 export default withRoot(withDrawer(connector(UserProfile)))
+
+//user={this.props.nonActiveUsers} line 130
