@@ -7,6 +7,8 @@ import {
   filter,
   contains,
   map,
+  pathOr,
+
   compose,
   join,
   toUpper,
@@ -27,16 +29,15 @@ import FavoriteIcon from 'material-ui-icons/Favorite';
 import ShareIcon from 'material-ui-icons/Share';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
-import UserProfileItem from '../components/user-profile-item'
 import {setNonActiveUserTransactions, setAllTransactions} from '../action-creators/txs'
 import {setUser} from "../action-creators/user"
 import {bankDeposit} from '../action-creators/bank'
 import {prop, last, path} from 'ramda'
 import {userify} from "../lib/userify"
+import UserProfileList from './user-profile-list'
 import '../App.css'
 import '../components/profile-item.css'
 import SecondaryMenu from '../components/secondaryMenu'
-const loading = require('../loading.svg')
 
 class UserProfile extends React.Component {
   componentDidMount() {
@@ -44,6 +45,8 @@ class UserProfile extends React.Component {
       ? path(['match', 'params', 'id'])(this.props)
       : compose(last, split('/'), path(['location', 'pathname']))(this.props)
     console.log("USERPROFILE: ", pathID)
+    console.log("this.props.user: ", this.props.user)
+    console.log("this.props.nonActiveUsers: ", this.props.nonActiveUsers)
     this
       .props
       .setPersonalTxs(pathID)
@@ -83,7 +86,9 @@ class UserProfile extends React.Component {
   };
 
   render() {
-
+    const pathID = prop('match')(this.props)
+      ? path(['match', 'params', 'id'])(this.props)
+      : compose(last, split('/'), path(['location', 'pathname']))(this.props)
     const {vertical, horizontal} = this.state;
     const menuItemActions = [
       {
@@ -92,9 +97,16 @@ class UserProfile extends React.Component {
         fn: null
       }
     ]
+    console.log(`path([
+      'nonActiveUsers', '_id'
+    ], this.props)`, path([
+      'nonActiveUsers', '_id'
+    ], this.props))
+
     return (
       <div>
         <MenuAppBar title="Profile" search={true} {...this.props}/>
+
         <Card style={{
           padding: 0,
           paddingTop: 60
@@ -103,7 +115,12 @@ class UserProfile extends React.Component {
             avatar={< Avatar > {
             compose(toUpper(), slice(0, 1))(this.props.nonActiveUsers.firstName)
           } < /Avatar>}
-            action={< IconButton > <SecondaryMenu actions={menuItemActions} {...this.props}/> < /IconButton>}
+            action={< SecondaryMenu actions = {
+            menuItemActions
+          }
+          {
+            ...this.props
+          } />}
             title={`${this.props.nonActiveUsers.firstName} ${this.props.nonActiveUsers.lastName}`}
             subheader={userify(this.props.nonActiveUsers._id)}/>
           <Snackbar
@@ -119,21 +136,13 @@ class UserProfile extends React.Component {
           }}
             message={< span id = "message-id" > Thank you for using Chained < /span>}/>
         </Card>
-        {!this.props.load.loaded
-          ? <div id="custom-loader-container">
-              <img id="custom-loader" src={loading} alt="loading"/>
-            </div>
-          : (
-            <ul class="list pl0 mt0 measure center">
-              {map(transactions => <UserProfileItem
-                resource={transactions}
-                user={this.props.user}
-                props={this.props}/>, this.props.personalTxs)}
-            </ul>
-          )}
+        <UserProfileList {...this.props}/>
+
       </div>
     )
+
   }
+
 }
 
 const connector = connect(state => {
@@ -143,10 +152,15 @@ const connector = connect(state => {
     toggleDrawer: () => dispatch({type: 'TOGGLE_DRAWER'}),
     setPersonalTxs: user => dispatch(setNonActiveUserTransactions(user)),
     bankDeposit: () => dispatch(bankDeposit),
-    setUser: user => dispatch(setUser(user))
+    setUser: user => dispatch(setUser(user)),
+    changeUserProfile: e => user => {
+      e.preventDefault()
+      console.log("changeUserProfile hit with user: ", user)
+      dispatch(setUser(user))
+    }
   }
 })
 
 export default withRoot(withDrawer(connector(UserProfile)))
 
-//user={this.props.nonActiveUsers} line 130
+//user={this.props.nonActiveUsers} line 13

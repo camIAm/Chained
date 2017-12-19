@@ -4,6 +4,7 @@ import history from '../history'
 import {
   filter,
   propEq,
+  find,
   prop,
   or,
   reverse,
@@ -23,11 +24,13 @@ export const setAllUsers = async(dispatch, getState) => {
 
 // non active user
 export const setUser = userID => async(dispatch, getState) => {
-  const response = await fetch(`${url}/users/${userID}`)
-    .then(res => res.json())
-    .catch(err => console.log('err: ', err));
-  if (!response.ok) {
-    console.log("the response: ", response)
-  }
-  dispatch({type: SET_NON_ACTIVE_USERS, payload: response})
+  console.log("setUser firing to set another user!!! with:", userID)
+  dispatch(setAllUsers).then(() => {
+    const pickedUser = find(propEq('_id', userID))(getState().allUsers)
+
+    // const response = await fetch(`${url}/users/${userID}`)   .then(res =>
+    // res.json())   .catch(err => console.log('err: ', err)); if (!response.ok) {
+    // console.log("the response: ", response) }
+    dispatch({type: SET_NON_ACTIVE_USERS, payload: pickedUser})
+  })
 }
