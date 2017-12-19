@@ -64,12 +64,12 @@ const ResourceItem = ({resource, user}) => {
   // receipt (paper material-ui component)
   return (
     <div key={resource._id}>
-      <li class="flex items-center lh-copy pa3 ph0-l bb b--black-10">
+      <li className="flex items-center lh-copy pa3 ph0-l bb b--black-10">
         <Avatar className="w2 h2 w3-ns h3-ns br-100">{`${compose(toUpper(), slice(0, 1), join(' '), split(' '), toLower(), userify)(resource.sender)}`}</Avatar>
-        <div class="pl3 flex-auto">
+        <div className="pl3 flex-auto">
           {not(equals(resource.sender, user.id))
             ? not(equals(resource.recipient, user.id))
-              ? <span class="f6 db black-70">
+              ? <span className="f6 db black-70">
                   <Link
                     to={`/user/${resource.sender}`}
                     style={{
@@ -87,7 +87,7 @@ const ResourceItem = ({resource, user}) => {
                     {`  ${userify(resource.recipient)}`}
                   </Link>
                 </span>
-              : <span class="f6 db black-70">
+              : <span className="f6 db black-70">
                   <Link
                     to={`/user/${resource.sender}`}
                     style={{
@@ -105,7 +105,7 @@ const ResourceItem = ({resource, user}) => {
                     {`  ${userify(resource.recipient)}`}
                   </Link>
                 </span>
-            : <span class="f6 db black-70">
+            : <span className="f6 db black-70">
               <Link
                 to={`/profile/${resource.sender}`}
                 style={{
@@ -124,7 +124,7 @@ const ResourceItem = ({resource, user}) => {
               </Link>
             </span>
 }
-          <span class="f6 db black-70">{resource.description}</span>
+          <span className="f6 db black-70">{resource.description}</span>
         </div>
 
       </li>

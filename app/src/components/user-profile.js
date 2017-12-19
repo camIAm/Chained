@@ -8,7 +8,7 @@ import {
   contains,
   map,
   pathOr,
-
+  not,
   compose,
   join,
   toUpper,
@@ -30,7 +30,7 @@ import ShareIcon from 'material-ui-icons/Share';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
 import {setNonActiveUserTransactions, setAllTransactions} from '../action-creators/txs'
-import {setUser} from "../action-creators/user"
+import {setUser, setUserFromState} from "../action-creators/user"
 import {bankDeposit} from '../action-creators/bank'
 import {prop, last, path} from 'ramda'
 import {userify} from "../lib/userify"
@@ -47,13 +47,17 @@ class UserProfile extends React.Component {
     console.log("USERPROFILE: ", pathID)
     console.log("this.props.user: ", this.props.user)
     console.log("this.props.nonActiveUsers: ", this.props.nonActiveUsers)
-    this
-      .props
-      .setPersonalTxs(pathID)
+    if (not(path([
+      'nonActiveUsers', '_id'
+    ], this.props))) {
+      this
+        .props
+        .setPersonalTxs(pathID)
 
-    this
-      .props
-      .setUser(pathID)
+      this
+        .props
+        .setUser(pathID)
+    }
   }
   state = {
     open: false,
@@ -156,7 +160,7 @@ const connector = connect(state => {
     changeUserProfile: e => user => {
       e.preventDefault()
       console.log("changeUserProfile hit with user: ", user)
-      dispatch(setUser(user))
+      dispatch(setUserFromState(user))
     }
   }
 })

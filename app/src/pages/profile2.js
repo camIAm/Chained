@@ -27,12 +27,14 @@ import FavoriteIcon from 'material-ui-icons/Favorite';
 import ShareIcon from 'material-ui-icons/Share';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
-import ProfileItem from '../components/profile-item'
+
+import ProfileList from '../components/profile-list'
 import {setPersonalTransactions, setAllTransactions} from '../action-creators/txs'
 import {bankDeposit} from '../action-creators/bank'
 import {userify} from '../lib/userify'
 import '../App.css'
 import '../components/profile-item.css'
+
 import SecondaryMenu from '../components/secondaryMenu'
 const loading = require('../loading.svg')
 
@@ -98,7 +100,12 @@ class Profile extends React.Component {
             avatar={< Avatar > {
             compose(toUpper(), slice(0, 1))(this.props.user.firstName)
           } < /Avatar>}
-            action={< IconButton > <SecondaryMenu actions={menuItemActions} {...this.props}/> < /IconButton>}
+            action={< SecondaryMenu actions = {
+            menuItemActions
+          }
+          {
+            ...this.props
+          } />}
             title={`${this.props.user.firstName} ${this.props.user.lastName}`}
             subheader={userify(this.props.user.id)}/>
           <CardActions disableActionSpacing>
@@ -149,15 +156,8 @@ class Profile extends React.Component {
           }}
             message={< span id = "message-id" > Thank you for using Chained < /span>}/>
         </Card>
-        {!this.props.load.loaded
-          ? <div id="custom-loader-container">
-              <img id="custom-loader" src={loading} alt="loading"/>
-            </div>
-          : (
-            <ul class="list pl0 mt0 measure center">
-              {map(transactions => <ProfileItem resource={transactions} user={this.props.user} props={this.props}/>, this.props.personalTxs)}
-            </ul>
-          )}
+        <ProfileList {...this.props}/>
+
       </div >
     )
   }

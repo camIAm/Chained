@@ -34,3 +34,14 @@ export const setUser = userID => async(dispatch, getState) => {
     dispatch({type: SET_NON_ACTIVE_USERS, payload: pickedUser})
   })
 }
+
+export const setUserFromState = userID => async(dispatch, getState) => {
+  console.log("getting userID: ", userID)
+  const pickedUser = find(propEq('_id', userID))(getState().allUsers)
+
+  // const response = await fetch(`${url}/users/${userID}`)   .then(res =>
+  // res.json())   .catch(err => console.log('err: ', err)); if (!response.ok) {
+  // console.log("the response: ", response) }
+  dispatch({type: SET_NON_ACTIVE_USERS, payload: pickedUser})
+
+}
